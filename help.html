@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Помощь — BlackRay VPN</title>
+  <meta name="theme-color" content="#0a0a0c" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-start: #0a0a0c;
+      --bg-end: #000000;
+      --card-bg: rgba(15, 23, 42, 0.6);
+      --border: rgba(56, 189, 248, 0.15);
+      --text-main: #e2e8f0;
+      --text-muted: #94a3b8;
+      --brand: #38bdf8;
+      --gradient: linear-gradient(to right, #60a5fa, #67e8f9);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-main);
+      background: linear-gradient(to bottom, var(--bg-start), var(--bg-end));
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; width: 100%; }
+
+    /* Навигация (такая же как на главной) */
+    header.nav-bar {
+      padding: 20px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+    .logo-block { display: flex; align-items: center; gap: 12px; }
+    .logo-img { width: 48px; height: 48px; border-radius: 50%; }
+    .logo-text { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.05em; }
+    .logo-text span:first-child { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .logo-text span:last-child { color: var(--brand); }
+    .nav-links { display: flex; gap: 32px; font-size: 1rem; font-weight: 500; }
+    .nav-links a.active { color: var(--brand); font-weight: 700; }
+    .nav-links a:hover:not(.active) { color: #fff; }
+
+    /* Блок помощи */
+    main { flex: 1; padding: 80px 0; }
+    .page-title { font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: 800; margin-bottom: 48px; text-align: center; }
+
+    /* Макет: Слева меню, Справа контент */
+    .help-grid {
+      display: flex; gap: 40px; align-items: flex-start;
+    }
+
+    .questions-list {
+      flex: 0 0 350px; display: flex; flex-direction: column; gap: 12px;
+    }
+
+    .q-btn {
+      background: rgba(255, 255, 255, 0.03); border: 1px solid transparent;
+      padding: 18px 24px; border-radius: 16px; color: var(--text-main);
+      font-size: 1.05rem; font-weight: 600; text-align: left; cursor: pointer;
+      transition: all 0.2s ease; font-family: inherit;
+    }
+
+    .q-btn:hover { background: rgba(255, 255, 255, 0.08); }
+    .q-btn.active {
+      background: var(--card-bg); border-color: var(--border);
+      color: var(--brand); box-shadow: 0 4px 20px rgba(56, 189, 248, 0.1);
+    }
+
+    .answer-panel {
+      flex: 1; background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 24px; padding: 40px; min-height: 300px;
+      backdrop-filter: blur(10px);
+    }
+
+    .answer-content { display: none; animation: fadeIn 0.4s ease forwards; }
+    .answer-content.active { display: block; }
+    
+    .answer-content h2 { font-size: 1.8rem; margin-bottom: 20px; color: #fff; }
+    .answer-content p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 16px; }
+    .answer-content a { color: var(--brand); text-decoration: underline; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Подвал */
+    footer { border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 40px 0; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    .footer-copy { color: rgba(148, 163, 184, 0.6); font-size: 0.9rem; }
+    .footer-links { display: flex; gap: 24px; font-size: 0.9rem; }
+
+    /* Мобильная адаптация */
+    .mobile-answer { display: none; } /* Скрываем ответы под кнопками на ПК */
+
+    @media (max-width: 900px) {
+      .help-grid { flex-direction: column; gap: 24px; }
+      .questions-list { flex: auto; width: 100%; }
+      .answer-panel { display: none; } /* Скрываем правую панель на телефоне */
+      
+      /* На телефоне ответ появляется прямо под нажатой кнопкой */
+      .q-btn { border: 1px solid rgba(255, 255, 255, 0.05); }
+      .q-btn.active { border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-color: transparent; }
+      
+      .mobile-answer {
+        display: none; background: var(--card-bg); padding: 20px 24px;
+        border: 1px solid var(--border); border-top: none;
+        border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;
+        color: var(--text-muted); font-size: 1rem; margin-top: -12px; margin-bottom: 12px;
+      }
+      .mobile-answer.active { display: block; animation: fadeIn 0.3s ease; }
+      .mobile-answer a { color: var(--brand); text-decoration: underline; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav-bar">
+    <div class="container nav-inner">
+      <div class="logo-block">
+        <img src="image_0.png" alt="BlackRay Logo" class="logo-img">
+        <div class="logo-text"><span>Black</span><span>Ray</span></div>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html">Главная</a>
+        <a href="help.html" class="active">Помощь</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <h1 class="page-title">Ответы на частые вопросы</h1>
+      
+      <div class="help-grid">
+        <div class="questions-list">
+          <button class="q-btn active" data-target="q1">Как установить VPN на телефон?</button>
+          <div class="mobile-answer" id="m-q1"></div> <button class="q-btn" data-target="q2">Будет ли работать на компьютере?</button>
+          <div class="mobile-answer" id="m-q2"></div>
+
+          <button class="q-btn" data-target="q3">Сколько устройств можно подключить?</button>
+          <div class="mobile-answer" id="m-q3"></div>
+
+          <button class="q-btn" data-target="q4">У меня не подключается, что делать?</button>
+          <div class="mobile-answer" id="m-q4"></div>
+        </div>
+
+        <div class="answer-panel">
+          <div class="answer-content active" id="q1">
+            <h2>Как установить VPN на телефон?</h2>
+            <p>Всё очень просто. Нажми кнопку «Подключить на главной странице», бот выдаст тебе специальную ссылку-ключ.</p>
+            <p>Скачай бесплатное приложение (например, V2Ray Tun или Outline — бот подскажет точное название для твоей системы), нажми в приложении «Добавить» и вставь ссылку. Готово!</p>
+          </div>
+
+          <div class="answer-content" id="q2">
+            <h2>Будет ли работать на компьютере (ПК/Mac)?</h2>
+            <p>Да, BlackRay VPN отлично работает на Windows, macOS и Linux.</p>
+            <p>Процесс такой же: получаешь ключ в боте, скачиваешь нужный клиент на компьютер и вставляешь ключ. Подробная инструкция со ссылками на скачивание клиентов есть внутри бота.</p>
+          </div>
+
+          <div class="answer-content" id="q3">
+            <h2>Сколько устройств можно подключить?</h2>
+            <p>По умолчанию один ключ рассчитан на одно активное подключение для обеспечения максимальной скорости.</p>
+            <p>Но в личном кабинете бота ты всегда можешь сгенерировать дополнительные ключи для своих остальных гаджетов в пару кликов.</p>
+          </div>
+
+          <div class="answer-content" id="q4">
+            <h2>У меня не подключается, что делать?</h2>
+            <p>Не переживай, такое редко, но бывает из-за особенностей местных провайдеров.</p>
+            <p>Напиши нам в поддержку на почту <a href="mailto:support@blackray.io">support@blackray.io</a> или прямо в Telegram через кнопку «Связь с оператором» в боте. Мы на связи и поможем за 5 минут.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-copy">&copy; 2026 BlackRay. Все права защищены.</div>
+      <div class="footer-links">
+        <a href="#">Договор-оферта</a>
+        <a href="mailto:support@blackray.io">support@blackray.io</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Простой скрипт для переключения вкладок
+    const buttons = document.querySelectorAll('.q-btn');
+    const contents = document.querySelectorAll('.answer-content');
+
+    // Копируем контент в мобильные блоки при загрузке
+    contents.forEach(content => {
+      const targetId = content.id;
+      const mobileContainer = document.getElementById('m-' + targetId);
+      if (mobileContainer) {
+        mobileContainer.innerHTML = content.innerHTML;
+        // Если это первая вкладка, делаем ее активной и на мобилке
+        if(content.classList.contains('active')) {
+          mobileContainer.classList.add('active');
+        }
+      }
+    });
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Убираем active у всех кнопок и контента
+        buttons.forEach(b => b.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.mobile-answer').forEach(m => m.classList.remove('active'));
+
+        // Добавляем active нажатой кнопке
+        btn.classList.add('active');
+        
+        // Показываем нужный контент на ПК
+        const targetId = btn.getAttribute('data-target');
+        document.getElementById(targetId).classList.add('active');
+
+        // Показываем нужный контент на телефоне
+        const mobileTargetId = 'm-' + targetId;
+        document.getElementById(mobileTargetId).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
