@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlackRay VPN — Свободный интернет</title>
+    <meta name="description" content="Быстрый и безопасный VPN нового поколения. Защита от блокировок, высокая скорость и полная анонимность.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#3b82f6', // Синий акцент
+                        dark: '#0f172a',  // Глубокий темный фон
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark text-slate-300 font-sans antialiased selection:bg-brand selection:text-white">
+
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="text-2xl font-bold text-white tracking-tight">
+            ⚫️ Black<span class="text-brand">Ray</span>
+        </div>
+        <a href="#setup" class="text-sm font-medium hover:text-white transition-colors">Как подключить</a>
+    </nav>
+
+    <header class="container mx-auto px-6 py-20 text-center md:py-32">
+        <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight">
+            Интернет без <br class="hidden md:block" />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">ограничений</span>
+        </h1>
+        <p class="text-lg md:text-xl max-w-2xl mx-auto mb-10 text-slate-400">
+            Современный протокол VLESS-Reality. Не режет скорость, не разряжает батарею и обходит самые жесткие блокировки. Управление прямо в Telegram.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="https://t.me/BlackRayVPN_bot" target="_blank" class="bg-brand hover:bg-blue-600 text-white font-semibold py-4 px-8 rounded-xl transition-all shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.11.03-1.87 1.18-5.28 3.45-.5.34-.95.51-1.35.5-.44-.01-1.28-.24-1.91-.44-.77-.24-1.38-.37-1.32-.78.03-.21.35-.43.96-.65 3.75-1.63 6.25-2.71 7.5-3.23 3.56-1.48 4.3-1.74 4.79-1.75.11 0 .36.03.49.14.11.09.14.22.15.33-.01.05-.01.16-.03.24z"/></svg>
+                Открыть в Telegram
+            </a>
+        </div>
+    </header>
+
+    <section id="setup" class="bg-slate-800/50 py-20 border-y border-slate-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-16">Как начать пользоваться?</h2>
+            
+            <div class="grid md:grid-cols-3 gap-10">
+                <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800 relative">
+                    <div class="absolute -top-6 left-8 bg-brand text-white w-12 h-12 flex items-center justify-center rounded-xl font-bold text-xl shadow-lg">1</div>
+                    <h3 class="text-xl font-bold text-white mb-4 mt-2">Скачайте клиент</h3>
+                    <p class="text-slate-400 mb-4">Для работы нашего VPN требуется специальное приложение, поддерживающее современные протоколы.</p>
+                    <ul class="space-y-2 text-sm text-brand font-medium">
+                        <li>🍏 iOS: <a href="https://apps.apple.com/us/app/v2box-v2ray-client/id6446814690" target="_blank" class="hover:underline">V2Box</a> или <a href="https://apps.apple.com/us/app/foxray/id6448898396" target="_blank" class="hover:underline">FoXray</a></li>
+                        <li>🤖 Android: <a href="https://play.google.com/store/apps/details?id=com.v2ray.ang" target="_blank" class="hover:underline">v2rayNG</a></li>
+                        <li>🪟 Windows: <a href="https://github.com/MatsuriDayo/nekoray/releases" target="_blank" class="hover:underline">NekoRay</a></li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800 relative">
+                    <div class="absolute -top-6 left-8 bg-brand text-white w-12 h-12 flex items-center justify-center rounded-xl font-bold text-xl shadow-lg">2</div>
+                    <h3 class="text-xl font-bold text-white mb-4 mt-2">Получите ключ</h3>
+                    <p class="text-slate-400">Перейдите в нашего Telegram-бота, нажмите «Подключить VPN» и выберите ваше устройство. Бот сгенерирует для вас уникальную ссылку (начинается с vless://).</p>
+                </div>
+
+                <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800 relative">
+                    <div class="absolute -top-6 left-8 bg-brand text-white w-12 h-12 flex items-center justify-center rounded-xl font-bold text-xl shadow-lg">3</div>
+                    <h3 class="text-xl font-bold text-white mb-4 mt-2">Добавьте в приложение</h3>
+                    <p class="text-slate-400">Скопируйте полученную ссылку, откройте скачанное приложение (например, V2Box) и нажмите кнопку добавления конфигурации из буфера обмена (+). Нажмите Start.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="container mx-auto px-6 py-10 flex flex-col md:flex-row justify-between items-center border-t border-slate-800 mt-20">
+        <div class="mb-4 md:mb-0 text-slate-500 text-sm">
+            &copy; 2026 BlackRay. Все права защищены.
+        </div>
+        <div class="flex gap-6 text-sm">
+            <a href="#" class="hover:text-white transition-colors">Договор-оферта</a>
+            <a href="mailto:support@blackray.io" class="hover:text-white transition-colors">support@blackray.io</a>
+        </div>
+    </footer>
+
+</body>
+</html>
