@@ -1,105 +1,1357 @@
 <!DOCTYPE html>
 <html lang="ru" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BlackRay VPN — Премиум доступ к свободному интернету</title>
-    <meta name="description" content="BlackRay VPN — самый простой и доступный способ вернуть себе доступ к любым сайтам. Оплата картами РФ, максимальная скорость.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: '#38bdf8', // Неоновый сине-голубой из логотипа
-                        dark_bg_start: '#0a0a0c', // Глубокий темный фон для градиента
-                        dark_bg_end: '#000000', // Чистый черный фон
-                    }
-                }
-            }
-        }
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlackRay VPN — Быстрый доступ к открытому интернету</title>
+  <meta
+    name="description"
+    content="BlackRay VPN — быстрый и удобный VPN"
+  />
+  <meta property="og:title" content="BlackRay VPN — Быстрый доступ к открытому интернету" />
+  <meta property="og:description" content="Подключение в пару кликов через Telegram-бот. Быстро, удобно, без лишней настройки." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#06070a" />
+  <style>
+    :root {
+      --bg: #05070b;
+      --bg-2: #0b1020;
+      --surface: rgba(13, 18, 34, 0.74);
+      --surface-strong: rgba(16, 23, 44, 0.92);
+      --border: rgba(148, 163, 184, 0.12);
+      --text: #e5eefc;
+      --muted: #97a6c6;
+      --brand: #38bdf8;
+      --brand-2: #22d3ee;
+      --brand-3: #60a5fa;
+      --success: #22c55e;
+      --shadow: 0 30px 90px rgba(0, 0, 0, 0.42);
+      --radius: 26px;
+      --container: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(56, 189, 248, 0.18), transparent 28%),
+        radial-gradient(circle at 85% 12%, rgba(34, 211, 238, 0.16), transparent 28%),
+        radial-gradient(circle at 78% 80%, rgba(96, 165, 250, 0.12), transparent 30%),
+        linear-gradient(180deg, #06070a 0%, #08101f 45%, #05070b 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    .bg-grid,
+    .bg-glow,
+    .noise {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+    }
+
+    .bg-grid {
+      background-image:
+        linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: linear-gradient(180deg, rgba(255,255,255,0.5), rgba(255,255,255,0.06), transparent);
+    }
+
+    .bg-glow::before,
+    .bg-glow::after {
+      content: "";
+      position: absolute;
+      width: 34rem;
+      height: 34rem;
+      border-radius: 999px;
+      filter: blur(85px);
+      opacity: 0.22;
+      animation: drift 16s ease-in-out infinite alternate;
+    }
+
+    .bg-glow::before {
+      top: -10rem;
+      left: -6rem;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    }
+
+    .bg-glow::after {
+      right: -8rem;
+      top: 12rem;
+      background: linear-gradient(135deg, var(--brand-3), var(--brand));
+      animation-duration: 20s;
+    }
+
+    .noise {
+      z-index: -2;
+      opacity: 0.045;
+      background-image:
+        radial-gradient(circle at 20% 20%, #ffffff 0.7px, transparent 0.7px),
+        radial-gradient(circle at 80% 35%, #ffffff 0.7px, transparent 0.7px),
+        radial-gradient(circle at 50% 80%, #ffffff 0.7px, transparent 0.7px);
+      background-size: 120px 120px;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .header-shell {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(20px);
+      background: linear-gradient(180deg, rgba(6,7,10,0.86), rgba(6,7,10,0.56));
+      border-bottom: 1px solid rgba(148, 163, 184, 0.07);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 16px 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.55), transparent 24%),
+        linear-gradient(135deg, rgba(56,189,248,0.95), rgba(34,211,238,0.62) 40%, rgba(2,8,23,0.9) 100%);
+      box-shadow: 0 10px 35px rgba(56, 189, 248, 0.24);
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: 9px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.16);
+    }
+
+    .brand-mark::after {
+      inset: auto 8px 8px auto;
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.18);
+      border: none;
+      box-shadow: 0 0 18px rgba(255,255,255,0.16);
+    }
+
+    .brand-text {
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    .brand-text span:first-child {
+      color: white;
+    }
+
+    .brand-text span:last-child {
+      background: linear-gradient(90deg, var(--brand), var(--brand-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .nav-links a {
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: 16px;
+      font-weight: 800;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+      will-change: transform;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-primary {
+      color: #03111b;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      box-shadow: 0 14px 40px rgba(56, 189, 248, 0.28);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 18px 48px rgba(56, 189, 248, 0.38);
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(14px);
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(56, 189, 248, 0.3);
+      background: rgba(56, 189, 248, 0.06);
+    }
+
+    .hero {
+      padding: 54px 0 26px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.18);
+      background: rgba(56, 189, 248, 0.08);
+      color: #c8ecff;
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--success);
+      box-shadow: 0 0 14px rgba(34,197,94,0.7);
+      animation: pulse 1.8s infinite;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(3rem, 8vw, 6.2rem);
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 0%, #d4f2ff 35%, #60a5fa 70%, #22d3ee 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-copy {
+      margin: 18px 0 0;
+      max-width: 700px;
+      color: var(--muted);
+      font-size: clamp(1.08rem, 2.4vw, 1.35rem);
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .hero-notes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+      color: #bdd1f3;
+      font-size: 0.96rem;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(148,163,184,0.1);
+      backdrop-filter: blur(12px);
+    }
+
+    .icon-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.4);
+    }
+
+    .hero-card {
+      position: relative;
+      border-radius: 32px;
+      padding: 22px;
+      background: linear-gradient(180deg, rgba(13,18,34,0.82), rgba(7,11,24,0.96));
+      border: 1px solid rgba(148,163,184,0.12);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      min-height: 600px;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(56, 189, 248, 0.18), transparent 24%),
+        radial-gradient(circle at 85% 18%, rgba(34, 211, 238, 0.18), transparent 22%),
+        linear-gradient(180deg, rgba(255,255,255,0.02), transparent 32%);
+      pointer-events: none;
+    }
+
+    .dashboard-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .traffic-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.16);
+      color: #d7f4ff;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .window-dots i {
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.35);
+    }
+
+    .dashboard-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 16px;
+    }
+
+    .stat,
+    .mini-panel,
+    .device-list,
+    .floating-card {
+      background: rgba(10, 15, 28, 0.78);
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      border-radius: 24px;
+      backdrop-filter: blur(16px);
+    }
+
+    .stat {
+      padding: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .stat-item {
+      padding: 14px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(148, 163, 184, 0.08);
+    }
+
+    .label {
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin-bottom: 8px;
+    }
+
+    .value {
+      font-weight: 900;
+      font-size: 1.35rem;
+      color: white;
+    }
+
+    .subvalue {
+      margin-top: 6px;
+      color: #b8c9ea;
+      font-size: 0.84rem;
+    }
+
+    .mini-panel {
+      padding: 18px;
+    }
+
+    .panel-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-weight: 800;
+      color: white;
+    }
+
+    .chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 9px;
+      height: 120px;
+    }
+
+    .bar {
+      flex: 1;
+      border-radius: 999px 999px 10px 10px;
+      background: linear-gradient(180deg, rgba(34, 211, 238, 0.95), rgba(59, 130, 246, 0.4));
+      box-shadow: inset 0 -8px 18px rgba(2, 8, 23, 0.32), 0 0 18px rgba(56, 189, 248, 0.16);
+      animation: rise 1s ease both;
+    }
+
+    .bar:nth-child(2) { animation-delay: 0.08s; }
+    .bar:nth-child(3) { animation-delay: 0.14s; }
+    .bar:nth-child(4) { animation-delay: 0.2s; }
+    .bar:nth-child(5) { animation-delay: 0.26s; }
+    .bar:nth-child(6) { animation-delay: 0.32s; }
+
+    .device-list {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .device-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(148, 163, 184, 0.06);
+    }
+
+    .device-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .device-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #d7f4ff;
+      background: linear-gradient(135deg, rgba(56,189,248,0.18), rgba(34,211,238,0.08));
+      border: 1px solid rgba(56, 189, 248, 0.18);
+      font-size: 1rem;
+      font-weight: 900;
+      flex: 0 0 auto;
+    }
+
+    .device-info {
+      min-width: 0;
+    }
+
+    .device-name {
+      color: white;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .device-meta {
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin-top: 4px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #dcfce7;
+      font-size: 0.82rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--success);
+      box-shadow: 0 0 10px rgba(34,197,94,0.7);
+    }
+
+    .floating-card {
+      position: absolute;
+      padding: 14px 16px;
+      box-shadow: 0 18px 38px rgba(0,0,0,0.24);
+      animation: floatY 4.6s ease-in-out infinite;
+    }
+
+    .floating-card strong {
+      display: block;
+      font-size: 0.92rem;
+      margin-bottom: 6px;
+      color: white;
+    }
+
+    .floating-card span {
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+
+    .floating-card.one {
+      top: 84px;
+      right: -32px;
+      width: 190px;
+      animation-delay: 0.2s;
+    }
+
+    .floating-card.two {
+      bottom: 76px;
+      left: -36px;
+      width: 210px;
+      animation-duration: 5.2s;
+    }
+
+    .section {
+      padding: 34px 0;
+    }
+
+    .section-head {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .section-kicker {
+      color: #cceeff;
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(2.1rem, 5vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .section-copy {
+      margin: 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.04rem;
+      line-height: 1.75;
+    }
+
+    .stats-strip {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .metric {
+      padding: 20px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(148,163,184,0.1);
+      backdrop-filter: blur(12px);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 2rem;
+      margin-bottom: 8px;
+      letter-spacing: -0.03em;
+      color: white;
+    }
+
+    .metric span {
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .card {
+      position: relative;
+      padding: 22px;
+      border-radius: 26px;
+      background: linear-gradient(180deg, rgba(11, 17, 32, 0.92), rgba(8, 12, 24, 0.92));
+      border: 1px solid rgba(148,163,184,0.1);
+      overflow: hidden;
+      box-shadow: 0 22px 48px rgba(0,0,0,0.18);
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(56, 189, 248, 0.22);
+      box-shadow: 0 26px 60px rgba(0,0,0,0.22);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0% 0%, rgba(56,189,248,0.08), transparent 35%);
+      pointer-events: none;
+    }
+
+    .card-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, rgba(56,189,248,0.18), rgba(34,211,238,0.06));
+      border: 1px solid rgba(56, 189, 248, 0.18);
+      color: #d7f4ff;
+      font-size: 1.35rem;
+      font-weight: 900;
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      font-size: 1.18rem;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: white;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .step-card {
+      padding: 22px;
+      border-radius: 26px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(148,163,184,0.1);
+      backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-number {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      margin-bottom: 16px;
+      color: #03111b;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      box-shadow: 0 10px 24px rgba(56,189,248,0.24);
+    }
+
+    .step-card h3,
+    .faq-item h3,
+    .compat-card h3 {
+      margin: 0 0 10px;
+      color: white;
+      letter-spacing: -0.02em;
+    }
+
+    .step-card p,
+    .compat-card p,
+    .faq-item p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .compat {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .compat-card,
+    .faq-wrap,
+    .cta-wrap {
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(11,17,32,0.9), rgba(7,11,22,0.94));
+      border: 1px solid rgba(148,163,184,0.1);
+      box-shadow: 0 24px 56px rgba(0,0,0,0.18);
+    }
+
+    .compat-card {
+      padding: 24px;
+    }
+
+    .compat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .os-chip {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(148,163,184,0.08);
+      color: #d7e9ff;
+      font-weight: 700;
+    }
+
+    .faq-wrap {
+      padding: 10px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .faq-item {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(148,163,184,0.08);
+    }
+
+    .cta-wrap {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      margin-top: 26px;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(56,189,248,0.18), transparent 28%),
+        radial-gradient(circle at 82% 20%, rgba(34,211,238,0.14), transparent 22%),
+        linear-gradient(180deg, rgba(9,15,28,0.95), rgba(7,10,20,0.98));
+    }
+
+    .cta-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.03) 48%, transparent 74%);
+      transform: translateX(-120%);
+      animation: sweep 7s linear infinite;
+      pointer-events: none;
+    }
+
+    .cta-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .cta-title {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .cta-text {
+      margin: 0;
+      color: #bdd1f3;
+      line-height: 1.8;
+      max-width: 640px;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .mini-note {
+      display: grid;
+      gap: 12px;
+    }
+
+    .mini-note .note-card {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(148,163,184,0.1);
+    }
+
+    .note-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: white;
+    }
+
+    .note-card span {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    footer {
+      padding: 22px 0 56px;
+    }
+
+    .footer-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(148,163,184,0.08);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.16); opacity: 0.72; }
+    }
+
+    @keyframes drift {
+      from { transform: translate3d(0, 0, 0) scale(1); }
+      to { transform: translate3d(40px, 24px, 0) scale(1.08); }
+    }
+
+    @keyframes rise {
+      from { transform: scaleY(0.4); opacity: 0.3; }
+      to { transform: scaleY(1); opacity: 1; }
+    }
+
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes sweep {
+      0% { transform: translateX(-120%); }
+      100% { transform: translateX(120%); }
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .compat,
+      .cta-grid,
+      .features,
+      .steps,
+      .stats-strip {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-grid {
+        align-items: stretch;
+      }
+
+      .features {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .nav-actions .btn-secondary { display: none; }
+      .hero-grid,
+      .compat,
+      .cta-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero { padding-top: 32px; }
+      .hero-card { min-height: auto; }
+      .floating-card { display: none; }
+      .stat { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(var(--container), calc(100% - 20px)); }
+      .nav { padding: 12px 0; }
+      .brand-text { font-size: 1.18rem; }
+      .btn { width: 100%; }
+      .hero-actions,
+      .cta-actions { flex-direction: column; }
+      .features,
+      .stats-strip,
+      .compat-grid { grid-template-columns: 1fr; }
+      .hero-notes { flex-direction: column; align-items: flex-start; }
+      .card,
+      .step-card,
+      .compat-card,
+      .faq-item,
+      .cta-wrap,
+      .hero-card { border-radius: 22px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
 </head>
-<body class="bg-gradient-to-b from-dark_bg_start to-dark_bg_end text-slate-300 font-sans antialiased selection:bg-brand selection:text-white">
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+  <div class="noise"></div>
 
-    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-        <div class="flex items-center gap-3">
-            <img src="image_0.png" alt="BlackRay Logo" class="w-12 h-12 rounded-full shadow-lg shadow-brand/20">
-            <div class="text-3xl font-extrabold text-white tracking-tight">
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Black</span><span class="text-brand">Ray</span>
+  <header class="header-shell">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="BlackRay VPN">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text"><span>Black</span><span>Ray</span></span>
+      </a>
+
+      <nav class="nav-links" aria-label="Основная навигация">
+        <a href="#features">Преимущества</a>
+        <a href="#how">Как это работает</a>
+        <a href="#support">Поддержка</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="https://t.me/BlackRayVPN_bot" target="_blank" rel="noopener noreferrer">Личный кабинет</a>
+        <a class="btn btn-primary" href="https://t.me/BlackRayVPN_bot?start=start_from_site" target="_blank" rel="noopener noreferrer">Подключить VPN</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="reveal is-visible">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Telegram-бот + быстрый старт за пару минут
+          </div>
+
+          <h1>
+            <span class="gradient-text">Быстрый VPN</span><br />
+            без сложной настройки
+          </h1>
+
+          <p class="hero-copy">
+            BlackRay VPN — удобный способ подключиться к нужным сервисам через понятный Telegram-бот.
+            Минимум шагов, высокая скорость, аккуратный личный кабинет и поддержка популярных устройств.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://t.me/BlackRayVPN_bot?start=start_from_site" target="_blank" rel="noopener noreferrer">Подключить в 1 клик</a>
+            <a class="btn btn-secondary" href="https://t.me/BlackRayVPN_bot" target="_blank" rel="noopener noreferrer">Открыть кабинет</a>
+          </div>
+
+          <div class="hero-notes" aria-label="Ключевые преимущества">
+            <div class="chip"><span class="icon-dot"></span> Удобное управление через Telegram</div>
+            <div class="chip"><span class="icon-dot"></span> Поддержка популярных платформ</div>
+            <div class="chip"><span class="icon-dot"></span> Понятное подключение без лишней суеты</div>
+          </div>
+        </div>
+
+        <div class="hero-card reveal" aria-label="Превью личного кабинета">
+          <div class="dashboard-top">
+            <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="traffic-pill">● BlackRay активен</div>
+          </div>
+
+          <div class="dashboard-grid">
+            <div class="stat">
+              <div class="stat-item">
+                <div class="label">Статус</div>
+                <div class="value">Online</div>
+                <div class="subvalue">Стабильное подключение</div>
+              </div>
+              <div class="stat-item">
+                <div class="label">Управление</div>
+                <div class="value">Telegram</div>
+                <div class="subvalue">Покупка и продление в боте</div>
+              </div>
+              <div class="stat-item">
+                <div class="label">Подключение</div>
+                <div class="value">1–2 мин</div>
+                <div class="subvalue">Без сложных шагов</div>
+              </div>
             </div>
-        </div>
-        <div class="hidden md:flex gap-6 text-sm font-medium">
-            <a href="#features" class="hover:text-white transition-colors">Преимущества</a>
-            <a href="#footer" class="hover:text-white transition-colors">Помощь</a>
-        </div>
-    </nav>
 
-    <header class="container mx-auto px-6 py-20 text-center md:py-32">
-        <div class="relative inline-block mb-10">
-            <img src="image_0.png" alt="Hero Manta" class="w-48 h-48 mx-auto rounded-full shadow-2xl shadow-brand/50 p-2 border-4 border-brand/20">
-            <div class="absolute inset-0 rounded-full bg-brand/10 blur-xl"></div>
-        </div>
-        <h1 class="text-6xl md:text-8xl font-extrabold text-white mb-6 tracking-tight leading-none">
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Твой доступ</span> <br class="hidden md:block" />
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">к свободному интернету</span>
-        </h1>
-        <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-16 text-slate-400 font-medium">
-            BlackRay VPN — самый простой и доступный способ вернуть себе доступ к любимым сайтам. Без переплат, на максимальной скорости.
-        </p>
-        <div class="flex flex-col sm:flex-row justify-center gap-6">
-            <a href="https://t.me/BlackRayVPN_bot?start=start_from_site" target="_blank" class="bg-brand hover:bg-blue-600 text-dark_bg_start font-extrabold text-xl py-5 px-10 rounded-2xl transition-all shadow-lg shadow-brand/50 flex items-center justify-center gap-2 transform hover:scale-105">
-                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.11.03-1.87 1.18-5.28 3.45-.5.34-.95.51-1.35.5-.44-.01-1.28-.24-1.91-.44-.77-.24-1.38-.37-1.32-.78.03-.21.35-.43.96-.65 3.75-1.63 6.25-2.71 7.5-3.23 3.56-1.48 4.3-1.74 4.79-1.75.11 0 .36.03.49.14.11.09.14.22.15.33-.01.05-.01.16-.03.24z"/></svg>
-                Подключить в 1 клик
-            </a>
-            <a href="https://t.me/BlackRayVPN_bot" target="_blank" class="border-4 border-brand/20 text-brand font-extrabold text-xl py-5 px-10 rounded-2xl transition-all hover:bg-brand/10 hover:border-brand/30 flex items-center justify-center gap-2 transform hover:scale-105">
-                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.11.03-1.87 1.18-5.28 3.45-.5.34-.95.51-1.35.5-.44-.01-1.28-.24-1.91-.44-.77-.24-1.38-.37-1.32-.78.03-.21.35-.43.96-.65 3.75-1.63 6.25-2.71 7.5-3.23 3.56-1.48 4.3-1.74 4.79-1.75.11 0 .36.03.49.14.11.09.14.22.15.33-.01.05-.01.16-.03.24z"/></svg>
-                Войти в кабинет
-            </a>
-        </div>
-    </header>
-
-    <section id="features" class="bg-gradient-to-b from-[#111114] to-black py-20 border-y-4 border-slate-900 shadow-2xl shadow-brand/10">
-        <div class="container mx-auto px-6">
-            <h2 class="text-5xl md:text-6xl font-bold text-white text-center mb-16 tracking-tight">Всё, что тебе нужно знать о VPN</h2>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-                <div class="bg-slate-900 p-8 rounded-3xl border border-slate-800 transition-all hover:border-brand/50 group flex flex-col gap-6">
-                    <div class="w-20 h-20 flex items-center justify-center bg-slate-800 rounded-3xl group-hover:bg-brand/20 transition-colors">
-                        <svg class="w-12 h-12 text-brand" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75m0 1.5v.75m0 1.5v.75m0 1.5v.75m0 1.5V15m1.5-1.5h1.5m1.5 1.5h1.5m1.5-1.5h1.5m1.5 1.5h1.5M6.75 19.5a3.75 3.75 0 01-3.75-3.75m15 0a3.75 3.75 0 013.75 3.75M6.75 19.5a3.75 3.75 0 003.75-3.75M18.75 19.5a3.75 3.75 0 003.75-3.75"/></svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white tracking-tight">Самая низкая цена</h3>
-                    <p class="text-slate-400 font-medium">Лучшее соотношение качества к цене на рынке.</p>
-                </div>
-
-                <div class="bg-slate-900 p-8 rounded-3xl border border-slate-800 transition-all hover:border-brand/50 group flex flex-col gap-6">
-                    <div class="w-20 h-20 flex items-center justify-center bg-slate-800 rounded-3xl group-hover:bg-brand/20 transition-colors">
-                        <svg class="w-12 h-12 text-brand" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white tracking-tight">Доступ к любым сайтам</h3>
-                    <p class="text-slate-400 font-medium">Современный протокол VLESS полностью маскирует твой трафик от РКН. Никакой блокировки или снижения скорости со стороны провайдера.</p>
-                </div>
-
-                <div class="bg-slate-900 p-8 rounded-3xl border border-slate-800 transition-all hover:border-brand/50 group flex flex-col gap-6">
-                    <div class="w-20 h-20 flex items-center justify-center bg-slate-800 rounded-3xl group-hover:bg-brand/20 transition-colors">
-                        <svg class="w-12 h-12 text-brand" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0zM15 9h2m-6 0h2m0 6h2m-2-3h2m-6 3h2m0-6h2m-2 3h2m6 3a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white tracking-tight">Оплата картами РФ и СБП</h3>
-                    <p class="text-slate-400 font-medium">Пополняй баланс так, как тебе удобно. Мгновенное зачисление.</p>
-                </div>
+            <div class="mini-panel">
+              <div class="panel-title">
+                <span>Нагрузка сети</span>
+                <span style="color:#bdd1f3;font-size:.88rem;font-weight:700;">в реальном времени</span>
+              </div>
+              <div class="chart" aria-hidden="true">
+                <div class="bar" style="height:48%"></div>
+                <div class="bar" style="height:65%"></div>
+                <div class="bar" style="height:52%"></div>
+                <div class="bar" style="height:78%"></div>
+                <div class="bar" style="height:88%"></div>
+                <div class="bar" style="height:60%"></div>
+              </div>
             </div>
+
+            <div class="device-list">
+              <div class="panel-title" style="margin-bottom:2px;">
+                <span>Мои устройства</span>
+                <span style="color:#bdd1f3;font-size:.88rem;font-weight:700;">синхронизация</span>
+              </div>
+
+              <div class="device-row">
+                <div class="device-left">
+                  <div class="device-icon"></div>
+                  <div class="device-info">
+                    <div class="device-name">iPhone</div>
+                    <div class="device-meta">iOS • основное устройство</div>
+                  </div>
+                </div>
+                <div class="status">Подключено</div>
+              </div>
+
+              <div class="device-row">
+                <div class="device-left">
+                  <div class="device-icon">⊞</div>
+                  <div class="device-info">
+                    <div class="device-name">Windows PC</div>
+                    <div class="device-meta">Для работы и браузера</div>
+                  </div>
+                </div>
+                <div class="status">Подключено</div>
+              </div>
+
+              <div class="device-row">
+                <div class="device-left">
+                  <div class="device-icon">▶</div>
+                  <div class="device-info">
+                    <div class="device-name">Android</div>
+                    <div class="device-meta">Быстрый старт из приложения</div>
+                  </div>
+                </div>
+                <div class="status">Подключено</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="floating-card one">
+            <strong>Запуск без стресса</strong>
+            <span>Открыл бота → выбрал тариф → получил данные для подключения.</span>
+          </div>
+
+          <div class="floating-card two">
+            <strong>Чистый интерфейс</strong>
+            <span>Лендинг сразу подводит к целевому действию и не перегружает посетителя.</span>
+          </div>
         </div>
+      </div>
     </section>
 
-    <footer id="footer" class="container mx-auto px-6 py-10 flex flex-col md:flex-row justify-between items-center border-t border-slate-900 mt-20">
-        <div class="mb-4 md:mb-0 text-slate-500 text-sm">
-            &copy; 2026 BlackRay. Все права защищены.
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-kicker">Почему BlackRay</div>
+          <h2>Лендинг, который выглядит как полноценный digital-продукт</h2>
+          <p class="section-copy">
+            Этот экран продаёт не только VPN, но и ощущение аккуратного, современного сервиса:
+            чистая структура, мягкая анимация, премиальный тёмный стиль и сильный акцент на Telegram-бот как на главный вход в продукт.
+          </p>
         </div>
-        <div class="flex gap-6 text-sm">
-            <a href="#" class="hover:text-white transition-colors">Договор-оферта</a>
-            <a href="mailto:support@blackray.io" class="hover:text-white transition-colors">support@blackray.io</a>
-        </div>
-    </footer>
 
+        <div class="stats-strip reveal">
+          <div class="metric">
+            <strong>1 экран</strong>
+            <span>Вся ключевая информация собрана в понятный одностраничник без перегруза.</span>
+          </div>
+          <div class="metric">
+            <strong>100%</strong>
+            <span>Статичный сайт, который идеально подходит под GitHub Pages и не требует сервера.</span>
+          </div>
+          <div class="metric">
+            <strong>SEO</strong>
+            <span>Добавлены мета-теги, тайтл и описание для аккуратного превью в браузере и мессенджерах.</span>
+          </div>
+          <div class="metric">
+            <strong>Mobile</strong>
+            <span>Адаптивная вёрстка для телефона, планшета и десктопа без отдельных версий.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-kicker">Преимущества</div>
+          <h2>Сильная подача продукта на первом экране и дальше</h2>
+          <p class="section-copy">
+            Я усилил твой набросок и превратил его в более дорогой на вид лендинг: аккуратные карточки,
+            живые градиенты, мягкие эффекты движения и блоки, которые ведут пользователя к нажатию на кнопку.
+          </p>
+        </div>
+
+        <div class="features">
+          <article class="card reveal">
+            <div class="card-icon">⚡</div>
+            <h3>Быстрый старт</h3>
+            <p>Главное действие вынесено в Telegram-бот: посетитель сразу понимает, куда нажимать и что делать дальше.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-icon">✦</div>
+            <h3>Премиальный стиль</h3>
+            <p>Тёмная палитра, мягкое свечение, стеклянные поверхности и визуальный язык, который выглядит дороже обычного шаблона.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-icon">☍</div>
+            <h3>Адаптивность</h3>
+            <p>Сайт аккуратно перестраивается на мобильных экранах: кнопки становятся крупнее, сетка — проще, а текст — удобнее.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-icon">∞</div>
+            <h3>Простой деплой</h3>
+            <p>Один HTML-файл без сборки, без npm и без сложной инфраструктуры — идеально для GitHub Pages и быстрого запуска.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-kicker">Как это работает</div>
+          <h2>Путь пользователя — от захода на сайт до подключения</h2>
+          <p class="section-copy">
+            На лендинге должно быть максимально понятно, что делать дальше. Поэтому структура простая:
+            зашёл → нажал кнопку → открыл бота → подключился.
+          </p>
+        </div>
+
+        <div class="steps">
+          <article class="step-card reveal">
+            <div class="step-number">1</div>
+            <h3>Открывает сайт</h3>
+            <p>Пользователь сразу видит понятный оффер, красивые визуальные акценты и две главные кнопки без отвлекающего мусора.</p>
+          </article>
+
+          <article class="step-card reveal">
+            <div class="step-number">2</div>
+            <h3>Переходит в Telegram-бот</h3>
+            <p>Кнопка ведёт напрямую в бота, где уже находится ваш основной сценарий: тарифы, кабинет, продление и управление доступом.</p>
+          </article>
+
+          <article class="step-card reveal">
+            <div class="step-number">3</div>
+            <h3>Подключает VPN</h3>
+            <p>После этого человек получает доступ к вашему основному продукту — без регистрации на сайте и без отдельной CMS.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-kicker">Совместимость и доверие</div>
+          <h2>Лендинг отвечает на основные вопросы до обращения в поддержку</h2>
+          <p class="section-copy">
+            Чем меньше сомнений у посетителя, тем выше конверсия. Поэтому ниже — блок совместимости и короткий FAQ.
+          </p>
+        </div>
+
+        <div class="compat">
+          <div class="compat-card reveal">
+            <h3>Подходит для популярных платформ</h3>
+            <p>Этот блок помогает быстро снять типовой вопрос: «А у меня это вообще запустится?»</p>
+            <div class="compat-grid">
+              <div class="os-chip">iPhone / iPad</div>
+              <div class="os-chip">Android</div>
+              <div class="os-chip">Windows</div>
+              <div class="os-chip">macOS</div>
+              <div class="os-chip">Ноутбук</div>
+              <div class="os-chip">Планшет</div>
+            </div>
+          </div>
+
+          <div class="faq-wrap reveal" id="support">
+            <div class="faq-item">
+              <h3>Нужно ли что-то устанавливать на сайт?</h3>
+              <p>Нет. Это статичный лендинг, который открывается как обычный сайт. Для GitHub Pages нужен только репозиторий с index.html.</p>
+            </div>
+            <div class="faq-item">
+              <h3>Можно ли поменять тексты и кнопки позже?</h3>
+              <p>Да. Меняешь пару строк в HTML, коммитишь — и GitHub Pages автоматически публикует новую версию.</p>
+            </div>
+            <div class="faq-item">
+              <h3>Можно ли подключить свой домен?</h3>
+              <p>Да. Когда купишь домен, его можно привязать к GitHub Pages без смены самой структуры сайта.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-wrap reveal">
+          <div class="cta-grid">
+            <div>
+              <h2 class="cta-title">Запусти красивый VPN-лендинг уже сегодня</h2>
+              <p class="cta-text">
+                Сайт уже заточен под конверсию: заметные кнопки, продуманный первый экран,
+                акцент на вашем Telegram-боте и визуальная подача, которая выглядит дорого даже без тяжёлого фронтенда.
+              </p>
+              <div class="cta-actions">
+                <a class="btn btn-primary" href="https://t.me/BlackRayVPN_bot?start=start_from_site" target="_blank" rel="noopener noreferrer">Перейти в бот</a>
+                <a class="btn btn-secondary" href="#top">Вернуться наверх</a>
+              </div>
+            </div>
+
+            <div class="mini-note">
+              <div class="note-card">
+                <strong>Что заменить перед запуском</strong>
+                <span>Проверь Telegram-ссылки, e-mail поддержки, тексты тарифов и ссылки на оферту/политику.</span>
+              </div>
+              <div class="note-card">
+                <strong>Что можно докрутить позже</strong>
+                <span>Отзывы, блок тарифов, FAQ-аккордеон, аналитику, favicon, кастомный домен и отдельные legal pages.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-wrap">
+      <div>© 2026 BlackRay VPN. Все права защищены.</div>
+      <div class="footer-links">
+        <a href="#">Договор-оферта</a>
+        <a href="mailto:support@blackray.io">...</a>
+        <a href="https://t.me/BlackRayVPN_bot" target="_blank" rel="noopener noreferrer">Telegram-бот</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal:not(.is-visible)').forEach((el) => observer.observe(el));
+  </script>
 </body>
 </html>
