@@ -59,31 +59,49 @@
 
     /* Навигация */
     header.nav-bar {
-      padding: 20px 0;
+      padding: 16px 0;
       position: fixed;
       width: 100%;
       top: 0;
       z-index: 100;
-      background: rgba(10, 10, 12, 0.8);
+      background: rgba(10, 10, 12, 0.85);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .nav-inner { display: flex; justify-content: space-between; align-items: center; }
-    .logo-block { display: flex; align-items: center; gap: 12px; }
+    
+    /* Кликабельный логотип */
+    .logo-block { 
+      display: flex; align-items: center; gap: 12px; 
+      cursor: pointer; transition: transform 0.2s ease;
+    }
+    .logo-block:hover { transform: scale(1.02); }
     
     .logo-img {
-      width: 48px; height: 48px; border-radius: 50%;
+      width: 44px; height: 44px; border-radius: 50%;
       box-shadow: 0 4px 20px rgba(56, 189, 248, 0.2);
     }
 
-    .logo-text { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.05em; }
+    .logo-text { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.05em; }
     .logo-text span:first-child { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .logo-text span:last-child { color: var(--brand); }
 
-    .nav-links { display: flex; gap: 32px; font-size: 1rem; font-weight: 500; }
+    /* Десктопное меню */
+    .nav-links { display: flex; gap: 32px; font-size: 1rem; font-weight: 500; align-items: center; }
     .nav-links a.active { color: var(--brand); font-weight: 700; }
     .nav-links a:hover:not(.active) { color: #fff; }
+
+    /* Кнопка гамбургера (скрыта на ПК) */
+    .menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-main);
+      cursor: pointer;
+      padding: 8px;
+    }
+    .menu-btn svg { width: 28px; height: 28px; stroke: currentColor; stroke-width: 2; }
 
     /* Главный экран */
     .hero { padding: 180px 0 100px; text-align: center; }
@@ -102,7 +120,7 @@
     }
 
     .hero h1 {
-      font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 800; line-height: 1.1;
+      font-size: clamp(2.5rem, 6vw, 5.5rem); font-weight: 800; line-height: 1.1;
       letter-spacing: -0.04em; margin-bottom: 24px;
     }
 
@@ -110,7 +128,7 @@
     .hero h1 span.darker { background: linear-gradient(to right, #2563eb, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
     .hero p {
-      font-size: clamp(1.1rem, 2vw, 1.3rem); color: var(--text-muted);
+      font-size: clamp(1rem, 2vw, 1.3rem); color: var(--text-muted);
       max-width: 768px; margin: 0 auto 48px; font-weight: 500;
     }
 
@@ -149,8 +167,8 @@
     .card:hover .icon-box { background: rgba(56, 189, 248, 0.15); }
     .icon-box svg { width: 36px; height: 36px; stroke: var(--brand); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 
-    .card h3 { font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 12px; letter-spacing: -0.02em; }
-    .card p { color: var(--text-muted); font-size: 1rem; font-weight: 500; }
+    .card h3 { font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 12px; letter-spacing: -0.02em; }
+    .card p { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; }
 
     /* Подвал */
     footer { border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 40px 0; margin-top: 40px; }
@@ -159,9 +177,31 @@
     .footer-links { display: flex; gap: 24px; font-size: 0.9rem; }
     .footer-links a:hover { color: #fff; }
 
+    /* Мобильная адаптация */
     @media (max-width: 768px) {
       .hero { padding: 140px 0 80px; }
       .footer-inner { flex-direction: column; text-align: center; }
+      
+      .menu-btn { display: block; } /* Показываем бургер */
+      
+      .nav-links {
+        display: none; /* Прячем обычное меню */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(10, 10, 12, 0.98);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        flex-direction: column;
+        padding: 24px;
+        gap: 20px;
+      }
+      
+      .nav-links.active {
+        display: flex; /* Показываем, когда нажат бургер */
+      }
+      
+      .nav-links a { font-size: 1.2rem; }
     }
   </style>
 </head>
@@ -169,11 +209,16 @@
 
   <header class="nav-bar">
     <div class="container nav-inner">
-      <div class="logo-block">
+      <a href="index.html" class="logo-block">
         <img src="image_0.png" alt="BlackRay Logo" class="logo-img">
         <div class="logo-text"><span>Black</span><span>Ray</span></div>
-      </div>
-      <nav class="nav-links">
+      </a>
+      
+      <button class="menu-btn" id="mobile-menu-btn" aria-label="Открыть меню">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+
+      <nav class="nav-links" id="nav-links">
         <a href="index.html" class="active">Главная</a>
         <a href="help.html">Помощь</a>
       </nav>
@@ -253,5 +298,14 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const navLinks = document.getElementById('nav-links');
+
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
 </body>
 </html>
