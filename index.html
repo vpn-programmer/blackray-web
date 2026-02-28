@@ -3,34 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BlackRay VPN — быстрый VPN без лишнего</title>
-  <meta name="description" content="BlackRay VPN — быстрый и удобный VPN с подключением через Telegram-бот. Просто, стабильно, без лишней настройки." />
-  <meta name="theme-color" content="#0b1020" />
+  <title>BlackRay VPN — простой и быстрый VPN</title>
+  <meta name="description" content="BlackRay VPN — простой VPN с быстрым подключением через Telegram-бот. Без лишнего, всё понятно с первого экрана." />
+  <meta name="theme-color" content="#0b0f19" />
   <style>
     :root {
-      --bg: #070b14;
-      --bg-soft: #0d1324;
-      --card: #111a31;
-      --line: rgba(255,255,255,0.08);
-      --text: #eef4ff;
-      --muted: #a9b7d4;
-      --brand: #4cc9ff;
-      --brand-2: #6ea8ff;
-      --max: 1120px;
-      --radius: 20px;
+      --bg: #0b0f19;
+      --bg-2: #101726;
+      --card: #151e31;
+      --line: rgba(255,255,255,0.06);
+      --text: #f3f6fd;
+      --muted: #a5b1c8;
+      --accent: #5aa9ff;
+      --accent-2: #7ec7ff;
+      --max: 1040px;
+      --radius: 18px;
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at top right, rgba(76,201,255,0.12), transparent 28%),
-        radial-gradient(circle at top left, rgba(110,168,255,0.10), transparent 24%),
-        linear-gradient(180deg, #070b14 0%, #0a1020 45%, #070b14 100%);
-      line-height: 1.5;
+        radial-gradient(circle at 50% 0%, rgba(90,169,255,0.08), transparent 30%),
+        linear-gradient(180deg, var(--bg) 0%, #0d1321 100%);
     }
 
     a { color: inherit; text-decoration: none; }
@@ -41,12 +38,11 @@
     }
 
     .header {
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      background: rgba(7,11,20,0.88);
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
     }
 
-    .nav {
-      min-height: 74px;
+    .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -56,287 +52,203 @@
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       font-weight: 800;
       letter-spacing: -0.02em;
     }
 
     .brand-mark {
-      width: 40px;
-      height: 40px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, var(--brand), var(--brand-2));
-      box-shadow: 0 8px 24px rgba(76,201,255,0.22);
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
     }
 
-    .brand-name {
-      font-size: 1.1rem;
-    }
+    .brand-name span:last-child { color: var(--accent); }
 
-    .brand-name span:last-child {
-      color: var(--brand);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 22px;
+    .top-link {
       color: var(--muted);
       font-size: 0.95rem;
     }
 
-    .nav-links a:hover { color: #fff; }
-
-    .nav-actions {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 46px;
-      padding: 0 18px;
-      border-radius: 14px;
-      font-weight: 700;
-      transition: 0.2s ease;
-      border: 1px solid transparent;
-      white-space: nowrap;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--brand), var(--brand-2));
-      color: #07111d;
-      box-shadow: 0 10px 28px rgba(76,201,255,0.20);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 32px rgba(76,201,255,0.26);
-    }
-
-    .btn-secondary {
-      border-color: rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.02);
-      color: var(--text);
-    }
-
-    .btn-secondary:hover {
-      border-color: rgba(76,201,255,0.18);
-      background: rgba(76,201,255,0.05);
-    }
+    .top-link:hover { color: #fff; }
 
     .hero {
-      padding: 72px 0 48px;
+      padding: 84px 0 56px;
+      text-align: center;
     }
 
-    .hero-box {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 24px;
-      align-items: center;
+    .hero-inner {
+      max-width: 760px;
+      margin: 0 auto;
     }
 
-    .badge {
+    .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      min-height: 36px;
+      min-height: 34px;
       padding: 0 12px;
       border-radius: 999px;
-      background: rgba(76,201,255,0.08);
-      border: 1px solid rgba(76,201,255,0.14);
-      color: #d9f6ff;
-      font-size: 0.88rem;
-      font-weight: 600;
-      margin-bottom: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
     }
 
-    .badge-dot {
-      width: 8px;
-      height: 8px;
+    .hero-badge i {
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      background: #32d583;
-      box-shadow: 0 0 10px rgba(50,213,131,0.5);
+      background: #34d399;
+      display: block;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(2.5rem, 6vw, 4.8rem);
-      line-height: 1.02;
+      font-size: clamp(2.4rem, 6vw, 4.8rem);
+      line-height: 1.04;
       letter-spacing: -0.04em;
+      font-weight: 800;
     }
 
-    .hero p {
-      margin: 18px 0 0;
-      max-width: 640px;
+    .hero-text {
+      margin: 18px auto 0;
+      max-width: 620px;
       color: var(--muted);
-      font-size: clamp(1rem, 2vw, 1.15rem);
+      font-size: clamp(1rem, 2vw, 1.1rem);
+      line-height: 1.65;
     }
 
     .hero-actions {
       display: flex;
+      justify-content: center;
       gap: 12px;
-      margin-top: 28px;
+      margin-top: 30px;
       flex-wrap: wrap;
     }
 
-    .hero-note {
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
-
-    .hero-card {
-      border-radius: 24px;
-      padding: 22px;
-      background: linear-gradient(180deg, rgba(17,26,49,0.92), rgba(12,18,34,0.96));
-      border: 1px solid var(--line);
-    }
-
-    .mini-top {
-      display: flex;
-      justify-content: space-between;
+    .btn {
+      min-height: 50px;
+      padding: 0 22px;
+      border-radius: 14px;
+      display: inline-flex;
       align-items: center;
-      margin-bottom: 16px;
+      justify-content: center;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #08111b;
+    }
+
+    .btn-secondary {
+      background: #182235;
+      border-color: rgba(255,255,255,0.06);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: #1c2840;
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    .hero-note {
+      margin-top: 16px;
       color: var(--muted);
-      font-size: 0.88rem;
-    }
-
-    .dots {
-      display: flex;
-      gap: 7px;
-    }
-
-    .dots i {
-      width: 9px;
-      height: 9px;
-      display: block;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.22);
-    }
-
-    .mini-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .mini-row {
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .mini-row strong {
-      display: block;
-      color: #fff;
-      font-size: 1rem;
-      margin-bottom: 4px;
-    }
-
-    .mini-row span {
-      color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 0.92rem;
     }
 
     .section {
-      padding: 32px 0;
+      padding: 18px 0 34px;
     }
 
-    .section-head {
-      margin-bottom: 18px;
-    }
-
-    .section-head h2 {
-      margin: 0;
-      font-size: clamp(1.8rem, 4vw, 3rem);
+    .section-title {
+      margin: 0 0 16px;
+      text-align: center;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
       letter-spacing: -0.03em;
     }
 
-    .section-head p {
-      margin: 10px 0 0;
-      color: var(--muted);
-      max-width: 700px;
-    }
-
-    .grid-3 {
+    .features {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      gap: 14px;
     }
 
     .card {
-      padding: 22px;
+      background: var(--card);
+      border: 1px solid var(--line);
       border-radius: var(--radius);
-      background: rgba(255,255,255,0.025);
-      border: 1px solid rgba(255,255,255,0.06);
+      padding: 20px;
     }
 
     .card h3 {
       margin: 0 0 10px;
-      font-size: 1.05rem;
+      font-size: 1rem;
       color: #fff;
     }
 
     .card p {
       margin: 0;
       color: var(--muted);
-      font-size: 0.95rem;
+      font-size: 0.94rem;
+      line-height: 1.6;
     }
 
-    .steps {
+    .mini-steps {
+      margin-top: 14px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      gap: 14px;
     }
 
-    .step-number {
-      width: 36px;
-      height: 36px;
-      border-radius: 12px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 12px;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--brand), var(--brand-2));
-      color: #07111d;
+    .step {
+      background: #121a2b;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      text-align: center;
     }
 
-    .cta {
-      margin-top: 8px;
-      padding: 28px;
-      border-radius: 24px;
-      background: linear-gradient(180deg, rgba(17,26,49,0.95), rgba(11,17,31,0.98));
-      border: 1px solid rgba(255,255,255,0.06);
+    .step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      margin: 0 auto 10px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      flex-wrap: wrap;
+      justify-content: center;
+      font-weight: 800;
+      background: #1e2a44;
+      color: var(--accent-2);
     }
 
-    .cta h2 {
-      margin: 0;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      letter-spacing: -0.03em;
+    .step strong {
+      display: block;
+      font-size: 0.98rem;
+      margin-bottom: 6px;
     }
 
-    .cta p {
-      margin: 8px 0 0;
+    .step span {
       color: var(--muted);
-      max-width: 620px;
+      font-size: 0.92rem;
+      line-height: 1.5;
     }
 
     .footer {
-      padding: 26px 0 52px;
+      padding: 34px 0 48px;
     }
 
     .footer-box {
-      border-top: 1px solid rgba(255,255,255,0.05);
-      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      padding-top: 18px;
       display: flex;
       justify-content: space-between;
       gap: 16px;
@@ -347,211 +259,115 @@
 
     .footer-links {
       display: flex;
-      gap: 16px;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
     .footer-links a:hover { color: #fff; }
 
-    @media (max-width: 900px) {
-      .hero-box,
-      .grid-3,
-      .steps {
+    @media (max-width: 820px) {
+      .features,
+      .mini-steps {
         grid-template-columns: 1fr;
       }
 
       .hero {
-        padding-top: 52px;
-      }
-
-      .hero-card {
-        order: 2;
+        padding-top: 64px;
       }
     }
 
-    @media (max-width: 720px) {
-      .nav {
-        min-height: auto;
-        padding: 14px 0;
-        flex-wrap: wrap;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .nav-actions {
-        width: 100%;
-      }
-
-      .nav-actions .btn {
-        flex: 1;
-      }
-
-      .cta {
-        padding: 22px;
-      }
-    }
-
-    @media (max-width: 520px) {
+    @media (max-width: 560px) {
       .container {
         width: min(var(--max), calc(100% - 20px));
       }
 
-      .hero,
-      .section {
-        padding-top: 24px;
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
       }
 
-      .hero-actions,
-      .nav-actions {
+      .hero-actions {
         flex-direction: column;
       }
 
-      .nav-actions .btn,
-      .hero-actions .btn,
-      .cta .btn {
+      .hero-actions .btn {
         width: 100%;
       }
 
-      .hero-card,
-      .card,
-      .cta {
-        border-radius: 18px;
+      .hero {
+        padding-top: 48px;
       }
     }
   </style>
 </head>
 <body>
   <header class="header">
-    <div class="container nav">
+    <div class="container topbar">
       <a href="#top" class="brand" aria-label="BlackRay VPN">
         <span class="brand-mark"></span>
         <span class="brand-name">Black<span>Ray</span></span>
       </a>
-
-      <nav class="nav-links" aria-label="Навигация">
-        <a href="#features">Преимущества</a>
-        <a href="#how">Как это работает</a>
-        <a href="#help">Помощь</a>
-      </nav>
-
-      <div class="nav-actions">
-        <a class="btn btn-secondary" href="https://t.me/BlackRayVPN_bot" target="_blank" rel="noopener noreferrer">Личный кабинет</a>
-        <a class="btn btn-primary" href="https://t.me/BlackRayVPN_bot?start=start_from_site" target="_blank" rel="noopener noreferrer">Подключить</a>
-      </div>
+      <a class="top-link" href="https://t.me/BlackRayVPN_bot" target="_blank" rel="noopener noreferrer">Личный кабинет</a>
     </div>
   </header>
 
   <main id="top">
     <section class="hero">
-      <div class="container hero-box">
-        <div>
-          <div class="badge">
-            <span class="badge-dot"></span>
-            Простой запуск через Telegram-бот
-          </div>
+      <div class="container hero-inner">
+        <div class="hero-badge"><i></i> Подключение через Telegram-бот</div>
+        <h1>Простой и быстрый VPN</h1>
+        <p class="hero-text">
+          BlackRay VPN — удобный сервис для стабильного доступа к нужным сайтам и приложениям.
+          Всё просто: открыл бота, подключился, пользуешься.
+        </p>
 
-          <h1>Простой VPN для повседневного использования</h1>
-          <p>
-            BlackRay VPN — быстрый и удобный сервис для стабильного доступа к нужным сайтам и приложениям.
-            Подключение занимает пару минут, управление — через Telegram-бот.
-          </p>
-
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="https://t.me/BlackRayVPN_bot?start=start_from_site" target="_blank" rel="noopener noreferrer">Подключить в 1 клик</a>
-            <a class="btn btn-secondary" href="https://t.me/BlackRayVPN_bot" target="_blank" rel="noopener noreferrer">Открыть кабинет</a>
-          </div>
-
-          <div class="hero-note">Без лишней регистрации на сайте. Всё управление — сразу в боте.</div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://t.me/BlackRayVPN_bot?start=start_from_site" target="_blank" rel="noopener noreferrer">Подключить</a>
+          <a class="btn btn-secondary" href="https://t.me/BlackRayVPN_bot" target="_blank" rel="noopener noreferrer">Открыть бот</a>
         </div>
 
-        <div class="hero-card">
-          <div class="mini-top">
-            <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
-            <div>BlackRay VPN</div>
-          </div>
-
-          <div class="mini-list">
-            <div class="mini-row">
-              <strong>Быстрое подключение</strong>
-              <span>Переходишь в бота, выбираешь тариф и получаешь доступ.</span>
-            </div>
-            <div class="mini-row">
-              <strong>Удобное управление</strong>
-              <span>Продление, устройства и доступ — в одном месте.</span>
-            </div>
-            <div class="mini-row">
-              <strong>Популярные платформы</strong>
-              <span>Подходит для телефона, ноутбука и планшета.</span>
-            </div>
-          </div>
-        </div>
+        <div class="hero-note">Без лишней регистрации на сайте</div>
       </div>
     </section>
 
-    <section class="section" id="features">
+    <section class="section">
       <div class="container">
-        <div class="section-head">
-          <h2>Что важно</h2>
-          <p>Только основные преимущества без перегруза.</p>
+        <h2 class="section-title">Почему BlackRay</h2>
+
+        <div class="features">
+          <div class="card">
+            <h3>Быстрое подключение</h3>
+            <p>Основной сценарий проходит через Telegram-бот без лишних шагов.</p>
+          </div>
+
+          <div class="card">
+            <h3>Понятное управление</h3>
+            <p>Доступ, продление и работа с устройствами — в одном месте.</p>
+          </div>
+
+          <div class="card">
+            <h3>Для повседневного использования</h3>
+            <p>Подходит для телефона, ноутбука и других популярных устройств.</p>
+          </div>
         </div>
 
-        <div class="grid-3">
-          <div class="card">
-            <h3>Просто</h3>
-            <p>Не нужно разбираться в сложных настройках. Основной сценарий проходит через Telegram-бот.</p>
-          </div>
-          <div class="card">
-            <h3>Быстро</h3>
-            <p>Подключение занимает минимум времени, а сайт сразу ведёт к нужному действию.</p>
-          </div>
-          <div class="card">
-            <h3>Удобно</h3>
-            <p>Подходит для обычного повседневного использования на популярных устройствах.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="how">
-      <div class="container">
-        <div class="section-head">
-          <h2>Как это работает</h2>
-          <p>Максимально короткий путь от сайта до подключения.</p>
-        </div>
-
-        <div class="steps">
-          <div class="card">
-            <div class="step-number">1</div>
-            <h3>Открываешь бота</h3>
-            <p>Нажимаешь кнопку на сайте и переходишь в Telegram.</p>
-          </div>
-          <div class="card">
-            <div class="step-number">2</div>
-            <h3>Выбираешь тариф</h3>
-            <p>Получаешь доступ и данные для подключения в понятном интерфейсе.</p>
-          </div>
-          <div class="card">
-            <div class="step-number">3</div>
-            <h3>Пользуешься</h3>
-            <p>Подключаешь устройство и используешь сервис как обычно.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="help">
-      <div class="container">
-        <div class="cta">
-          <div>
-            <h2>Подключиться можно за пару минут</h2>
-            <p>Открой Telegram-бот и начни пользоваться BlackRay VPN без лишних шагов.</p>
+        <div class="mini-steps" style="margin-top:18px;">
+          <div class="step">
+            <div class="step-num">1</div>
+            <strong>Открой бота</strong>
+            <span>Нажми кнопку на сайте и перейди в Telegram.</span>
           </div>
 
-          <div class="hero-actions" style="margin-top:0;">
-            <a class="btn btn-primary" href="https://t.me/BlackRayVPN_bot?start=start_from_site" target="_blank" rel="noopener noreferrer">Перейти в бот</a>
-            <a class="btn btn-secondary" href="mailto:support@blackray.io">Поддержка</a>
+          <div class="step">
+            <div class="step-num">2</div>
+            <strong>Выбери тариф</strong>
+            <span>Получи доступ и данные для подключения.</span>
+          </div>
+
+          <div class="step">
+            <div class="step-num">3</div>
+            <strong>Пользуйся</strong>
+            <span>Подключи устройство и используй сервис как обычно.</span>
           </div>
         </div>
       </div>
