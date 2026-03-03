@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Пользовательское соглашение — BlackRay VPN</title>
+  <meta name="theme-color" content="#0a0a0c" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-start: #0a0a0c;
+      --bg-end: #000000;
+      --card-bg: rgba(15, 23, 42, 0.6);
+      --border: rgba(56, 189, 248, 0.15);
+      --text-main: #e2e8f0;
+      --text-muted: #94a3b8;
+      --brand: #38bdf8;
+      --gradient: linear-gradient(to right, #60a5fa, #67e8f9);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-main);
+      background: linear-gradient(to bottom, var(--bg-start), var(--bg-end));
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+      background-attachment: fixed;
+    }
+
+    a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* Навигация */
+    header.nav-bar {
+      padding: 16px 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 10, 12, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+    
+    .logo-block { 
+      display: flex; align-items: center; gap: 12px; 
+      cursor: pointer; transition: transform 0.2s ease;
+    }
+    .logo-block:hover { transform: scale(1.02); }
+    
+    .logo-img {
+      width: 44px; height: 44px; border-radius: 50%;
+      box-shadow: 0 4px 20px rgba(56, 189, 248, 0.2);
+    }
+
+    .logo-text { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.05em; }
+    .logo-text span:first-child { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .logo-text span:last-child { color: var(--brand); }
+
+    .nav-links { display: flex; gap: 32px; font-size: 1rem; font-weight: 500; align-items: center; }
+    .nav-links a.active { color: var(--brand); font-weight: 700; }
+    .nav-links a:hover:not(.active) { color: #fff; }
+
+    .menu-btn {
+      display: none; background: none; border: none;
+      color: var(--text-main); cursor: pointer; padding: 8px;
+    }
+    .menu-btn svg { width: 28px; height: 28px; stroke: currentColor; stroke-width: 2; }
+
+    /* Стили для текстовой страницы документов */
+    .legal-content {
+      padding: 140px 0 80px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .legal-content h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 40px;
+      line-height: 1.2;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .legal-content h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--brand);
+      margin: 48px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .legal-content h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 24px 0 12px;
+    }
+
+    .legal-content p, .legal-content li {
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .legal-content ul {
+      margin-left: 24px;
+      margin-bottom: 24px;
+    }
+
+    .legal-content strong {
+      color: #e2e8f0;
+      font-weight: 600;
+    }
+
+    .doc-section {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 24px;
+      padding: 40px;
+      margin-bottom: 40px;
+      backdrop-filter: blur(10px);
+    }
+
+    /* Подвал */
+    footer { border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 40px 0; margin-top: 40px; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    .footer-copy { color: rgba(148, 163, 184, 0.6); font-size: 0.9rem; }
+    .footer-links { display: flex; gap: 24px; font-size: 0.9rem; }
+    .footer-links a:hover { color: #fff; }
+
+    @media (max-width: 768px) {
+      .legal-content { padding: 120px 20px 60px; }
+      .doc-section { padding: 24px; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .menu-btn { display: block; }
+      .nav-links {
+        display: none; position: absolute; top: 100%; left: 0; width: 100%;
+        background: rgba(10, 10, 12, 0.98); border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        flex-direction: column; padding: 24px; gap: 20px;
+      }
+      .nav-links.active { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav-bar">
+    <div class="container nav-inner">
+      <a href="/" class="logo-block">
+        <img src="image_0.png" alt="BlackRay Logo" class="logo-img">
+        <div class="logo-text"><span>Black</span><span>Ray</span></div>
+      </a>
+      
+      <button class="menu-btn" id="mobile-menu-btn" aria-label="Открыть меню">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+
+      <nav class="nav-links" id="nav-links">
+        <a href="/">Главная</a>
+        <a href="/help">Помощь</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container legal-content">
+    <h1>Документация и правила сервиса</h1>
+    
+    <div class="doc-section">
+      <h2>Пользовательское соглашение (Публичная оферта)</h2>
+      <p>Настоящий документ определяет условия использования сервиса BlackRay VPN (далее — «Провайдер») и является публичной офертой.</p>
+
+      <h3>1. Общие положения</h3>
+      <p>Запуск Telegram-бота, пополнение баланса или начало использования конфигурации (ключа) означает ваше полное согласие с условиями данного Соглашения. Наш сервис предоставляет инструмент для обеспечения вашей информационной безопасности и защиты приватности в сети.</p>
+
+      <h3>2. Правила использования (Права и обязанности)</h3>
+      <p>Мы стараемся обеспечить максимальную скорость и стабильность для всех. Чтобы сервис работал идеально, Пользователь обязуется соблюдать несколько простых, но важных правил:</p>
+      <ul>
+        <li><strong>Запрет на P2P и Торренты:</strong> Пожалуйста, не используйте торрент-клиенты (qBittorrent, uTorrent и др.) при включенном VPN. Это вызывает жалобы дата-центров и может привести к блокировке серверов, из-за чего пострадают все пользователи. В случае фиксации торрент-трафика мы оставляем за собой право отключить ключ без возврата средств.</li>
+        <li><strong>Только законное использование:</strong> Запрещено использовать сеть для DDoS-атак, спама, взлома, мошенничества и передачи незаконного контента.</li>
+        <li><strong>Личное использование:</strong> Ключи доступа генерируются индивидуально для вас. Запрещается передавать их третьим лицам или использовать для создания массовых автоматизированных подключений.</li>
+      </ul>
+
+      <h3>3. Тарификация и списания</h3>
+      <p>Оплата услуг осуществляется по удобной авансовой (предоплатной) системе. Списание средств с вашего баланса происходит ежедневно равными долями за каждое добавленное вами активное устройство в Боте. Если вы временно не пользуетесь сервисом, просто отключите или удалите устройство в Боте, чтобы остановить списания.</p>
+
+      <h3>4. Условия возврата средств</h3>
+      <p>Мы ценим каждого клиента и готовы вернуть неизрасходованные средства, если сервис оказался недоступен по нашей вине (например, масштабный технический сбой на наших серверах, длившийся более 72 часов).</p>
+      <p>Просим отнестись с пониманием, что возврат средств <strong>не производится</strong> в ситуациях, которые не зависят от работоспособности нашей инфраструктуры. К ним относятся:</p>
+      <ul>
+        <li>Блокировки и ограничения со стороны вашего интернет-провайдера или сотового оператора (включая работу оборудования ТСПУ и систем DPI).</li>
+        <li>Индивидуальные проблемы с вашим устройством, операционной системой или локальным роутером.</li>
+        <li>Блокировка аккаунта за нарушение Правил использования (п. 2), включая загрузку торрентов.</li>
+      </ul>
+
+      <h3>5. Форс-мажор</h3>
+      <p>Мы делаем всё возможное для обхода сетевых ограничений (регулярно обновляем протоколы, используем маскировку трафика). Однако целенаправленные действия государственных органов по блокировке VPN-сетей, а также глобальные сбои у магистральных операторов связи являются обстоятельствами непреодолимой силы. В такие моменты сервис может работать нестабильно, и это время не подлежит компенсации.</p>
+    </div>
+
+    <div class="doc-section">
+      <h2>Политика конфиденциальности (Privacy Policy)</h2>
+      
+      <h3>1. Минимальный сбор данных</h3>
+      <p>Мы придерживаемся строгой политики приватности. <strong>Мы не собираем ваши персональные данные.</strong> Нам не нужны ваши ФИО, номера телефонов, адреса или документы.</p>
+      <p>Для того чтобы вы могли управлять своей подпиской, а мы могли оказывать поддержку, мы сохраняем лишь базовый минимум технических данных:</p>
+      <ul>
+        <li>Ваш идентификатор в Telegram (Telegram ID).</li>
+        <li>Объем переданного трафика (в байтах) для корректной работы биллинга.</li>
+        <li>Текущий статус подключения ключа (чтобы избежать передачи одного ключа десяткам людей).</li>
+      </ul>
+
+      <h3>2. Политика отсутствия логов активности (Zero-Log Policy)</h3>
+      <p>Ваша активность в сети — это только ваше дело. Мы <strong>никогда не отслеживаем и не сохраняем:</strong></p>
+      <ul>
+        <li>Историю посещенных вами сайтов.</li>
+        <li>Ваши DNS-запросы.</li>
+        <li>Содержимое файлов, которые вы скачиваете или передаете.</li>
+      </ul>
+      <p><em>Исключение для защиты сети:</em> Автоматизированная система защиты может кратковременно удерживать IP-адрес подключения исключительно для выявления аномалий (попыток DDoS-атак, спама или использования торрентов). Эти технические данные не привязываются к вашей истории браузера и автоматически удаляются системой.</p>
+
+      <h3>3. Передача данных и безопасность</h3>
+      <p>Мы не продаем и не передаем ваши данные аналитическим или рекламным компаниям. Наш сайт использует только базовые cookie-файлы для правильного отображения страницы, мы не используем рекламные трекеры. Вы в любой момент можете запросить полное и безвозвратное удаление вашего аккаунта через службу поддержки.</p>
+      
+      <h3>4. Контакты</h3>
+      <p>Если у вас остались вопросы по условиям соглашения или политике конфиденциальности, мы всегда рады помочь в нашей службе поддержки: <a href="https://t.me/ТУТ_ТВОЙ_САППОРТ_БОТ" style="color: var(--brand);">@ТВОЙ_САППОРТ_БОТ</a>.</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-copy">&copy; 2026 BlackRay. Все права защищены.</div>
+      <div class="footer-links">
+        <a href="/terms" class="active">Договор-оферта</a>
+        <a href="mailto:support@blackray.info">support@blackray.info</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const navLinks = document.getElementById('nav-links');
+
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
