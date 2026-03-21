@@ -4,10 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Помощь — BlackRay VPN</title>
+  <meta name="description" content="Инструкции по установке и настройке BlackRay VPN. Ответы на частые вопросы, устранение неполадок." />
   <meta name="theme-color" content="#0a0a0c" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   
   <style>
     :root {
@@ -19,9 +20,13 @@
       --text-muted: #94a3b8;
       --brand: #38bdf8;
       --gradient: linear-gradient(to right, #60a5fa, #67e8f9);
+      --green: #34d399;
+      --yellow: #fbbf24;
+      --red: #f87171;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     
     body {
       font-family: 'Inter', sans-serif;
@@ -30,140 +35,155 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      line-height: 1.6;
+      line-height: 1.7;
       background-attachment: fixed;
     }
 
-    a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; width: 100%; }
+    a { color: var(--brand); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: #fff; text-decoration: underline; }
+    .container { max-width: 860px; margin: 0 auto; padding: 0 24px; width: 100%; }
 
     /* Навигация */
     header.nav-bar {
-      padding: 16px 0;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 100;
-      background: rgba(10, 10, 12, 0.85);
-      backdrop-filter: blur(12px);
+      padding: 16px 0; position: fixed; width: 100%; top: 0; z-index: 100;
+      background: rgba(10, 10, 12, 0.85); backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
-
-    .nav-inner { display: flex; justify-content: space-between; align-items: center; }
-    
-    .logo-block { 
-      display: flex; align-items: center; gap: 12px; 
-      cursor: pointer; transition: transform 0.2s ease;
-    }
-    .logo-block:hover { transform: scale(1.02); }
-    
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .logo-block { display: flex; align-items: center; gap: 12px; cursor: pointer; transition: transform 0.2s; text-decoration: none; }
+    .logo-block:hover { transform: scale(1.02); text-decoration: none; }
     .logo-img { width: 44px; height: 44px; border-radius: 50%; box-shadow: 0 4px 20px rgba(56, 189, 248, 0.2); }
     .logo-text { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.05em; }
     .logo-text span:first-child { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .logo-text span:last-child { color: var(--brand); }
-
     .nav-links { display: flex; gap: 32px; font-size: 1rem; font-weight: 500; align-items: center; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; }
     .nav-links a.active { color: var(--brand); font-weight: 700; }
-    .nav-links a:hover:not(.active) { color: #fff; }
-
-    .menu-btn {
-      display: none; background: none; border: none;
-      color: var(--text-main); cursor: pointer; padding: 8px;
-    }
+    .nav-links a:hover:not(.active) { color: #fff; text-decoration: none; }
+    .menu-btn { display: none; background: none; border: none; color: var(--text-main); cursor: pointer; padding: 8px; }
     .menu-btn svg { width: 28px; height: 28px; stroke: currentColor; stroke-width: 2; }
 
-    /* Блок помощи */
-    main { flex: 1; padding: 140px 0 80px; } /* Отступ сверху увеличен из-за фиксированной шапки */
-    .page-title { font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: 800; margin-bottom: 48px; text-align: center; }
+    /* Контент */
+    main { flex: 1; padding: 120px 0 60px; }
 
-    .help-grid { display: flex; gap: 40px; align-items: flex-start; }
-
-    .questions-list { flex: 0 0 350px; display: flex; flex-direction: column; gap: 12px; }
-
-    .q-btn {
-      background: rgba(255, 255, 255, 0.03); border: 1px solid transparent;
-      padding: 18px 24px; border-radius: 16px; color: var(--text-main);
-      font-size: 1.05rem; font-weight: 600; text-align: left; cursor: pointer;
-      transition: all 0.2s ease; font-family: inherit;
+    .page-title {
+      font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 12px; text-align: center;
+      background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
-    .q-btn:hover { background: rgba(255, 255, 255, 0.08); }
-    .q-btn.active {
-      background: var(--card-bg); border-color: var(--border);
-      color: var(--brand); box-shadow: 0 4px 20px rgba(56, 189, 248, 0.1);
+    .page-subtitle { text-align: center; color: var(--text-muted); font-size: 1.1rem; margin-bottom: 48px; }
+
+    /* Быстрые ссылки */
+    .toc { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 56px; }
+    .toc a {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;
+      padding: 10px 18px; font-size: 0.9rem; font-weight: 500; color: var(--text-muted);
+      transition: all 0.2s; text-decoration: none;
+    }
+    .toc a:hover { background: rgba(56,189,248,0.1); border-color: var(--border); color: var(--brand); text-decoration: none; }
+
+    /* Секции */
+    .faq-section { margin-bottom: 56px; scroll-margin-top: 100px; }
+    .faq-section-title {
+      font-size: 1.5rem; font-weight: 700; margin-bottom: 24px; padding-bottom: 12px;
+      border-bottom: 2px solid rgba(56,189,248,0.2); color: #fff;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .faq-section-title .icon { font-size: 1.4rem; }
+
+    /* Аккордеон */
+    .faq-item { margin-bottom: 12px; }
+    .faq-q {
+      width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+      padding: 18px 24px; border-radius: 16px; color: var(--text-main); font-size: 1.05rem;
+      font-weight: 600; text-align: left; cursor: pointer; font-family: inherit;
+      transition: all 0.2s; display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    }
+    .faq-q:hover { background: rgba(255,255,255,0.06); }
+    .faq-q.open { background: var(--card-bg); border-color: var(--border); border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-color: transparent; }
+    .faq-q::after { content: '+'; font-size: 1.4rem; font-weight: 300; color: var(--text-muted); transition: transform 0.3s; flex-shrink: 0; }
+    .faq-q.open::after { content: '−'; color: var(--brand); }
+
+    .faq-a {
+      display: none; background: var(--card-bg); border: 1px solid var(--border); border-top: none;
+      border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;
+      padding: 20px 24px; color: var(--text-muted); font-size: 1rem; line-height: 1.8;
+      animation: slideDown 0.3s ease;
+    }
+    .faq-a.open { display: block; }
+    .faq-a p { margin-bottom: 12px; }
+    .faq-a p:last-child { margin-bottom: 0; }
+    .faq-a strong { color: var(--text-main); }
+    .faq-a code { background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 6px; font-size: 0.92em; color: var(--brand); }
+    .faq-a ul, .faq-a ol { margin: 8px 0 12px 20px; }
+    .faq-a li { margin-bottom: 6px; }
+
+    .step-list { list-style: none; margin: 12px 0; padding: 0; counter-reset: step; }
+    .step-list li { counter-increment: step; padding-left: 36px; position: relative; margin-bottom: 10px; }
+    .step-list li::before {
+      content: counter(step); position: absolute; left: 0; top: 1px;
+      width: 24px; height: 24px; border-radius: 50%; background: rgba(56,189,248,0.15);
+      color: var(--brand); font-size: 0.8rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
     }
 
-    .answer-panel {
-      flex: 1; background: var(--card-bg); border: 1px solid var(--border);
-      border-radius: 24px; padding: 40px; min-height: 300px;
-      backdrop-filter: blur(10px);
+    .badge { display: inline-block; padding: 3px 10px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; }
+    .badge-green { background: rgba(52,211,153,0.15); color: var(--green); }
+    .badge-yellow { background: rgba(251,191,36,0.15); color: var(--yellow); }
+    .badge-blue { background: rgba(56,189,248,0.15); color: var(--brand); }
+
+    .app-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 12px 0; }
+    .app-card {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px;
+      padding: 16px; text-align: center; transition: all 0.2s;
     }
+    .app-card:hover { border-color: var(--border); }
+    .app-card .app-name { font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .app-card .app-os { font-size: 0.85rem; color: var(--text-muted); }
 
-    .answer-content { display: none; animation: fadeIn 0.4s ease forwards; }
-    .answer-content.active { display: block; }
-    
-    .answer-content h2 { font-size: 1.8rem; margin-bottom: 20px; color: #fff; }
-    .answer-content p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 16px; }
-    .answer-content a { color: var(--brand); text-decoration: underline; }
+    .tip-box {
+      background: rgba(56,189,248,0.06); border: 1px solid rgba(56,189,248,0.15);
+      border-radius: 12px; padding: 16px 20px; margin: 12px 0; font-size: 0.95rem;
+    }
+    .tip-box.warning { background: rgba(251,191,36,0.06); border-color: rgba(251,191,36,0.15); }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-8px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .mobile-answer { display: none; }
-
     /* Подвал */
-    footer { border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 40px 0; margin-top: 40px;}
-    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
-    .footer-copy { color: rgba(148, 163, 184, 0.6); font-size: 0.9rem; }
+    footer { border-top: 1px solid rgba(255,255,255,0.05); padding: 40px 0; margin-top: 40px; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .footer-copy { color: rgba(148,163,184,0.6); font-size: 0.9rem; }
     .footer-links { display: flex; gap: 24px; font-size: 0.9rem; }
+    .footer-links a { color: var(--text-muted); }
     .footer-links a:hover { color: #fff; }
-
-    /* Мобильная адаптация */
-    @media (max-width: 900px) {
-      .help-grid { flex-direction: column; gap: 24px; }
-      .questions-list { flex: auto; width: 100%; }
-      .answer-panel { display: none; } /* На телефоне скрываем правую панель */
-      
-      .q-btn { border: 1px solid rgba(255, 255, 255, 0.05); }
-      .q-btn.active { border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-color: transparent; }
-      
-      .mobile-answer {
-        display: none; background: var(--card-bg); padding: 20px 24px;
-        border: 1px solid var(--border); border-top: none;
-        border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;
-        color: var(--text-muted); font-size: 1rem; margin-top: -12px; margin-bottom: 12px;
-      }
-      .mobile-answer.active { display: block; animation: fadeIn 0.3s ease; }
-      .mobile-answer a { color: var(--brand); text-decoration: underline; }
-    }
 
     @media (max-width: 768px) {
       .menu-btn { display: block; }
       .nav-links {
         display: none; position: absolute; top: 100%; left: 0; width: 100%;
-        background: rgba(10, 10, 12, 0.98); border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        background: rgba(10,10,12,0.98); border-bottom: 1px solid rgba(255,255,255,0.05);
         flex-direction: column; padding: 24px; gap: 20px;
       }
       .nav-links.active { display: flex; }
       .nav-links a { font-size: 1.2rem; }
       .footer-inner { flex-direction: column; text-align: center; }
+      .app-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
   <header class="nav-bar">
-    <div class="container nav-inner">
+    <div class="nav-inner">
       <a href="/" class="logo-block">
         <img src="image_0.png" alt="BlackRay Logo" class="logo-img">
         <div class="logo-text"><span>Black</span><span>Ray</span></div>
       </a>
-      
       <button class="menu-btn" id="mobile-menu-btn" aria-label="Открыть меню">
-        <svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        <svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
-
       <nav class="nav-links" id="nav-links">
         <a href="/">Главная</a>
         <a href="/help" class="active">Помощь</a>
@@ -173,100 +193,389 @@
 
   <main>
     <div class="container">
-      <h1 class="page-title">Ответы на частые вопросы</h1>
-      
-      <div class="help-grid">
-        <div class="questions-list">
-          <button class="q-btn active" data-target="q1">Как установить VPN на телефон?</button>
-          <div class="mobile-answer" id="m-q1"></div>
+      <h1 class="page-title">Центр помощи</h1>
+      <p class="page-subtitle">Всё, что нужно для быстрого старта и решения любых вопросов</p>
 
-          <button class="q-btn" data-target="q2">Будет ли работать на компьютере?</button>
-          <div class="mobile-answer" id="m-q2"></div>
+      <div class="toc">
+        <a href="#start">Быстрый старт</a>
+        <a href="#apps">Приложения</a>
+        <a href="#devices">Устройства</a>
+        <a href="#billing">Баланс и оплата</a>
+        <a href="#whitelist">Белые списки</a>
+        <a href="#troubleshoot">Не работает?</a>
+        <a href="#security">Безопасность</a>
+        <a href="#support">Поддержка</a>
+      </div>
 
-          <button class="q-btn" data-target="q3">Сколько устройств можно подключить?</button>
-          <div class="mobile-answer" id="m-q3"></div>
+      <!-- ==================== БЫСТРЫЙ СТАРТ ==================== -->
+      <div class="faq-section" id="start">
+        <h2 class="faq-section-title"><span class="icon">🚀</span> Быстрый старт</h2>
 
-          <button class="q-btn" data-target="q4">У меня не подключается, что делать?</button>
-          <div class="mobile-answer" id="m-q4"></div>
+        <div class="faq-item">
+          <button class="faq-q open">Как подключить BlackRay VPN за 2 минуты?</button>
+          <div class="faq-a open">
+            <ol class="step-list">
+              <li>Откройте <a href="https://t.me/BlackRayVPN_bot?start=start_from_site" target="_blank">Telegram-бот BlackRay VPN</a> и нажмите <strong>«Подключить VPN»</strong>.</li>
+              <li>Выберите операционную систему вашего устройства (Android, iOS, Windows, macOS, Linux).</li>
+              <li>Бот создаст ваш персональный ключ и подписку — нажмите <strong>«Получить конфиг»</strong>.</li>
+              <li>Скачайте рекомендованное приложение (ссылка будет в сообщении).</li>
+              <li>Откройте ссылку-подписку — она автоматически добавится в приложение. Нажмите <strong>«Подключить»</strong>.</li>
+            </ol>
+            <div class="tip-box">
+              <strong>Готово!</strong> Теперь весь ваш трафик зашифрован. Проверьте, зайдя на любой ранее недоступный сайт.
+            </div>
+          </div>
         </div>
 
-        <div class="answer-panel">
-          <div class="answer-content active" id="q1">
-            <h2>Как установить VPN на телефон?</h2>
-            <p>Всё очень просто. Нажми кнопку «Подключить» на главной странице, бот выдаст тебе специальную ссылку-ключ.</p>
-            <p>Скачай бесплатное приложение (например, V2Ray Tun или Outline — бот подскажет точное название для твоей системы), нажми в приложении «Добавить» и вставь ссылку. Готово!</p>
-          </div>
-
-          <div class="answer-content" id="q2">
-            <h2>Будет ли работать на компьютере (ПК/Mac)?</h2>
-            <p>Да, BlackRay VPN отлично работает на Windows, macOS и Linux.</p>
-            <p>Процесс такой же: получаешь ключ в боте, скачиваешь нужный клиент на компьютер и вставляешь ключ. Подробная инструкция со ссылками на скачивание клиентов есть внутри бота.</p>
-          </div>
-
-          <div class="answer-content" id="q3">
-            <h2>Сколько устройств можно подключить?</h2>
-            <p>По умолчанию один ключ рассчитан на одно активное подключение для обеспечения максимальной скорости.</p>
-            <p>Но в личном кабинете бота ты всегда можешь сгенерировать дополнительные ключи для своих остальных гаджетов в пару кликов.</p>
-          </div>
-
-          <div class="answer-content" id="q4">
-            <h2>У меня не подключается, что делать?</h2>
-            <p> </p>
-            <p>Напиши нам в поддержку на почту <a href="mailto:support@blackray.io">support@blackray.io</a> или прямо в Telegram через кнопку «Связь с оператором» в боте. Мы на связи и поможем за 5 минут.</p>
+        <div class="faq-item">
+          <button class="faq-q">Какие приложения рекомендуются?</button>
+          <div class="faq-a">
+            <p>Мы рекомендуем следующие бесплатные клиенты — они автоматически импортируют подписку по ссылке:</p>
+            <div class="app-grid">
+              <div class="app-card">
+                <div class="app-name">v2RayTun</div>
+                <div class="app-os">Android / iOS</div>
+              </div>
+              <div class="app-card">
+                <div class="app-name">Hiddify</div>
+                <div class="app-os">Android / iOS / Windows / macOS / Linux</div>
+              </div>
+              <div class="app-card">
+                <div class="app-name">Happ</div>
+                <div class="app-os">iOS</div>
+              </div>
+              <div class="app-card">
+                <div class="app-name">v2rayN</div>
+                <div class="app-os">Windows</div>
+              </div>
+              <div class="app-card">
+                <div class="app-name">Nekoray</div>
+                <div class="app-os">Windows / Linux</div>
+              </div>
+            </div>
+            <p>Любое из этих приложений поддерживает протокол <strong>VLESS</strong>, который использует BlackRay. Ссылки на скачивание появятся в боте при создании устройства.</p>
           </div>
         </div>
       </div>
+
+      <!-- ==================== ПРИЛОЖЕНИЯ ==================== -->
+      <div class="faq-section" id="apps">
+        <h2 class="faq-section-title"><span class="icon">📲</span> Настройка приложений</h2>
+
+        <div class="faq-item">
+          <button class="faq-q">Как добавить подписку в приложение?</button>
+          <div class="faq-a">
+            <p>В большинстве приложений подписка добавляется <strong>автоматически</strong> — просто нажмите на ссылку из бота, и она откроется в вашем VPN-клиенте.</p>
+            <p>Если автоматический импорт не сработал:</p>
+            <ol class="step-list">
+              <li>Скопируйте ссылку из бота (она начинается с <code>https://</code>).</li>
+              <li>Откройте VPN-приложение → <strong>«Добавить» / «+» / «Import»</strong>.</li>
+              <li>Выберите <strong>«Из буфера обмена»</strong> или <strong>«Subscription URL»</strong>.</li>
+              <li>Вставьте ссылку и подтвердите.</li>
+            </ol>
+            <div class="tip-box">
+              Подписка — это не одноразовый ключ, а постоянная ссылка. Через неё приложение автоматически получает актуальные серверы и обновления конфигурации.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">Как обновить список серверов в приложении?</button>
+          <div class="faq-a">
+            <p>Новые серверы появляются автоматически через вашу подписку. Чтобы применить обновления:</p>
+            <ol class="step-list">
+              <li>Откройте VPN-приложение.</li>
+              <li>Найдите кнопку <strong>🔄 (обновить подписку)</strong> — обычно в верхней части или в настройках подписки.</li>
+              <li>Дождитесь обновления списка серверов.</li>
+            </ol>
+            <p>Рекомендуем обновлять подписку <strong>раз в несколько дней</strong>, чтобы всегда иметь актуальный набор серверов.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">Работает ли VPN на компьютере (Windows / macOS / Linux)?</button>
+          <div class="faq-a">
+            <p><strong>Да.</strong> BlackRay VPN работает на всех популярных платформах. Процесс подключения аналогичный:</p>
+            <ul>
+              <li><strong>Windows:</strong> v2rayN или Hiddify</li>
+              <li><strong>macOS:</strong> Hiddify</li>
+              <li><strong>Linux:</strong> Hiddify или Nekoray</li>
+            </ul>
+            <p>Создайте устройство в боте, выбрав нужную ОС, и следуйте инструкции. Подписка работает одинаково на всех платформах.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== УСТРОЙСТВА ==================== -->
+      <div class="faq-section" id="devices">
+        <h2 class="faq-section-title"><span class="icon">📱</span> Устройства и подключения</h2>
+
+        <div class="faq-item">
+          <button class="faq-q">Сколько устройств можно подключить?</button>
+          <div class="faq-a">
+            <p>По умолчанию вы можете создать до <strong>5 устройств</strong> (ключей). Каждый ключ — это одно активное подключение.</p>
+            <p>Для каждого устройства (телефон, компьютер, планшет) создавайте отдельный ключ в боте. Это обеспечивает максимальную скорость и стабильность.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">Можно ли использовать один ключ на нескольких устройствах одновременно?</button>
+          <div class="faq-a">
+            <p><strong>Нет.</strong> Один ключ рассчитан на одно активное подключение. При попытке подключиться с двух устройств одновременно, предыдущее соединение будет разорвано.</p>
+            <p>Создайте отдельный ключ для каждого устройства — это бесплатно в рамках вашего баланса.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">Что означают статусы устройств?</button>
+          <div class="faq-a">
+            <p>В боте у каждого устройства отображается статус:</p>
+            <ul>
+              <li><span class="badge badge-green">🟢 Активно</span> — подписка оплачена, VPN работает.</li>
+              <li><span class="badge badge-yellow">🟡 Остановлено</span> — на балансе недостаточно средств. Пополните баланс, и подписка автоматически возобновится.</li>
+              <li><span class="badge badge-blue">⚪️ Неактивно</span> — устройство создано, но ещё не подключалось или ожидает первого списания.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">Как удалить устройство?</button>
+          <div class="faq-a">
+            <p>Откройте устройство в боте → нажмите <strong>«Отключить»</strong>. После отключения устройство перестанет расходовать баланс, а ключ станет недействительным.</p>
+            <p>Вы всегда можете создать новое устройство взамен удалённого.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== БАЛАНС И ОПЛАТА ==================== -->
+      <div class="faq-section" id="billing">
+        <h2 class="faq-section-title"><span class="icon">💳</span> Баланс и оплата</h2>
+
+        <div class="faq-item">
+          <button class="faq-q">Как работает оплата?</button>
+          <div class="faq-a">
+            <p>BlackRay работает по модели <strong>баланса</strong>:</p>
+            <ol class="step-list">
+              <li>Вы пополняете баланс любым удобным способом (карта РФ, СБП, криптовалюта).</li>
+              <li>С баланса ежедневно списывается фиксированная сумма за каждое активное устройство.</li>
+              <li>Пока на балансе есть средства — VPN работает. Никаких скрытых платежей.</li>
+            </ol>
+            <p>Текущую стоимость за день и прогноз «хватит на» можно увидеть в боте на главном экране.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">Как пополнить баланс?</button>
+          <div class="faq-a">
+            <p>В боте нажмите <strong>«Пополнить баланс»</strong> и следуйте инструкциям. Доступные способы:</p>
+            <ul>
+              <li><strong>Карта РФ</strong> — Visa, Mastercard, МИР</li>
+              <li><strong>СБП</strong> — моментальный перевод</li>
+              <li><strong>Криптовалюта</strong> — USDT, BTC и другие</li>
+            </ul>
+            <p>Зачисление происходит <strong>моментально</strong> после подтверждения оплаты.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">Что будет, если баланс закончится?</button>
+          <div class="faq-a">
+            <p>Когда баланс станет ниже дневной стоимости:</p>
+            <ul>
+              <li>Устройство перейдёт в статус <strong>🟡 «Остановлено»</strong>.</li>
+              <li>VPN-подключение перестанет работать.</li>
+              <li>Ваш ключ и данные <strong>сохранятся</strong> — ничего не нужно перенастраивать.</li>
+            </ul>
+            <p>Как только вы пополните баланс, подписка <strong>автоматически возобновится</strong> в течение нескольких минут. Обновите подписку в приложении (🔄), чтобы восстановить подключение.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== БЕЛЫЕ СПИСКИ ==================== -->
+      <div class="faq-section" id="whitelist">
+        <h2 class="faq-section-title"><span class="icon">🏳️</span> Серверы для белых списков</h2>
+
+        <div class="faq-item">
+          <button class="faq-q">Что такое серверы «Белые списки»?</button>
+          <div class="faq-a">
+            <p>Это специальные серверы, которые работают в зонах, где обычный VPN блокируется «белыми списками» — когда провайдер (обычно на LTE) <strong>разрешает доступ только к определённым сайтам</strong>, блокируя всё остальное.</p>
+            <p>Серверы белых списков маскируются под разрешённые российские сервисы и позволяют обходить такие ограничения.</p>
+            <div class="tip-box">
+              Эти серверы нужны <strong>только в зонах с белыми списками</strong> (обычно LTE в крупных городах). Если обычный VPN у вас работает — используйте серверы <strong>Germany (Fast Private)</strong>, они быстрее.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">Как подключиться через белые списки?</button>
+          <div class="faq-a">
+            <ol class="step-list">
+              <li>Обновите подписку в приложении (🔄).</li>
+              <li>В списке серверов появятся <strong>🏳️ Белые списки • 1–5</strong>.</li>
+              <li>Попробуйте подключиться к любому из них.</li>
+              <li>Если один не работает — переключитесь на другой.</li>
+            </ol>
+            <p>Каждый сервер использует разную маскировку. Если ни один не помогает — возможно, ваш оператор использует другой тип блокировки. Напишите в поддержку.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">Какой сервер быстрее — Germany или Белые списки?</button>
+          <div class="faq-a">
+            <p><strong>Germany (Fast Private)</strong> — это ваши основные серверы с максимальной скоростью. Используйте их везде, где VPN работает.</p>
+            <p><strong>Белые списки</strong> — используйте только когда Germany-серверы не подключаются (обычно в зонах LTE-блокировок). Скорость может быть ниже из-за дополнительного промежуточного сервера.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== УСТРАНЕНИЕ НЕПОЛАДОК ==================== -->
+      <div class="faq-section" id="troubleshoot">
+        <h2 class="faq-section-title"><span class="icon">🔧</span> Решение проблем</h2>
+
+        <div class="faq-item">
+          <button class="faq-q">VPN не подключается — что делать?</button>
+          <div class="faq-a">
+            <p>Попробуйте по порядку:</p>
+            <ol class="step-list">
+              <li><strong>Обновите подписку</strong> в приложении (🔄) — возможно, конфигурация устарела.</li>
+              <li><strong>Смените сервер</strong> — переключитесь на другой из списка.</li>
+              <li><strong>Проверьте баланс</strong> в боте — если 🟡, нужно пополнить.</li>
+              <li><strong>Смените сеть</strong> — попробуйте Wi-Fi вместо LTE или наоборот.</li>
+              <li><strong>Перезапустите приложение</strong> — полностью закройте и откройте заново.</li>
+              <li><strong>Проверьте дату и время</strong> на устройстве — неправильные настройки могут мешать TLS-соединению.</li>
+            </ol>
+            <p>Если ничего не помогло — <a href="https://t.me/blackray_support_bot?start=support" target="_blank">напишите в поддержку</a>.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">VPN подключается, но сайты не открываются</button>
+          <div class="faq-a">
+            <ul>
+              <li>Убедитесь, что в приложении включён режим <strong>«Проксировать весь трафик»</strong> (Global/VPN mode), а не «только выбранные приложения».</li>
+              <li>Попробуйте <strong>другой сервер</strong> из списка.</li>
+              <li>Очистите кэш DNS: выключите VPN → включите авиарежим на 5 секунд → выключите → включите VPN.</li>
+              <li>Проверьте, что на устройстве нет другого VPN или прокси, работающего одновременно.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">Низкая скорость — как ускорить?</button>
+          <div class="faq-a">
+            <ul>
+              <li>Переключитесь на <strong>ближайший сервер</strong> — серверы Germany (Fast Private) обычно быстрее всех.</li>
+              <li>Используйте <strong>Wi-Fi</strong> вместо мобильной сети, если возможно.</li>
+              <li>Закройте фоновые приложения, потребляющие трафик.</li>
+              <li>Проверьте скорость <strong>без VPN</strong> — если она тоже низкая, проблема на стороне провайдера.</li>
+            </ul>
+            <div class="tip-box">
+              BlackRay использует серверы с каналом <strong>1 Гбит/с</strong>. Если вы наблюдаете скорость ниже 50 Мбит/с — попробуйте другой сервер или напишите в поддержку.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">Подписка не обновляется / пустой список серверов</button>
+          <div class="faq-a">
+            <p>Если после обновления подписки список серверов пуст:</p>
+            <ol class="step-list">
+              <li>Проверьте, что ссылка подписки <strong>корректна</strong> — она должна начинаться с <code>https://api.blackray.info</code>.</li>
+              <li>Удалите текущую подписку из приложения и добавьте заново из бота (<strong>«Получить конфиг»</strong>).</li>
+              <li>Убедитесь, что устройство не отключено в боте (статус должен быть 🟢).</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">Уведомление «устройство уже подключено» / сброс соединения</button>
+          <div class="faq-a">
+            <p>Один ключ = одно активное подключение. Если вы подключились с другого устройства по тому же ключу, предыдущее соединение автоматически разрывается.</p>
+            <p><strong>Решение:</strong> создайте в боте отдельное устройство для каждого гаджета. Это не влияет на стоимость подписки.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== БЕЗОПАСНОСТЬ ==================== -->
+      <div class="faq-section" id="security">
+        <h2 class="faq-section-title"><span class="icon">🔒</span> Безопасность и конфиденциальность</h2>
+
+        <div class="faq-item">
+          <button class="faq-q">Какой протокол используется?</button>
+          <div class="faq-a">
+            <p>BlackRay использует <strong>VLESS + TLS 1.3</strong> — один из самых современных протоколов для обхода блокировок. Ваш трафик выглядит как обычное HTTPS-соединение к легитимному сайту.</p>
+            <p>Дополнительно для серверов белых списков применяется технология <strong>REALITY</strong> с flow <strong>xtls-rprx-vision</strong>, что делает обнаружение VPN-трафика практически невозможным для систем DPI.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">Сохраняете ли вы логи моего трафика?</button>
+          <div class="faq-a">
+            <p><strong>Нет.</strong> Мы придерживаемся строгой политики <strong>no-logs</strong>:</p>
+            <ul>
+              <li>Мы <strong>не записываем</strong> посещённые вами сайты.</li>
+              <li>Мы <strong>не сохраняем</strong> содержимое трафика.</li>
+              <li>Единственная метрика — <strong>объём переданных данных</strong> (для отображения использования в вашем профиле).</li>
+            </ul>
+            <p>Серверы расположены в <strong>Германии</strong> — юрисдикции с надёжной защитой персональных данных (GDPR).</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">Безопасно ли делиться ссылкой-подпиской?</button>
+          <div class="faq-a">
+            <p><strong>Нет, не делитесь ссылкой.</strong> Ваша ссылка-подписка — это персональный ключ доступа. Если передать её другому человеку, он сможет пользоваться VPN за ваш счёт, а ваше соединение будет разрываться.</p>
+            <p>Если вы случайно поделились ссылкой — удалите устройство в боте и создайте новое.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== ПОДДЕРЖКА ==================== -->
+      <div class="faq-section" id="support">
+        <h2 class="faq-section-title"><span class="icon">💬</span> Связь с поддержкой</h2>
+
+        <div class="faq-item">
+          <button class="faq-q">Как связаться с поддержкой?</button>
+          <div class="faq-a">
+            <p>Мы на связи и отвечаем быстро:</p>
+            <ul>
+              <li><strong>Telegram-бот поддержки:</strong> <a href="https://t.me/blackray_support_bot?start=support" target="_blank">@blackray_support_bot</a> — самый быстрый способ</li>
+              <li><strong>В основном боте:</strong> кнопка <strong>«❓ Помощь»</strong> → <strong>«Связаться с поддержкой»</strong></li>
+            </ul>
+            <p>При обращении укажите:</p>
+            <ul>
+              <li>Какое приложение используете (название и версия)</li>
+              <li>Тип подключения (Wi-Fi / LTE, название оператора)</li>
+              <li>Описание проблемы и скриншот ошибки (если есть)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
     </div>
   </main>
 
-<footer>
-  <div class="container footer-inner">
-    <div class="footer-copy">&copy; 2026 BlackRay. Все права защищены.</div>
-    <div class="footer-links">
-      <a href="/terms">Договор-оферта</a>
-      <a href="https://t.me/blackray_support_bot?start=1" target="_blank" rel="noopener noreferrer">Вопросы и предложения</a>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-copy">&copy; 2026 BlackRay. Все права защищены.</div>
+      <div class="footer-links">
+        <a href="/terms">Договор-оферта</a>
+        <a href="https://t.me/blackray_support_bot?start=1" target="_blank" rel="noopener noreferrer">Поддержка</a>
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
   <script>
-    // 1. Скрипт для работы мобильного меню шапки
-    const menuBtn = document.getElementById('mobile-menu-btn');
-    const navLinks = document.getElementById('nav-links');
-
-    menuBtn.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+      document.getElementById('nav-links').classList.toggle('active');
     });
 
-    // 2. Скрипт для переключения вкладок с вопросами
-    const buttons = document.querySelectorAll('.q-btn');
-    const contents = document.querySelectorAll('.answer-content');
-
-    // Копируем контент в мобильные блоки при загрузке
-    contents.forEach(content => {
-      const targetId = content.id;
-      const mobileContainer = document.getElementById('m-' + targetId);
-      if (mobileContainer) {
-        mobileContainer.innerHTML = content.innerHTML;
-        if(content.classList.contains('active')) {
-          mobileContainer.classList.add('active');
-        }
-      }
-    });
-
-    buttons.forEach(btn => {
+    document.querySelectorAll('.faq-q').forEach(btn => {
       btn.addEventListener('click', () => {
-        buttons.forEach(b => b.classList.remove('active'));
-        contents.forEach(c => c.classList.remove('active'));
-        document.querySelectorAll('.mobile-answer').forEach(m => m.classList.remove('active'));
-
-        btn.classList.add('active');
-        
-        const targetId = btn.getAttribute('data-target');
-        document.getElementById(targetId).classList.add('active');
-
-        const mobileTargetId = 'm-' + targetId;
-        document.getElementById(mobileTargetId).classList.add('active');
+        const wasOpen = btn.classList.contains('open');
+        const answer = btn.nextElementSibling;
+        btn.classList.toggle('open');
+        answer.classList.toggle('open');
       });
     });
   </script>
