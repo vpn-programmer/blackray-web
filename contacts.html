@@ -94,6 +94,8 @@
     .contact-label { font-size: 0.8rem; font-weight: 600; color: var(--brand); text-transform: uppercase; letter-spacing: 0.06em; }
     .contact-title { font-weight: 700; font-size: 1.05rem; color: #fff; }
     .contact-sub { font-size: 0.88rem; color: var(--text-muted); margin-top: 2px; }
+    .contact-email { color: #fff; text-decoration: none; user-select: text; }
+    .contact-email:hover { color: var(--brand); text-decoration: underline; }
 
     .info-box {
       background: rgba(56,189,248,0.05); border: 1px solid rgba(56,189,248,0.12);
@@ -159,14 +161,14 @@
           </div>
         </a>
 
-        <a href="mailto:blackrayvpn@protonmail.com" class="contact-card">
+        <div class="contact-card">
           <div class="contact-icon">✉️</div>
           <div class="contact-info">
             <span class="contact-label">Электронная почта</span>
-            <span class="contact-title">blackrayvpn@protonmail.com</span>
+            <a href="mailto:blackrayvpn@protonmail.com" class="contact-title contact-email">blackrayvpn@protonmail.com</a>
             <span class="contact-sub">Вопросы и обратная связь</span>
           </div>
-        </a>
+        </div>
       </div>
 
       <div class="info-box">
