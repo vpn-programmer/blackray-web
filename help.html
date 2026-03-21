@@ -43,7 +43,6 @@
     a:hover { color: #fff; text-decoration: underline; }
     .container { max-width: 860px; margin: 0 auto; padding: 0 24px; width: 100%; }
 
-    /* Навигация */
     header.nav-bar {
       padding: 16px 0; position: fixed; width: 100%; top: 0; z-index: 100;
       background: rgba(10, 10, 12, 0.85); backdrop-filter: blur(12px);
@@ -63,7 +62,6 @@
     .menu-btn { display: none; background: none; border: none; color: var(--text-main); cursor: pointer; padding: 8px; }
     .menu-btn svg { width: 28px; height: 28px; stroke: currentColor; stroke-width: 2; }
 
-    /* Контент */
     main { flex: 1; padding: 120px 0 60px; }
 
     .page-title {
@@ -72,7 +70,6 @@
     }
     .page-subtitle { text-align: center; color: var(--text-muted); font-size: 1.1rem; margin-bottom: 48px; }
 
-    /* Быстрые ссылки */
     .toc { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 56px; }
     .toc a {
       background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;
@@ -81,7 +78,6 @@
     }
     .toc a:hover { background: rgba(56,189,248,0.1); border-color: var(--border); color: var(--brand); text-decoration: none; }
 
-    /* Секции */
     .faq-section { margin-bottom: 56px; scroll-margin-top: 100px; }
     .faq-section-title {
       font-size: 1.5rem; font-weight: 700; margin-bottom: 24px; padding-bottom: 12px;
@@ -90,7 +86,6 @@
     }
     .faq-section-title .icon { font-size: 1.4rem; }
 
-    /* Аккордеон */
     .faq-item { margin-bottom: 12px; }
     .faq-q {
       width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
@@ -131,27 +126,30 @@
     .badge-yellow { background: rgba(251,191,36,0.15); color: var(--yellow); }
     .badge-blue { background: rgba(56,189,248,0.15); color: var(--brand); }
 
-    .app-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 12px 0; }
-    .app-card {
-      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px;
-      padding: 16px; text-align: center; transition: all 0.2s;
+    .dl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 16px 0; }
+    .dl-card {
+      display: flex; align-items: center; gap: 14px;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px;
+      padding: 16px 20px; transition: all 0.2s; text-decoration: none; color: var(--text-main);
     }
-    .app-card:hover { border-color: var(--border); }
-    .app-card .app-name { font-weight: 700; color: #fff; margin-bottom: 4px; }
-    .app-card .app-os { font-size: 0.85rem; color: var(--text-muted); }
+    .dl-card:hover { border-color: var(--brand); background: rgba(56,189,248,0.06); text-decoration: none; transform: translateY(-2px); }
+    .dl-card .dl-icon { font-size: 1.8rem; flex-shrink: 0; line-height: 1; }
+    .dl-card .dl-info { display: flex; flex-direction: column; }
+    .dl-card .dl-label { font-weight: 700; font-size: 0.95rem; color: #fff; }
+    .dl-card .dl-sub { font-size: 0.8rem; color: var(--text-muted); }
 
     .tip-box {
       background: rgba(56,189,248,0.06); border: 1px solid rgba(56,189,248,0.15);
       border-radius: 12px; padding: 16px 20px; margin: 12px 0; font-size: 0.95rem;
     }
     .tip-box.warning { background: rgba(251,191,36,0.06); border-color: rgba(251,191,36,0.15); }
+    .tip-box.danger { background: rgba(248,113,113,0.06); border-color: rgba(248,113,113,0.15); }
 
     @keyframes slideDown {
       from { opacity: 0; transform: translateY(-8px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Подвал */
     footer { border-top: 1px solid rgba(255,255,255,0.05); padding: 40px 0; margin-top: 40px; }
     .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
     .footer-copy { color: rgba(148,163,184,0.6); font-size: 0.9rem; }
@@ -169,7 +167,7 @@
       .nav-links.active { display: flex; }
       .nav-links a { font-size: 1.2rem; }
       .footer-inner { flex-direction: column; text-align: center; }
-      .app-grid { grid-template-columns: 1fr; }
+      .dl-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -198,11 +196,12 @@
 
       <div class="toc">
         <a href="#start">Быстрый старт</a>
-        <a href="#apps">Приложения</a>
+        <a href="#apps">Приложение</a>
         <a href="#devices">Устройства</a>
         <a href="#billing">Баланс и оплата</a>
         <a href="#whitelist">Белые списки</a>
         <a href="#troubleshoot">Не работает?</a>
+        <a href="#rules">Правила</a>
         <a href="#security">Безопасность</a>
         <a href="#support">Поддержка</a>
       </div>
@@ -216,92 +215,67 @@
           <div class="faq-a open">
             <ol class="step-list">
               <li>Откройте <a href="https://t.me/BlackRayVPN_bot?start=start_from_site" target="_blank">Telegram-бот BlackRay VPN</a> и нажмите <strong>«Подключить VPN»</strong>.</li>
-              <li>Выберите операционную систему вашего устройства (Android, iOS, Windows, macOS, Linux).</li>
-              <li>Бот создаст ваш персональный ключ и подписку — нажмите <strong>«Получить конфиг»</strong>.</li>
-              <li>Скачайте рекомендованное приложение (ссылка будет в сообщении).</li>
-              <li>Откройте ссылку-подписку — она автоматически добавится в приложение. Нажмите <strong>«Подключить»</strong>.</li>
+              <li>Выберите операционную систему вашего устройства.</li>
+              <li>Бот создаст ваш персональный ключ — нажмите <strong>«Получить конфиг»</strong>.</li>
+              <li>Скачайте приложение <strong>v2RayTun</strong> (ссылки ниже) и откройте ссылку-подписку из бота — она автоматически добавится в приложение.</li>
+              <li>Выберите любой сервер и нажмите <strong>«Подключить»</strong>.</li>
             </ol>
             <div class="tip-box">
-              <strong>Готово!</strong> Теперь весь ваш трафик зашифрован. Проверьте, зайдя на любой ранее недоступный сайт.
+              <strong>Готово!</strong> Весь ваш трафик зашифрован и замаскирован. Проверьте, зайдя на любой ранее недоступный сайт.
             </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q">Какие приложения рекомендуются?</button>
-          <div class="faq-a">
-            <p>Мы рекомендуем следующие бесплатные клиенты — они автоматически импортируют подписку по ссылке:</p>
-            <div class="app-grid">
-              <div class="app-card">
-                <div class="app-name">v2RayTun</div>
-                <div class="app-os">Android / iOS</div>
-              </div>
-              <div class="app-card">
-                <div class="app-name">Hiddify</div>
-                <div class="app-os">Android / iOS / Windows / macOS / Linux</div>
-              </div>
-              <div class="app-card">
-                <div class="app-name">Happ</div>
-                <div class="app-os">iOS</div>
-              </div>
-              <div class="app-card">
-                <div class="app-name">v2rayN</div>
-                <div class="app-os">Windows</div>
-              </div>
-              <div class="app-card">
-                <div class="app-name">Nekoray</div>
-                <div class="app-os">Windows / Linux</div>
-              </div>
-            </div>
-            <p>Любое из этих приложений поддерживает протокол <strong>VLESS</strong>, который использует BlackRay. Ссылки на скачивание появятся в боте при создании устройства.</p>
           </div>
         </div>
       </div>
 
-      <!-- ==================== ПРИЛОЖЕНИЯ ==================== -->
+      <!-- ==================== ПРИЛОЖЕНИЕ ==================== -->
       <div class="faq-section" id="apps">
-        <h2 class="faq-section-title"><span class="icon">📲</span> Настройка приложений</h2>
+        <h2 class="faq-section-title"><span class="icon">📲</span> Приложение</h2>
+
+        <div class="faq-item">
+          <button class="faq-q open">Скачать v2RayTun</button>
+          <div class="faq-a open">
+            <p>Рекомендуемое приложение для BlackRay VPN. Поддерживает автоматический импорт подписки по ссылке.</p>
+            <div class="dl-grid">
+              <a href="https://play.google.com/store/apps/details?id=com.v2raytun.android" target="_blank" rel="noopener" class="dl-card">
+                <div class="dl-icon">🤖</div>
+                <div class="dl-info">
+                  <span class="dl-label">Android</span>
+                  <span class="dl-sub">Google Play</span>
+                </div>
+              </a>
+              <a href="https://apps.apple.com/app/v2raytun/id6476628951" target="_blank" rel="noopener" class="dl-card">
+                <div class="dl-icon">🍎</div>
+                <div class="dl-info">
+                  <span class="dl-label">iPhone / iPad</span>
+                  <span class="dl-sub">App Store</span>
+                </div>
+              </a>
+              <a href="https://storage.v2raytun.com/v2RayTun_Setup.exe" target="_blank" rel="noopener" class="dl-card">
+                <div class="dl-icon">🪟</div>
+                <div class="dl-info">
+                  <span class="dl-label">Windows</span>
+                  <span class="dl-sub">Скачать .exe</span>
+                </div>
+              </a>
+            </div>
+            <p style="margin-top: 16px; font-size: 0.9rem;"><strong>Запасной вариант для iOS:</strong> <a href="https://apps.apple.com/app/happ-proxy-utility/id6446649729" target="_blank">Happ</a> — также поддерживает ссылки-подписки BlackRay.</p>
+          </div>
+        </div>
 
         <div class="faq-item">
           <button class="faq-q">Как добавить подписку в приложение?</button>
           <div class="faq-a">
-            <p>В большинстве приложений подписка добавляется <strong>автоматически</strong> — просто нажмите на ссылку из бота, и она откроется в вашем VPN-клиенте.</p>
+            <p>В большинстве случаев подписка добавляется <strong>автоматически</strong> — просто нажмите на ссылку из бота, и она откроется в v2RayTun.</p>
             <p>Если автоматический импорт не сработал:</p>
             <ol class="step-list">
               <li>Скопируйте ссылку из бота (она начинается с <code>https://</code>).</li>
-              <li>Откройте VPN-приложение → <strong>«Добавить» / «+» / «Import»</strong>.</li>
-              <li>Выберите <strong>«Из буфера обмена»</strong> или <strong>«Subscription URL»</strong>.</li>
-              <li>Вставьте ссылку и подтвердите.</li>
+              <li>Откройте v2RayTun → нажмите <strong>«+»</strong> или <strong>«Добавить»</strong>.</li>
+              <li>Выберите <strong>«Из буфера обмена»</strong>.</li>
+              <li>Ссылка подписки и все серверы появятся автоматически.</li>
             </ol>
             <div class="tip-box">
               Подписка — это не одноразовый ключ, а постоянная ссылка. Через неё приложение автоматически получает актуальные серверы и обновления конфигурации.
             </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q">Как обновить список серверов в приложении?</button>
-          <div class="faq-a">
-            <p>Новые серверы появляются автоматически через вашу подписку. Чтобы применить обновления:</p>
-            <ol class="step-list">
-              <li>Откройте VPN-приложение.</li>
-              <li>Найдите кнопку <strong>🔄 (обновить подписку)</strong> — обычно в верхней части или в настройках подписки.</li>
-              <li>Дождитесь обновления списка серверов.</li>
-            </ol>
-            <p>Рекомендуем обновлять подписку <strong>раз в несколько дней</strong>, чтобы всегда иметь актуальный набор серверов.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q">Работает ли VPN на компьютере (Windows / macOS / Linux)?</button>
-          <div class="faq-a">
-            <p><strong>Да.</strong> BlackRay VPN работает на всех популярных платформах. Процесс подключения аналогичный:</p>
-            <ul>
-              <li><strong>Windows:</strong> v2rayN или Hiddify</li>
-              <li><strong>macOS:</strong> Hiddify</li>
-              <li><strong>Linux:</strong> Hiddify или Nekoray</li>
-            </ul>
-            <p>Создайте устройство в боте, выбрав нужную ОС, и следуйте инструкции. Подписка работает одинаково на всех платформах.</p>
           </div>
         </div>
       </div>
@@ -313,16 +287,16 @@
         <div class="faq-item">
           <button class="faq-q">Сколько устройств можно подключить?</button>
           <div class="faq-a">
-            <p>По умолчанию вы можете создать до <strong>5 устройств</strong> (ключей). Каждый ключ — это одно активное подключение.</p>
-            <p>Для каждого устройства (телефон, компьютер, планшет) создавайте отдельный ключ в боте. Это обеспечивает максимальную скорость и стабильность.</p>
+            <p>Вы можете создать до <strong>5 устройств</strong>. Каждый ключ — это одно активное подключение.</p>
+            <p>Для каждого вашего гаджета (телефон, компьютер, планшет) создавайте отдельный ключ в боте. Каждое устройство тарифицируется отдельно.</p>
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-q">Можно ли использовать один ключ на нескольких устройствах одновременно?</button>
+          <button class="faq-q">Можно ли использовать один ключ на нескольких устройствах?</button>
           <div class="faq-a">
-            <p><strong>Нет.</strong> Один ключ рассчитан на одно активное подключение. При попытке подключиться с двух устройств одновременно, предыдущее соединение будет разорвано.</p>
-            <p>Создайте отдельный ключ для каждого устройства — это бесплатно в рамках вашего баланса.</p>
+            <p><strong>Нет.</strong> Один ключ — одно активное подключение. При попытке подключиться с двух устройств одновременно предыдущее соединение будет разорвано.</p>
+            <p><strong>Решение:</strong> создайте отдельный ключ для каждого устройства в боте.</p>
           </div>
         </div>
 
@@ -332,8 +306,8 @@
             <p>В боте у каждого устройства отображается статус:</p>
             <ul>
               <li><span class="badge badge-green">🟢 Активно</span> — подписка оплачена, VPN работает.</li>
-              <li><span class="badge badge-yellow">🟡 Остановлено</span> — на балансе недостаточно средств. Пополните баланс, и подписка автоматически возобновится.</li>
-              <li><span class="badge badge-blue">⚪️ Неактивно</span> — устройство создано, но ещё не подключалось или ожидает первого списания.</li>
+              <li><span class="badge badge-yellow">🟡 Остановлено</span> — на балансе недостаточно средств. Пополните баланс — подписка возобновится автоматически.</li>
+              <li><span class="badge badge-blue">⚪️ Неактивно</span> — устройство создано, но ожидает активации.</li>
             </ul>
           </div>
         </div>
@@ -341,7 +315,7 @@
         <div class="faq-item">
           <button class="faq-q">Как удалить устройство?</button>
           <div class="faq-a">
-            <p>Откройте устройство в боте → нажмите <strong>«Отключить»</strong>. После отключения устройство перестанет расходовать баланс, а ключ станет недействительным.</p>
+            <p>Откройте устройство в боте → нажмите <strong>«Удалить»</strong>. После удаления устройство перестанет расходовать баланс, а ключ станет недействительным.</p>
             <p>Вы всегда можете создать новое устройство взамен удалённого.</p>
           </div>
         </div>
@@ -356,7 +330,7 @@
           <div class="faq-a">
             <p>BlackRay работает по модели <strong>баланса</strong>:</p>
             <ol class="step-list">
-              <li>Вы пополняете баланс любым удобным способом (карта РФ, СБП, криптовалюта).</li>
+              <li>Вы пополняете баланс любым удобным способом.</li>
               <li>С баланса ежедневно списывается фиксированная сумма за каждое активное устройство.</li>
               <li>Пока на балансе есть средства — VPN работает. Никаких скрытых платежей.</li>
             </ol>
@@ -384,9 +358,9 @@
             <ul>
               <li>Устройство перейдёт в статус <strong>🟡 «Остановлено»</strong>.</li>
               <li>VPN-подключение перестанет работать.</li>
-              <li>Ваш ключ и данные <strong>сохранятся</strong> — ничего не нужно перенастраивать.</li>
+              <li>Ваш ключ и настройки <strong>сохранятся</strong> — ничего не нужно перенастраивать.</li>
             </ul>
-            <p>Как только вы пополните баланс, подписка <strong>автоматически возобновится</strong> в течение нескольких минут. Обновите подписку в приложении (🔄), чтобы восстановить подключение.</p>
+            <p>Как только вы пополните баланс, подписка <strong>автоматически возобновится</strong> в течение нескольких минут.</p>
           </div>
         </div>
       </div>
@@ -398,10 +372,10 @@
         <div class="faq-item">
           <button class="faq-q">Что такое серверы «Белые списки»?</button>
           <div class="faq-a">
-            <p>Это специальные серверы, которые работают в зонах, где обычный VPN блокируется «белыми списками» — когда провайдер (обычно на LTE) <strong>разрешает доступ только к определённым сайтам</strong>, блокируя всё остальное.</p>
-            <p>Серверы белых списков маскируются под разрешённые российские сервисы и позволяют обходить такие ограничения.</p>
+            <p>Это специальные серверы для зон, где обычный VPN блокируется — когда оператор (обычно на LTE) <strong>разрешает доступ только к определённым сайтам</strong>, а всё остальное блокирует.</p>
+            <p>Серверы белых списков используют продвинутые технологии маскировки, неотличимые от обычного трафика для систем анализа, что позволяет обходить такие ограничения.</p>
             <div class="tip-box">
-              Эти серверы нужны <strong>только в зонах с белыми списками</strong> (обычно LTE в крупных городах). Если обычный VPN у вас работает — используйте серверы <strong>Germany (Fast Private)</strong>, они быстрее.
+              Эти серверы нужны <strong>только в зонах с белыми списками</strong> (обычно LTE в крупных городах). Если обычный VPN работает — используйте серверы <strong>Germany (Fast Private)</strong>, они быстрее.
             </div>
           </div>
         </div>
@@ -409,21 +383,16 @@
         <div class="faq-item">
           <button class="faq-q">Как подключиться через белые списки?</button>
           <div class="faq-a">
-            <ol class="step-list">
-              <li>Обновите подписку в приложении (🔄).</li>
-              <li>В списке серверов появятся <strong>🏳️ Белые списки • 1–5</strong>.</li>
-              <li>Попробуйте подключиться к любому из них.</li>
-              <li>Если один не работает — переключитесь на другой.</li>
-            </ol>
-            <p>Каждый сервер использует разную маскировку. Если ни один не помогает — возможно, ваш оператор использует другой тип блокировки. Напишите в поддержку.</p>
+            <p>Серверы <strong>🏳️ Белые списки • 1–5</strong> уже доступны в вашем списке серверов в приложении. Просто выберите один из них и подключитесь.</p>
+            <p>Каждый сервер использует разную маскировку. Если один не подключается — попробуйте другой. Если ни один не помогает — напишите в поддержку.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q">Какой сервер быстрее — Germany или Белые списки?</button>
           <div class="faq-a">
-            <p><strong>Germany (Fast Private)</strong> — это ваши основные серверы с максимальной скоростью. Используйте их везде, где VPN работает.</p>
-            <p><strong>Белые списки</strong> — используйте только когда Germany-серверы не подключаются (обычно в зонах LTE-блокировок). Скорость может быть ниже из-за дополнительного промежуточного сервера.</p>
+            <p><strong>Germany (Fast Private)</strong> — ваши основные серверы с максимальной скоростью. Используйте их везде, где VPN работает без ограничений.</p>
+            <p><strong>Белые списки</strong> — используйте только когда основные серверы не подключаются (обычно в зонах LTE-блокировок). Скорость может быть ниже из-за дополнительного промежуточного сервера.</p>
           </div>
         </div>
       </div>
@@ -437,12 +406,12 @@
           <div class="faq-a">
             <p>Попробуйте по порядку:</p>
             <ol class="step-list">
-              <li><strong>Обновите подписку</strong> в приложении (🔄) — возможно, конфигурация устарела.</li>
               <li><strong>Смените сервер</strong> — переключитесь на другой из списка.</li>
               <li><strong>Проверьте баланс</strong> в боте — если 🟡, нужно пополнить.</li>
               <li><strong>Смените сеть</strong> — попробуйте Wi-Fi вместо LTE или наоборот.</li>
               <li><strong>Перезапустите приложение</strong> — полностью закройте и откройте заново.</li>
-              <li><strong>Проверьте дату и время</strong> на устройстве — неправильные настройки могут мешать TLS-соединению.</li>
+              <li><strong>Проверьте дату и время</strong> на устройстве — неправильные настройки могут мешать шифрованию.</li>
+              <li><strong>Обновите подписку</strong> — нажмите 🔄 в приложении на случай, если конфигурация устарела.</li>
             </ol>
             <p>Если ничего не помогло — <a href="https://t.me/blackray_support_bot?start=support" target="_blank">напишите в поддержку</a>.</p>
           </div>
@@ -452,7 +421,7 @@
           <button class="faq-q">VPN подключается, но сайты не открываются</button>
           <div class="faq-a">
             <ul>
-              <li>Убедитесь, что в приложении включён режим <strong>«Проксировать весь трафик»</strong> (Global/VPN mode), а не «только выбранные приложения».</li>
+              <li>Убедитесь, что в приложении включён режим <strong>«Проксировать весь трафик»</strong> (Global / VPN mode), а не «только выбранные приложения».</li>
               <li>Попробуйте <strong>другой сервер</strong> из списка.</li>
               <li>Очистите кэш DNS: выключите VPN → включите авиарежим на 5 секунд → выключите → включите VPN.</li>
               <li>Проверьте, что на устройстве нет другого VPN или прокси, работающего одновременно.</li>
@@ -461,37 +430,67 @@
         </div>
 
         <div class="faq-item">
-          <button class="faq-q">Низкая скорость — как ускорить?</button>
+          <button class="faq-q">Низкая скорость</button>
           <div class="faq-a">
             <ul>
-              <li>Переключитесь на <strong>ближайший сервер</strong> — серверы Germany (Fast Private) обычно быстрее всех.</li>
+              <li>Переключитесь на <strong>сервер Germany (Fast Private)</strong> — это самые быстрые серверы.</li>
               <li>Используйте <strong>Wi-Fi</strong> вместо мобильной сети, если возможно.</li>
               <li>Закройте фоновые приложения, потребляющие трафик.</li>
               <li>Проверьте скорость <strong>без VPN</strong> — если она тоже низкая, проблема на стороне провайдера.</li>
             </ul>
-            <div class="tip-box">
-              BlackRay использует серверы с каналом <strong>1 Гбит/с</strong>. Если вы наблюдаете скорость ниже 50 Мбит/с — попробуйте другой сервер или напишите в поддержку.
-            </div>
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-q">Подписка не обновляется / пустой список серверов</button>
+          <button class="faq-q">Пустой список серверов</button>
           <div class="faq-a">
-            <p>Если после обновления подписки список серверов пуст:</p>
+            <p>Если список серверов пуст или подписка не загружается:</p>
             <ol class="step-list">
-              <li>Проверьте, что ссылка подписки <strong>корректна</strong> — она должна начинаться с <code>https://api.blackray.info</code>.</li>
-              <li>Удалите текущую подписку из приложения и добавьте заново из бота (<strong>«Получить конфиг»</strong>).</li>
-              <li>Убедитесь, что устройство не отключено в боте (статус должен быть 🟢).</li>
+              <li>Проверьте, что ссылка подписки начинается с <code>https://api.blackray.info</code>.</li>
+              <li>Удалите текущую подписку из приложения и добавьте заново через бота — <strong>«Получить конфиг»</strong>.</li>
+              <li>Убедитесь, что устройство не удалено в боте (статус должен быть 🟢).</li>
             </ol>
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-q">Уведомление «устройство уже подключено» / сброс соединения</button>
+          <button class="faq-q">Соединение разрывается</button>
           <div class="faq-a">
-            <p>Один ключ = одно активное подключение. Если вы подключились с другого устройства по тому же ключу, предыдущее соединение автоматически разрывается.</p>
-            <p><strong>Решение:</strong> создайте в боте отдельное устройство для каждого гаджета. Это не влияет на стоимость подписки.</p>
+            <p>Один ключ = одно активное подключение. Если кто-то использует тот же ключ, ваше соединение автоматически разрывается.</p>
+            <p><strong>Решение:</strong> создайте отдельное устройство для каждого гаджета. Не передавайте свою ссылку-подписку другим людям.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== ПРАВИЛА ==================== -->
+      <div class="faq-section" id="rules">
+        <h2 class="faq-section-title"><span class="icon">📋</span> Правила использования</h2>
+
+        <div class="faq-item">
+          <button class="faq-q">Можно ли скачивать торренты через VPN?</button>
+          <div class="faq-a">
+            <div class="tip-box danger">
+              <strong>Нет, использование торрентов через BlackRay VPN запрещено.</strong>
+            </div>
+            <p>Торрент-трафик создаёт аномально высокую нагрузку и множество параллельных соединений, что:</p>
+            <ul>
+              <li>Критически снижает скорость для всех пользователей на сервере.</li>
+              <li>Привлекает внимание систем мониторинга и может привести к блокировке IP-адреса сервера.</li>
+              <li>Нарушает условия хостинга серверов.</li>
+            </ul>
+            <p>При обнаружении торрент-трафика устройство может быть заблокировано без возврата средств.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">Можно ли делиться своим ключом?</button>
+          <div class="faq-a">
+            <p><strong>Не рекомендуется.</strong> Ваша ссылка-подписка — это персональный ключ. Если передать её другому человеку:</p>
+            <ul>
+              <li>Он будет пользоваться VPN <strong>за ваш счёт</strong>.</li>
+              <li>Ваши соединения будут <strong>конфликтовать</strong> — подключиться одновременно невозможно.</li>
+            </ul>
+            <p>Если вы случайно поделились ключом — удалите устройство в боте и создайте новое.</p>
           </div>
         </div>
       </div>
@@ -501,10 +500,10 @@
         <h2 class="faq-section-title"><span class="icon">🔒</span> Безопасность и конфиденциальность</h2>
 
         <div class="faq-item">
-          <button class="faq-q">Какой протокол используется?</button>
+          <button class="faq-q">Насколько надёжна защита?</button>
           <div class="faq-a">
-            <p>BlackRay использует <strong>VLESS + TLS 1.3</strong> — один из самых современных протоколов для обхода блокировок. Ваш трафик выглядит как обычное HTTPS-соединение к легитимному сайту.</p>
-            <p>Дополнительно для серверов белых списков применяется технология <strong>REALITY</strong> с flow <strong>xtls-rprx-vision</strong>, что делает обнаружение VPN-трафика практически невозможным для систем DPI.</p>
+            <p>BlackRay использует <strong>современные протоколы шифрования</strong>, которые делают ваш трафик неотличимым от обычного посещения сайтов. Системы глубокого анализа трафика (DPI) не могут определить, что вы используете VPN.</p>
+            <p>Все соединения защищены <strong>TLS 1.3</strong> — тем же стандартом безопасности, который используют банки и государственные сервисы.</p>
           </div>
         </div>
 
@@ -515,17 +514,9 @@
             <ul>
               <li>Мы <strong>не записываем</strong> посещённые вами сайты.</li>
               <li>Мы <strong>не сохраняем</strong> содержимое трафика.</li>
-              <li>Единственная метрика — <strong>объём переданных данных</strong> (для отображения использования в вашем профиле).</li>
+              <li>Единственная метрика — <strong>объём переданных данных</strong> (для отображения статистики в вашем профиле).</li>
             </ul>
-            <p>Серверы расположены в <strong>Германии</strong> — юрисдикции с надёжной защитой персональных данных (GDPR).</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q">Безопасно ли делиться ссылкой-подпиской?</button>
-          <div class="faq-a">
-            <p><strong>Нет, не делитесь ссылкой.</strong> Ваша ссылка-подписка — это персональный ключ доступа. Если передать её другому человеку, он сможет пользоваться VPN за ваш счёт, а ваше соединение будет разрываться.</p>
-            <p>Если вы случайно поделились ссылкой — удалите устройство в боте и создайте новое.</p>
+            <p>Серверы расположены в <strong>Германии</strong> — юрисдикции с надёжной защитой персональных данных.</p>
           </div>
         </div>
       </div>
@@ -544,9 +535,9 @@
             </ul>
             <p>При обращении укажите:</p>
             <ul>
-              <li>Какое приложение используете (название и версия)</li>
-              <li>Тип подключения (Wi-Fi / LTE, название оператора)</li>
-              <li>Описание проблемы и скриншот ошибки (если есть)</li>
+              <li>Какое приложение и ОС вы используете</li>
+              <li>Тип подключения (Wi-Fi / LTE, оператор)</li>
+              <li>Описание проблемы и скриншот ошибки, если есть</li>
             </ul>
           </div>
         </div>
@@ -569,13 +560,10 @@
     document.getElementById('mobile-menu-btn').addEventListener('click', () => {
       document.getElementById('nav-links').classList.toggle('active');
     });
-
     document.querySelectorAll('.faq-q').forEach(btn => {
       btn.addEventListener('click', () => {
-        const wasOpen = btn.classList.contains('open');
-        const answer = btn.nextElementSibling;
         btn.classList.toggle('open');
-        answer.classList.toggle('open');
+        btn.nextElementSibling.classList.toggle('open');
       });
     });
   </script>
