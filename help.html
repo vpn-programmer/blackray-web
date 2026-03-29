@@ -197,6 +197,7 @@
       <div class="toc">
         <a href="#start">Быстрый старт</a>
         <a href="#apps">Приложение</a>
+        <a href="#appstore">Удаление из App Store</a>
         <a href="#devices">Устройства</a>
         <a href="#billing">Баланс и оплата</a>
         <a href="#whitelist">Белые списки</a>
@@ -302,6 +303,79 @@
             <div class="tip-box">
               Подписка — это не одноразовый ключ, а постоянная ссылка. Через неё приложение автоматически получает актуальные серверы и обновления конфигурации.
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== УДАЛЕНИЕ ИЗ APP STORE ==================== -->
+      <div class="faq-section" id="appstore">
+        <h2 class="faq-section-title"><span class="icon">⚠️</span> Удаление VPN-приложений из App Store</h2>
+
+        <div class="faq-item">
+          <button class="faq-q open">Что произошло?</button>
+          <div class="faq-a open">
+            <p>По требованию Роскомнадзора Apple удалила <strong>v2RayTun и ещё 25 VPN-приложений</strong> из российского App Store. Это касается только аккаунтов с регионом <strong>Россия</strong>.</p>
+            <div class="tip-box">
+              <strong>Если приложение уже установлено</strong> — оно продолжит работать. Удаление из магазина не затрагивает установленные приложения.
+            </div>
+            <p><strong>Кого это НЕ касается:</strong></p>
+            <ul>
+              <li>Пользователей <strong>Android</strong> — скачивайте из Google Play как обычно</li>
+              <li>Пользователей <strong>Windows</strong> — скачивайте .exe напрямую</li>
+              <li>Тех, у кого Apple ID <strong>не в регионе РФ</strong> — скачивание доступно как обычно</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q open">Способ 1: Сменить регион Apple ID (если нет подписок)</button>
+          <div class="faq-a open">
+            <div class="tip-box warning">
+              Сработает, только если у вас <strong>нет активных подписок</strong> (в т.ч. iCloud+, Apple Music, Яндекс Плюс и др.) и <strong>нет денег на балансе</strong> Apple ID. Иначе Apple не даст сменить регион.
+            </div>
+            <ol class="step-list">
+              <li>Откройте <strong>Настройки</strong> → нажмите на своё <strong>Имя</strong> (вверху) → <strong>Контент и покупки</strong> → <strong>Просмотреть</strong>.</li>
+              <li>Выберите <strong>«Страна/регион»</strong> → укажите <strong>Казахстан</strong>. Способ оплаты — <strong>«Нет»</strong>. Адрес можно ввести любой.</li>
+              <li>Откройте App Store, найдите и скачайте <strong>v2RayTun</strong>.</li>
+              <li>Вернитесь в <strong>Настройки</strong> и смените регион обратно на <strong>Россию</strong>.</li>
+            </ol>
+            <p>Приложение останется на устройстве после смены региона обратно.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q open">Способ 2: Создать второй Apple ID (самый надёжный)</button>
+          <div class="faq-a open">
+            <p>Если первый способ не подходит из-за активных подписок — создайте запасной аккаунт только для App Store.</p>
+            <ol class="step-list">
+              <li>Зайдите на <a href="https://appleid.apple.com/account" target="_blank">apple.com</a> и создайте <strong>новый Apple ID</strong> с регионом <strong>Казахстан</strong> или <strong>США</strong>.</li>
+              <li>На iPhone: <strong>Настройки</strong> → ваше Имя → <strong>Контент и покупки</strong> → <strong>«Выйти»</strong>.</li>
+              <li style="color: var(--green);"><strong>Это выйдет ТОЛЬКО из App Store.</strong> Ваши фото, iCloud, контакты и всё остальное останутся на месте!</li>
+              <li>Нажмите <strong>«Войти»</strong> и введите данные нового Apple ID.</li>
+              <li>Скачайте <strong>v2RayTun</strong> из App Store.</li>
+              <li>Вернитесь на основной аккаунт: <strong>Контент и покупки</strong> → <strong>«Выйти»</strong> → войдите под своим основным Apple ID.</li>
+            </ol>
+            <div class="tip-box">
+              Приложение останется установленным. Обновлять его можно будет, временно переключившись на второй Apple ID.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">Как скачать на macOS?</button>
+          <div class="faq-a">
+            <p>На Mac смена региона работает так же, как на iPhone (способы выше). Но есть альтернатива, которая <strong>не требует App Store</strong>:</p>
+            <p>Скачайте <strong>Hiddify</strong> напрямую с GitHub — это бесплатное приложение с поддержкой подписок BlackRay:</p>
+            <div class="dl-grid">
+              <a href="https://github.com/hiddify/hiddify-app/releases/latest" target="_blank" rel="noopener" class="dl-card">
+                <div class="dl-icon">💻</div>
+                <div class="dl-info">
+                  <span class="dl-label">Hiddify для macOS</span>
+                  <span class="dl-sub">Скачайте файл Hiddify-MacOS-Universal.dmg</span>
+                </div>
+              </a>
+            </div>
+            <p style="margin-top: 12px;"><strong>Universal</strong> означает, что файл подходит для любых Mac — и Intel, и Apple Silicon (M1/M2/M3/M4).</p>
           </div>
         </div>
       </div>
