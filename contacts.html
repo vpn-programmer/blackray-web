@@ -139,38 +139,39 @@
         <svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
       <nav class="nav-links" id="nav-links">
-        <a href="/">Главная</a>
-        <a href="/help">Помощь</a>
+        <a href="/" data-ru="Главная" data-en="Home">Главная</a>
+        <a href="/help" data-ru="Помощь" data-en="Help">Помощь</a>
+        <button id="lang-toggle" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:var(--text-muted);padding:5px 12px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:0.85rem;font-weight:600;transition:all .2s" onmouseover="this.style.borderColor='var(--brand)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='var(--text-muted)'">EN</button>
       </nav>
     </div>
   </header>
 
   <main>
     <div class="container">
-      <h1 class="page-title">Контакты</h1>
-      <p class="page-subtitle">Мы на связи — выберите удобный способ</p>
+      <h1 class="page-title" data-ru="Контакты" data-en="Contacts">Контакты</h1>
+      <p class="page-subtitle" data-ru="Мы на связи — выберите удобный способ" data-en="We're here to help — choose a convenient way to reach us">Мы на связи — выберите удобный способ</p>
 
       <div class="contacts-grid">
         <a href="https://t.me/blackray_support_bot?start=support" target="_blank" rel="noopener" class="contact-card">
           <div class="contact-icon">✈️</div>
           <div class="contact-info">
-            <span class="contact-label">Поддержка</span>
-            <span class="contact-title">Telegram-бот</span>
-            <span class="contact-sub">@blackray_support_bot — самый быстрый способ</span>
+            <span class="contact-label" data-ru="Поддержка" data-en="Support">Поддержка</span>
+            <span class="contact-title" data-ru="Telegram-бот" data-en="Telegram Bot">Telegram-бот</span>
+            <span class="contact-sub" data-ru="@blackray_support_bot — самый быстрый способ" data-en="@blackray_support_bot — the fastest way">@blackray_support_bot — самый быстрый способ</span>
           </div>
         </a>
 
         <div class="contact-card">
           <div class="contact-icon">✉️</div>
           <div class="contact-info">
-            <span class="contact-label">Электронная почта</span>
+            <span class="contact-label" data-ru="Электронная почта" data-en="Email">Электронная почта</span>
             <a href="mailto:blackrayvpn@protonmail.com" class="contact-title contact-email">blackrayvpn@protonmail.com</a>
-            <span class="contact-sub">Вопросы и обратная связь</span>
+            <span class="contact-sub" data-ru="Вопросы и обратная связь" data-en="Questions and feedback">Вопросы и обратная связь</span>
           </div>
         </div>
       </div>
 
-      <div class="info-box">
+      <div class="info-box" data-ru="<strong>Время ответа:</strong> обычно в течение нескольких часов.<br>Для технических вопросов и проблем с подключением быстрее всего обратиться через Telegram — там мы на связи круглосуточно." data-en="<strong>Response time:</strong> usually within a few hours.<br>For technical questions and connection issues, Telegram is the quickest option — we are available around the clock.">
         <strong>Время ответа:</strong> обычно в течение нескольких часов.<br>
         Для технических вопросов и проблем с подключением быстрее всего обратиться через Telegram — там мы на связи круглосуточно.
       </div>
@@ -179,10 +180,10 @@
 
   <footer>
     <div class="footer-inner">
-      <div class="footer-copy">&copy; 2026 BlackRay. Все права защищены.</div>
+      <div class="footer-copy" data-ru="&copy; 2026 BlackRay. Все права защищены." data-en="&copy; 2026 BlackRay. All rights reserved.">&copy; 2026 BlackRay. Все права защищены.</div>
       <div class="footer-links">
-        <a href="/terms">Договор-оферта</a>
-        <a href="https://t.me/blackray_support_bot?start=1" target="_blank" rel="noopener noreferrer">Поддержка</a>
+        <a href="/terms" data-ru="Договор-оферта" data-en="Service Agreement">Договор-оферта</a>
+        <a href="https://t.me/blackray_support_bot?start=1" target="_blank" rel="noopener noreferrer" data-ru="Поддержка" data-en="Support">Поддержка</a>
       </div>
     </div>
   </footer>
@@ -191,6 +192,24 @@
     document.getElementById('mobile-menu-btn').addEventListener('click', () => {
       document.getElementById('nav-links').classList.toggle('active');
     });
+  </script>
+  <script>
+  (function(){
+    const btn = document.getElementById('lang-toggle');
+    let lang = localStorage.getItem('br_lang') || 'ru';
+    function apply(l) {
+      lang = l;
+      localStorage.setItem('br_lang', l);
+      btn.textContent = l === 'ru' ? 'EN' : 'RU';
+      document.documentElement.lang = l;
+      document.querySelectorAll('[data-'+l+']').forEach(el => {
+        const v = el.getAttribute('data-'+l);
+        if (v) el.innerHTML = v;
+      });
+    }
+    btn.addEventListener('click', () => apply(lang === 'ru' ? 'en' : 'ru'));
+    if (lang !== 'ru') apply(lang);
+  })();
   </script>
 </body>
 </html>

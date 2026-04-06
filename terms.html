@@ -177,82 +177,83 @@
       </button>
 
       <nav class="nav-links" id="nav-links">
-        <a href="/">Главная</a>
-        <a href="/help">Помощь</a>
+        <a href="/" data-ru="Главная" data-en="Home">Главная</a>
+        <a href="/help" data-ru="Помощь" data-en="Help">Помощь</a>
+        <button id="lang-toggle" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:var(--text-muted);padding:5px 12px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:0.85rem;font-weight:600;transition:all .2s" onmouseover="this.style.borderColor='var(--brand)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='var(--text-muted)'">EN</button>
       </nav>
     </div>
   </header>
 
   <main class="container legal-content">
-    <h1>Документация и правила сервиса</h1>
+    <h1 data-ru="Документация и правила сервиса" data-en="Service Documentation and Policies">Документация и правила сервиса</h1>
     
     <div class="doc-section">
-      <h2>Пользовательское соглашение (Публичная оферта)</h2>
-      <p>Настоящий документ является публичной офертой (далее — «Соглашение») сервиса BlackRay Cloud (далее — «Провайдер») и содержит все существенные условия предоставления услуг по аренде вычислительных мощностей.</p>
+      <h2 data-ru="Пользовательское соглашение (Публичная оферта)" data-en="User Agreement (Public Offer)">Пользовательское соглашение (Публичная оферта)</h2>
+      <p data-ru="Настоящий документ является публичной офертой (далее — «Соглашение») сервиса BlackRay Cloud (далее — «Провайдер») и содержит все существенные условия предоставления услуг по аренде вычислительных мощностей." data-en="This document constitutes a public offer (hereinafter the &laquo;Agreement&raquo;) of BlackRay Cloud service (hereinafter the &laquo;Provider&raquo;) and contains all material terms and conditions for the provision of computing resource rental services.">Настоящий документ является публичной офертой (далее — «Соглашение») сервиса BlackRay Cloud (далее — «Провайдер») и содержит все существенные условия предоставления услуг по аренде вычислительных мощностей.</p>
 
-      <h3>1. Термины и определения</h3>
-      <p>1.1. <strong>«Провайдер»</strong> — сервис BlackRay Cloud, предоставляющий услуги по аренде виртуальных вычислительных мощностей (IaaS) и обеспечению удалённого доступа к сетевой инфраструктуре.</p>
-      <p>1.2. <strong>«Пользователь»</strong> — дееспособное физическое лицо, осуществившее Акцепт настоящей Оферты.</p>
-      <p>1.3. <strong>«Удалённый доступ»</strong> — технология предоставления Пользователю выделенного канала связи для управления арендованными серверными ресурсами.</p>
-      <p>1.4. <strong>«Бот»</strong> — автоматизированный аппаратно-программный интерфейс Провайдера в мессенджере Telegram, предназначенный для регистрации, управления биллингом и получения реквизитов доступа.</p>
-      <p>1.5. <strong>«Реквизиты доступа»</strong> — уникальный набор авторизационных данных и сетевых настроек, генерируемый индивидуально для подключения оборудования Пользователя к инфраструктуре Провайдера.</p>
+      <h3 data-ru="1. Термины и определения" data-en="1. Terms and Definitions">1. Термины и определения</h3>
+      <p data-ru="1.1. <strong>«Провайдер»</strong> — сервис BlackRay Cloud, предоставляющий услуги по аренде виртуальных вычислительных мощностей (IaaS) и обеспечению удалённого доступа к сетевой инфраструктуре." data-en="1.1. <strong>&laquo;Provider&raquo;</strong> — BlackRay Cloud service providing virtual computing resource (IaaS) rental and remote network infrastructure access.">1.1. <strong>«Провайдер»</strong> — сервис BlackRay Cloud, предоставляющий услуги по аренде виртуальных вычислительных мощностей (IaaS) и обеспечению удалённого доступа к сетевой инфраструктуре.</p>
+      <p data-ru="1.2. <strong>«Пользователь»</strong> — дееспособное физическое лицо, осуществившее Акцепт настоящей Оферты." data-en="1.2. <strong>&laquo;User&raquo;</strong> — a legally capable individual who has accepted this Offer.">1.2. <strong>«Пользователь»</strong> — дееспособное физическое лицо, осуществившее Акцепт настоящей Оферты.</p>
+      <p data-ru="1.3. <strong>«Удалённый доступ»</strong> — технология предоставления Пользователю выделенного канала связи для управления арендованными серверными ресурсами." data-en="1.3. <strong>&laquo;Remote Access&raquo;</strong> — technology providing the User with a dedicated communication channel for managing rented server resources.">1.3. <strong>«Удалённый доступ»</strong> — технология предоставления Пользователю выделенного канала связи для управления арендованными серверными ресурсами.</p>
+      <p data-ru="1.4. <strong>«Бот»</strong> — автоматизированный аппаратно-программный интерфейс Провайдера в мессенджере Telegram, предназначенный для регистрации, управления биллингом и получения реквизитов доступа." data-en="1.4. <strong>&laquo;Bot&raquo;</strong> — the Provider's automated software interface in Telegram messenger, designed for registration, billing management, and obtaining access credentials.">1.4. <strong>«Бот»</strong> — автоматизированный аппаратно-программный интерфейс Провайдера в мессенджере Telegram, предназначенный для регистрации, управления биллингом и получения реквизитов доступа.</p>
+      <p data-ru="1.5. <strong>«Реквизиты доступа»</strong> — уникальный набор авторизационных данных и сетевых настроек, генерируемый индивидуально для подключения оборудования Пользователя к инфраструктуре Провайдера." data-en="1.5. <strong>&laquo;Access Credentials&raquo;</strong> — a unique set of authentication data and network settings generated individually for connecting the User's equipment to the Provider's infrastructure.">1.5. <strong>«Реквизиты доступа»</strong> — уникальный набор авторизационных данных и сетевых настроек, генерируемый индивидуально для подключения оборудования Пользователя к инфраструктуре Провайдера.</p>
 
-      <h3>2. Общие положения и порядок Акцепта</h3>
-      <p>2.1. Безусловным принятием (Акцептом) условий настоящей Оферты считается запуск Бота, пополнение лицевого счёта или фактическое начало использования Реквизитов доступа для подключения к инфраструктуре Провайдера.</p>
-      <p>2.2. Сервис является инструментом для удалённой работы, тестирования IT-продуктов и развёртывания пользовательских приложений. Провайдер предоставляет только сетевую и аппаратную инфраструктуру. Ответственность за цель использования вычислительных мощностей лежит исключительно на Пользователе.</p>
+      <h3 data-ru="2. Общие положения и порядок Акцепта" data-en="2. General Provisions and Acceptance Procedure">2. Общие положения и порядок Акцепта</h3>
+      <p data-ru="2.1. Безусловным принятием (Акцептом) условий настоящей Оферты считается запуск Бота, пополнение лицевого счёта или фактическое начало использования Реквизитов доступа для подключения к инфраструктуре Провайдера." data-en="2.1. Unconditional acceptance (Acceptance) of this Offer is deemed to occur upon launching the Bot, topping up the account balance, or commencing actual use of the Access Credentials to connect to the Provider's infrastructure.">2.1. Безусловным принятием (Акцептом) условий настоящей Оферты считается запуск Бота, пополнение лицевого счёта или фактическое начало использования Реквизитов доступа для подключения к инфраструктуре Провайдера.</p>
+      <p data-ru="2.2. Сервис является инструментом для удалённой работы, тестирования IT-продуктов и развёртывания пользовательских приложений. Провайдер предоставляет только сетевую и аппаратную инфраструктуру. Ответственность за цель использования вычислительных мощностей лежит исключительно на Пользователе." data-en="2.2. The service is a tool for remote work, IT product testing, and deployment of user applications. The Provider supplies only network and hardware infrastructure. Responsibility for the purpose of use of computing resources lies exclusively with the User.">2.2. Сервис является инструментом для удалённой работы, тестирования IT-продуктов и развёртывания пользовательских приложений. Провайдер предоставляет только сетевую и аппаратную инфраструктуру. Ответственность за цель использования вычислительных мощностей лежит исключительно на Пользователе.</p>
 
-      <h3>3. Права и обязанности сторон</h3>
-      <p><strong>3.1. Пользователь обязуется:</strong></p>
-      <p>3.1.1. Использовать вычислительные мощности в строгом соответствии с применимым законодательством.</p>
-      <p>3.1.2. Не создавать избыточную нагрузку на магистральные каналы связи Провайдера, в том числе путём использования протоколов непрерывного массового файлообмена (P2P/BitTorrent) на вычислительных узлах, не предназначенных для хранения больших объёмов данных.</p>
-      <p>3.1.3. Не использовать инфраструктуру Провайдера для осуществления вредоносной деятельности:</p>
+      <h3 data-ru="3. Права и обязанности сторон" data-en="3. Rights and Obligations of the Parties">3. Права и обязанности сторон</h3>
+      <p data-ru="<strong>3.1. Пользователь обязуется:</strong>" data-en="<strong>3.1. The User undertakes to:</strong>"><strong>3.1. Пользователь обязуется:</strong></p>
+      <p data-ru="3.1.1. Использовать вычислительные мощности в строгом соответствии с применимым законодательством." data-en="3.1.1. Use computing resources in strict compliance with applicable law.">3.1.1. Использовать вычислительные мощности в строгом соответствии с применимым законодательством.</p>
+      <p data-ru="3.1.2. Не создавать избыточную нагрузку на магистральные каналы связи Провайдера, в том числе путём использования протоколов непрерывного массового файлообмена (P2P/BitTorrent) на вычислительных узлах, не предназначенных для хранения больших объёмов данных." data-en="3.1.2. Not create excessive load on the Provider's backbone communication channels, including through the use of continuous mass file-sharing protocols (P2P/BitTorrent) on compute nodes not designed for large-volume data storage.">3.1.2. Не создавать избыточную нагрузку на магистральные каналы связи Провайдера, в том числе путём использования протоколов непрерывного массового файлообмена (P2P/BitTorrent) на вычислительных узлах, не предназначенных для хранения больших объёмов данных.</p>
+      <p data-ru="3.1.3. Не использовать инфраструктуру Провайдера для осуществления вредоносной деятельности:" data-en="3.1.3. Not use the Provider's infrastructure for malicious activities:">3.1.3. Не использовать инфраструктуру Провайдера для осуществления вредоносной деятельности:</p>
       <ul>
-        <li>Организация DDoS-атак, сканирование портов, брутфорс;</li>
-        <li>Распространение вредоносного ПО;</li>
-        <li>Осуществление спам-рассылок любого типа;</li>
-        <li>Фишинг, мошенничество и несанкционированный доступ к чужим данным.</li>
+        <li data-ru="Организация DDoS-атак, сканирование портов, брутфорс;" data-en="Organizing DDoS attacks, port scanning, brute-force attacks;">Организация DDoS-атак, сканирование портов, брутфорс;</li>
+        <li data-ru="Распространение вредоносного ПО;" data-en="Distributing malware;">Распространение вредоносного ПО;</li>
+        <li data-ru="Осуществление спам-рассылок любого типа;" data-en="Sending spam of any type;">Осуществление спам-рассылок любого типа;</li>
+        <li data-ru="Фишинг, мошенничество и несанкционированный доступ к чужим данным." data-en="Phishing, fraud, and unauthorized access to third-party data.">Фишинг, мошенничество и несанкционированный доступ к чужим данным.</li>
       </ul>
-      <p>3.1.4. Не передавать свои Реквизиты доступа третьим лицам. Услуга предоставляется для индивидуального использования. При фиксации одновременных подключений с использованием одних авторизационных данных Провайдер оставляет за собой право аннулировать скомпрометированные реквизиты.</p>
+      <p data-ru="3.1.4. Не передавать свои Реквизиты доступа третьим лицам. Услуга предоставляется для индивидуального использования. При фиксации одновременных подключений с использованием одних авторизационных данных Провайдер оставляет за собой право аннулировать скомпрометированные реквизиты." data-en="3.1.4. Not share Access Credentials with third parties. The service is provided for individual use. If simultaneous connections using the same authentication data are detected, the Provider reserves the right to revoke the compromised credentials.">3.1.4. Не передавать свои Реквизиты доступа третьим лицам. Услуга предоставляется для индивидуального использования. При фиксации одновременных подключений с использованием одних авторизационных данных Провайдер оставляет за собой право аннулировать скомпрометированные реквизиты.</p>
 
-      <p><strong>3.2. Провайдер обязуется и имеет право:</strong></p>
-      <p>3.2.1. Обеспечивать бесперебойную работу аппаратной части серверов и сетевой доступности.</p>
-      <p>3.2.2. Приостановить или прекратить оказание услуг (заблокировать аккаунт) без возмещения средств в случае нарушения Пользователем пунктов 3.1.2 — 3.1.4.</p>
+      <p data-ru="<strong>3.2. Провайдер обязуется и имеет право:</strong>" data-en="<strong>3.2. The Provider undertakes and has the right to:</strong>"><strong>3.2. Провайдер обязуется и имеет право:</strong></p>
+      <p data-ru="3.2.1. Обеспечивать бесперебойную работу аппаратной части серверов и сетевой доступности." data-en="3.2.1. Ensure uninterrupted operation of server hardware and network availability.">3.2.1. Обеспечивать бесперебойную работу аппаратной части серверов и сетевой доступности.</p>
+      <p data-ru="3.2.2. Приостановить или прекратить оказание услуг (заблокировать аккаунт) без возмещения средств в случае нарушения Пользователем пунктов 3.1.2 — 3.1.4." data-en="3.2.2. Suspend or terminate services (block the account) without refund in case of violation by the User of clauses 3.1.2–3.1.4.">3.2.2. Приостановить или прекратить оказание услуг (заблокировать аккаунт) без возмещения средств в случае нарушения Пользователем пунктов 3.1.2 — 3.1.4.</p>
 
-      <h3>4. Стоимость услуг и порядок расчётов</h3>
-      <p>4.1. Доступ к услугам Провайдера предоставляется по авансовой системе расчётов.</p>
-      <p>4.2. Списание средств с лицевого счёта Пользователя происходит ежедневно (посуточно) за каждую активную выделенную ноду (устройство), добавленную в интерфейсе Бота.</p>
-      <p>4.3. Базовая стоимость аренды вычислительных мощностей для 1 (одного) подключения составляет 149 рублей за 30 (тридцать) календарных дней.</p>
-      <p>4.4. При отрицательном или нулевом балансе Провайдер автоматически приостанавливает обслуживание инфраструктуры Пользователя до момента пополнения счёта.</p>
-      <p>4.5. Для остановки тарификации Пользователь обязан самостоятельно удалить неиспользуемую ноду в интерфейсе Бота.</p>
+      <h3 data-ru="4. Стоимость услуг и порядок расчётов" data-en="4. Service Fees and Payment Terms">4. Стоимость услуг и порядок расчётов</h3>
+      <p data-ru="4.1. Доступ к услугам Провайдера предоставляется по авансовой системе расчётов." data-en="4.1. Access to the Provider's services is provided on a prepaid basis.">4.1. Доступ к услугам Провайдера предоставляется по авансовой системе расчётов.</p>
+      <p data-ru="4.2. Списание средств с лицевого счёта Пользователя происходит ежедневно (посуточно) за каждую активную выделенную ноду (устройство), добавленную в интерфейсе Бота." data-en="4.2. Funds are deducted from the User's account on a daily basis for each active dedicated node (device) added via the Bot interface.">4.2. Списание средств с лицевого счёта Пользователя происходит ежедневно (посуточно) за каждую активную выделенную ноду (устройство), добавленную в интерфейсе Бота.</p>
+      <p data-ru="4.3. Базовая стоимость аренды вычислительных мощностей для 1 (одного) подключения составляет 149 рублей за 30 (тридцать) календарных дней." data-en="4.3. The base cost of computing resource rental for 1 (one) connection is 149 rubles per 30 (thirty) calendar days.">4.3. Базовая стоимость аренды вычислительных мощностей для 1 (одного) подключения составляет 149 рублей за 30 (тридцать) календарных дней.</p>
+      <p data-ru="4.4. При отрицательном или нулевом балансе Провайдер автоматически приостанавливает обслуживание инфраструктуры Пользователя до момента пополнения счёта." data-en="4.4. If the balance is zero or negative, the Provider automatically suspends the User's infrastructure services until the account is topped up.">4.4. При отрицательном или нулевом балансе Провайдер автоматически приостанавливает обслуживание инфраструктуры Пользователя до момента пополнения счёта.</p>
+      <p data-ru="4.5. Для остановки тарификации Пользователь обязан самостоятельно удалить неиспользуемую ноду в интерфейсе Бота." data-en="4.5. To stop billing, the User must independently remove the unused node via the Bot interface.">4.5. Для остановки тарификации Пользователь обязан самостоятельно удалить неиспользуемую ноду в интерфейсе Бота.</p>
 
-      <h3>5. Ограничение ответственности и возврат средств</h3>
-      <p>5.1. Услуги Провайдера предоставляются на условиях «КАК ЕСТЬ» (AS IS). Провайдер не несёт ответственности за любой прямой или косвенный ущерб, возникший в результате использования сервиса.</p>
-      <p>5.2. Возврат неизрасходованных средств производится в случае технической аварии на аппаратной стороне Провайдера, продолжающейся более 72 часов подряд.</p>
-      <p>5.3. Возврат не осуществляется при блокировке за нарушение правил сервиса (п. 3.1), а также при индивидуальных сетевых ограничениях на стороне локального интернет-провайдера Пользователя.</p>
+      <h3 data-ru="5. Ограничение ответственности и возврат средств" data-en="5. Limitation of Liability and Refunds">5. Ограничение ответственности и возврат средств</h3>
+      <p data-ru="5.1. Услуги Провайдера предоставляются на условиях «КАК ЕСТЬ» (AS IS). Провайдер не несёт ответственности за любой прямой или косвенный ущерб, возникший в результате использования сервиса." data-en="5.1. The Provider's services are provided on an &laquo;AS IS&raquo; basis. The Provider shall not be liable for any direct or indirect damages arising from the use of the service.">5.1. Услуги Провайдера предоставляются на условиях «КАК ЕСТЬ» (AS IS). Провайдер не несёт ответственности за любой прямой или косвенный ущерб, возникший в результате использования сервиса.</p>
+      <p data-ru="5.2. Возврат неизрасходованных средств производится в случае технической аварии на аппаратной стороне Провайдера, продолжающейся более 72 часов подряд." data-en="5.2. Refund of unused funds is made in the event of a technical failure on the Provider's hardware side lasting more than 72 consecutive hours.">5.2. Возврат неизрасходованных средств производится в случае технической аварии на аппаратной стороне Провайдера, продолжающейся более 72 часов подряд.</p>
+      <p data-ru="5.3. Возврат не осуществляется при блокировке за нарушение правил сервиса (п. 3.1), а также при индивидуальных сетевых ограничениях на стороне локального интернет-провайдера Пользователя." data-en="5.3. No refund is issued in cases of account suspension for violation of service rules (clause 3.1), as well as for individual network restrictions on the User's local ISP side.">5.3. Возврат не осуществляется при блокировке за нарушение правил сервиса (п. 3.1), а также при индивидуальных сетевых ограничениях на стороне локального интернет-провайдера Пользователя.</p>
     </div>
 
     <div class="doc-section">
-      <h2>Политика обработки данных и конфиденциальность</h2>
+      <h2 data-ru="Политика обработки данных и конфиденциальность" data-en="Data Processing and Privacy Policy">Политика обработки данных и конфиденциальность</h2>
       
-      <p>6.1. Провайдер запрашивает исключительно минимальный набор технических данных, необходимых для оказания услуг: Telegram ID (для авторизации в биллинговой системе) и агрегированную статистику объёма переданных данных (для учёта тарификации).</p>
-      <p>6.2. Провайдер не имеет технического доступа к информации, передаваемой или хранимой Пользователем на арендованных вычислительных мощностях. Логирование действий пользователей на уровне операционной системы серверов отключено в целях оптимизации производительности оборудования.</p>
-      <p>6.3. Провайдер не осуществляет передачу технических данных третьим лицам, за исключением случаев получения официального мотивированного запроса от правоохранительных органов в рамках действующего законодательства юрисдикции расположения серверов.</p>
+      <p data-ru="6.1. Провайдер запрашивает исключительно минимальный набор технических данных, необходимых для оказания услуг: Telegram ID (для авторизации в биллинговой системе) и агрегированную статистику объёма переданных данных (для учёта тарификации)." data-en="6.1. The Provider requests only the minimum set of technical data required to deliver services: Telegram ID (for billing system authentication) and aggregated data transfer volume statistics (for billing purposes).">6.1. Провайдер запрашивает исключительно минимальный набор технических данных, необходимых для оказания услуг: Telegram ID (для авторизации в биллинговой системе) и агрегированную статистику объёма переданных данных (для учёта тарификации).</p>
+      <p data-ru="6.2. Провайдер не имеет технического доступа к информации, передаваемой или хранимой Пользователем на арендованных вычислительных мощностях. Логирование действий пользователей на уровне операционной системы серверов отключено в целях оптимизации производительности оборудования." data-en="6.2. The Provider does not have technical access to information transmitted or stored by the User on rented computing resources. User activity logging at the server operating system level is disabled to optimize hardware performance.">6.2. Провайдер не имеет технического доступа к информации, передаваемой или хранимой Пользователем на арендованных вычислительных мощностях. Логирование действий пользователей на уровне операционной системы серверов отключено в целях оптимизации производительности оборудования.</p>
+      <p data-ru="6.3. Провайдер не осуществляет передачу технических данных третьим лицам, за исключением случаев получения официального мотивированного запроса от правоохранительных органов в рамках действующего законодательства юрисдикции расположения серверов." data-en="6.3. The Provider does not disclose technical data to third parties, except upon receipt of an official substantiated request from law enforcement authorities under the applicable laws of the jurisdiction where the servers are located.">6.3. Провайдер не осуществляет передачу технических данных третьим лицам, за исключением случаев получения официального мотивированного запроса от правоохранительных органов в рамках действующего законодательства юрисдикции расположения серверов.</p>
 
-      <h3>Контакты</h3>
-      <p>По всем вопросам, касающимся настоящей Оферты или Политики конфиденциальности:</p>
+      <h3 data-ru="Контакты" data-en="Contacts">Контакты</h3>
+      <p data-ru="По всем вопросам, касающимся настоящей Оферты или Политики конфиденциальности:" data-en="For all inquiries regarding this Offer or Privacy Policy:">По всем вопросам, касающимся настоящей Оферты или Политики конфиденциальности:</p>
       <ul>
-        <li><strong>Telegram:</strong> <a href="https://t.me/blackray_support_bot?start=1" style="color: var(--brand);">@blackray_support_bot</a></li>
-        <li><strong>Электронная почта:</strong> <a href="mailto:blackrayvpn@protonmail.com" style="color: var(--brand);">blackrayvpn@protonmail.com</a></li>
+        <li data-ru="<strong>Telegram:</strong> <a href=&quot;https://t.me/blackray_support_bot?start=1&quot; style=&quot;color: var(--brand);&quot;>@blackray_support_bot</a>" data-en="<strong>Telegram:</strong> <a href=&quot;https://t.me/blackray_support_bot?start=1&quot; style=&quot;color: var(--brand);&quot;>@blackray_support_bot</a>"><strong>Telegram:</strong> <a href="https://t.me/blackray_support_bot?start=1" style="color: var(--brand);">@blackray_support_bot</a></li>
+        <li data-ru="<strong>Электронная почта:</strong> <a href=&quot;mailto:blackrayvpn@protonmail.com&quot; style=&quot;color: var(--brand);&quot;>blackrayvpn@protonmail.com</a>" data-en="<strong>Email:</strong> <a href=&quot;mailto:blackrayvpn@protonmail.com&quot; style=&quot;color: var(--brand);&quot;>blackrayvpn@protonmail.com</a>"><strong>Электронная почта:</strong> <a href="mailto:blackrayvpn@protonmail.com" style="color: var(--brand);">blackrayvpn@protonmail.com</a></li>
       </ul>
     </div>
   </main>
 
 <footer>
   <div class="container footer-inner">
-    <div class="footer-copy">&copy; 2026 BlackRay. Все права защищены.</div>
+    <div class="footer-copy" data-ru="&copy; 2026 BlackRay. Все права защищены." data-en="&copy; 2026 BlackRay. All rights reserved.">&copy; 2026 BlackRay. Все права защищены.</div>
     <div class="footer-links">
-      <a href="/terms">Договор-оферта</a>
-      <a href="https://t.me/blackray_support_bot?start=1" target="_blank" rel="noopener noreferrer">Вопросы и предложения</a>
+      <a href="/terms" data-ru="Договор-оферта" data-en="Service Agreement">Договор-оферта</a>
+      <a href="https://t.me/blackray_support_bot?start=1" target="_blank" rel="noopener noreferrer" data-ru="Вопросы и предложения" data-en="Questions and Suggestions">Вопросы и предложения</a>
     </div>
   </div>
 </footer>
@@ -264,6 +265,24 @@
     menuBtn.addEventListener('click', () => {
       navLinks.classList.toggle('active');
     });
+  </script>
+  <script>
+  (function(){
+    const btn = document.getElementById('lang-toggle');
+    let lang = localStorage.getItem('br_lang') || 'ru';
+    function apply(l) {
+      lang = l;
+      localStorage.setItem('br_lang', l);
+      btn.textContent = l === 'ru' ? 'EN' : 'RU';
+      document.documentElement.lang = l;
+      document.querySelectorAll('[data-'+l+']').forEach(el => {
+        const v = el.getAttribute('data-'+l);
+        if (v) el.innerHTML = v;
+      });
+    }
+    btn.addEventListener('click', () => apply(lang === 'ru' ? 'en' : 'ru'));
+    if (lang !== 'ru') apply(lang);
+  })();
   </script>
 </body>
 </html>
