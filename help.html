@@ -183,16 +183,17 @@
         <svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
       <nav class="nav-links" id="nav-links">
-        <a href="/">Главная</a>
-        <a href="/help" class="active">Помощь</a>
+        <a href="/" data-ru="Главная" data-en="Home">Главная</a>
+        <a href="/help" class="active" data-ru="Помощь" data-en="Help">Помощь</a>
+        <button id="lang-toggle" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:var(--text-muted);padding:5px 12px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:0.85rem;font-weight:600;transition:all .2s" onmouseover="this.style.borderColor='var(--brand)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='var(--text-muted)'">EN</button>
       </nav>
     </div>
   </header>
 
   <main>
     <div class="container">
-      <h1 class="page-title">Центр помощи</h1>
-      <p class="page-subtitle">Всё, что нужно для быстрого старта и решения любых вопросов</p>
+      <h1 class="page-title" data-ru="Центр помощи" data-en="Help Center">Центр помощи</h1>
+      <p class="page-subtitle" data-ru="Всё, что нужно для быстрого старта и решения любых вопросов" data-en="Everything you need for a quick start and resolving any issues">Всё, что нужно для быстрого старта и решения любых вопросов</p>
 
       <div class="toc">
         <a href="#start">Быстрый старт</a>
@@ -326,18 +327,22 @@
         </div>
 
         <div class="faq-item">
-          <button class="faq-q open">Способ 1: Сменить регион Apple ID (если нет подписок)</button>
+          <button class="faq-q open">Способ 1: Сменить регион Apple ID (рекомендуемый)</button>
           <div class="faq-a open">
+            <div class="tip-box" style="border-color: var(--green);">
+              <strong>Обновление:</strong> Apple разрешила россиянам менять регион <strong>даже с активными подписками</strong> и <strong>без привязки новой карты</strong>. Подписка iCloud+ сохранится (валюта переведётся в доллары), сторонние подписки продолжат работать до конца оплаченного периода.
+            </div>
             <div class="tip-box warning">
-              Сработает, только если у вас <strong>нет активных подписок</strong> (в т.ч. iCloud+, Apple Music, Яндекс Плюс и др.) и <strong>нет денег на балансе</strong> Apple ID. Иначе Apple не даст сменить регион.
+              <strong>Нюансы:</strong> на балансе Apple ID <strong>не должно быть денег</strong> — даже мелочь придётся обнулить через техподдержку Apple. Подписка <strong>Apple Music</strong> не даст сменить регион до окончания — её нужно отменить и дождаться завершения.
             </div>
             <ol class="step-list">
+              <li>Отмените <strong>Apple Music</strong>, если она активна, и дождитесь окончания периода. Остальные подписки (iCloud+, Яндекс Плюс и др.) можно не трогать.</li>
+              <li>Убедитесь, что <strong>баланс Apple ID равен нулю</strong>. Если есть остаток — обратитесь в поддержку Apple для списания.</li>
               <li>Откройте <strong>Настройки</strong> → нажмите на своё <strong>Имя</strong> (вверху) → <strong>Контент и покупки</strong> → <strong>Просмотреть</strong>.</li>
-              <li>Выберите <strong>«Страна/регион»</strong> → укажите <strong>Казахстан</strong>. Способ оплаты — <strong>«Нет»</strong>. Адрес можно ввести любой.</li>
+              <li>Выберите <strong>«Страна/регион»</strong> → укажите <strong>Казахстан</strong> (или любую другую страну). Способ оплаты — <strong>«Нет»</strong>. Адрес можно ввести любой.</li>
               <li>Откройте App Store, найдите и скачайте <strong>v2RayTun</strong>.</li>
-              <li>Вернитесь в <strong>Настройки</strong> и смените регион обратно на <strong>Россию</strong>.</li>
+              <li>При желании верните регион обратно на <strong>Россию</strong> — приложение останется на устройстве.</li>
             </ol>
-            <p>Приложение останется на устройстве после смены региона обратно.</p>
           </div>
         </div>
 
@@ -664,6 +669,23 @@
         btn.nextElementSibling.classList.toggle('open');
       });
     });
+
+    (function(){
+      const btn = document.getElementById('lang-toggle');
+      let lang = localStorage.getItem('br_lang') || 'ru';
+      function apply(l) {
+        lang = l;
+        localStorage.setItem('br_lang', l);
+        btn.textContent = l === 'ru' ? 'EN' : 'RU';
+        document.documentElement.lang = l;
+        document.querySelectorAll('[data-'+l+']').forEach(el => {
+          const v = el.getAttribute('data-'+l);
+          if (v) el.innerHTML = v;
+        });
+      }
+      btn.addEventListener('click', () => apply(lang === 'ru' ? 'en' : 'ru'));
+      if (lang !== 'ru') apply(lang);
+    })();
   </script>
 </body>
 </html>
