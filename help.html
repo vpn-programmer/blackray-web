@@ -777,7 +777,7 @@
       function apply(l) {
         lang = l;
         localStorage.setItem('br_lang', l);
-        currentBtn.textContent = shortLabels[l];
+        currentBtn.innerHTML = shortLabels[l];
         menu.querySelectorAll('button').forEach(function(b) {
           b.classList.toggle('active', b.getAttribute('data-lang') === l);
         });
