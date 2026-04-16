@@ -35,6 +35,7 @@
       font-family: inherit; font-size: 0.85rem; font-weight: 600; transition: all .2s;
     }
     .lang-current:hover { border-color: var(--brand); color: #fff; }
+    .lang-current img, .lang-menu img { vertical-align: middle; margin-right: 4px; border-radius: 2px; }
     .lang-menu {
       display: none; position: absolute; top: calc(100% + 6px); right: 0;
       background: #1a1a28; border: 1px solid rgba(255,255,255,0.1); border-radius: 10px;
@@ -207,11 +208,11 @@
         <a href="/" data-ru="Главная" data-en="Home" data-fa="خانه">Главная</a>
         <a href="/help" data-ru="Помощь" data-en="Help" data-fa="راهنما">Помощь</a>
         <div class="lang-picker" id="lang-picker">
-          <button class="lang-current" id="lang-current">🇷🇺 RU</button>
+          <button class="lang-current" id="lang-current"><img src="https://flagcdn.com/20x15/ru.png" width="20" height="15" alt=""> RU</button>
           <div class="lang-menu" id="lang-menu">
-            <button data-lang="ru">🇷🇺 Русский</button>
-            <button data-lang="en">🇺🇸 English</button>
-            <button data-lang="fa">🇮🇷 فارسی</button>
+            <button data-lang="ru"><img src="https://flagcdn.com/20x15/ru.png" width="20" height="15" alt=""> Русский</button>
+            <button data-lang="en"><img src="https://flagcdn.com/20x15/us.png" width="20" height="15" alt=""> English</button>
+            <button data-lang="fa"><img src="https://flagcdn.com/20x15/ir.png" width="20" height="15" alt=""> فارسی</button>
           </div>
         </div>
       </nav>
@@ -305,7 +306,7 @@
     const currentBtn = document.getElementById('lang-current');
     const menu = document.getElementById('lang-menu');
     const langs = ['ru','en','fa'];
-    const shortLabels = {ru:'🇷🇺 RU', en:'🇺🇸 EN', fa:'🇮🇷 FA'};
+    const shortLabels = {ru:'<img src="https://flagcdn.com/20x15/ru.png" width="20" height="15" alt=""> RU', en:'<img src="https://flagcdn.com/20x15/us.png" width="20" height="15" alt=""> EN', fa:'<img src="https://flagcdn.com/20x15/ir.png" width="20" height="15" alt=""> FA'};
 
     function detectLang() {
       var stored = localStorage.getItem('br_lang');
