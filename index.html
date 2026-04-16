@@ -25,6 +25,12 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+    html[dir="rtl"] { direction: rtl; text-align: right; }
+    html[dir="rtl"] .nav-inner { flex-direction: row-reverse; }
+    html[dir="rtl"] .nav-links { flex-direction: row-reverse; }
+    html[dir="rtl"] .footer-inner { flex-direction: row-reverse; }
+    html[dir="rtl"] .hero { text-align: center; }
+    html[dir="rtl"] .btn-main { flex-direction: row-reverse; }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -219,8 +225,8 @@
       </button>
 
       <nav class="nav-links" id="nav-links">
-        <a href="/" class="active" data-ru="Главная" data-en="Home">Главная</a>
-        <a href="/help" data-ru="Помощь" data-en="Help">Помощь</a>
+        <a href="/" class="active" data-ru="Главная" data-en="Home" data-fa="خانه">Главная</a>
+        <a href="/help" data-ru="Помощь" data-en="Help" data-fa="راهنما">Помощь</a>
         <button id="lang-toggle" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:var(--text-muted);padding:5px 12px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:0.85rem;font-weight:600;transition:all .2s" onmouseover="this.style.borderColor='var(--brand)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='var(--text-muted)'">EN</button>
       </nav>
     </div>
@@ -234,18 +240,18 @@
       </div>
       
       <h1 class="animate-up delay-1">
-        <span data-ru="Безопасный доступ" data-en="Secure Access">Безопасный доступ</span><br>
-        <span class="darker" data-ru="к удалённой инфраструктуре" data-en="to Remote Infrastructure">к удалённой инфраструктуре</span>
+        <span data-ru="Безопасный доступ" data-en="Secure Access" data-fa="دسترسی امن">Безопасный доступ</span><br>
+        <span class="darker" data-ru="к удалённой инфраструктуре" data-en="to Remote Infrastructure" data-fa="به زیرساخت‌های از راه دور">к удалённой инфраструктуре</span>
       </h1>
       
-      <p class="animate-up delay-2" data-ru="BlackRay Cloud — надёжный облачный сервис для безопасного подключения к удалённым серверам и ресурсам. Без переплат, на максимальной скорости." data-en="BlackRay Cloud — a reliable cloud service for secure connection to remote servers and resources. No overpayments, maximum speed.">
+      <p class="animate-up delay-2" data-ru="BlackRay Cloud — надёжный облачный сервис для безопасного подключения к удалённым серверам и ресурсам. Без переплат, на максимальной скорости." data-en="BlackRay Cloud — a reliable cloud service for secure connection to remote servers and resources. No overpayments, maximum speed." data-fa="BlackRay Cloud — سرویس ابری مطمئن برای اتصال امن به سرورها و منابع از راه دور. بدون پرداخت اضافی، با حداکثر سرعت.">
         BlackRay Cloud — надёжный облачный сервис для безопасного подключения к удалённым серверам и ресурсам. Без переплат, на максимальной скорости.
       </p>
       
       <div class="animate-up delay-3">
         <a href="https://t.me/BlackRayVPN_bot?start=start_from_site" target="_blank" class="btn-main">
           <svg fill="currentColor" viewBox="0 0 24 24" stroke="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.11.03-1.87 1.18-5.28 3.45-.5.34-.95.51-1.35.5-.44-.01-1.28-.24-1.91-.44-.77-.24-1.38-.37-1.32-.78.03-.21.35-.43.96-.65 3.75-1.63 6.25-2.71 7.5-3.23 3.56-1.48 4.3-1.74 4.79-1.75.11 0 .36.03.49.14.11.09.14.22.15.33-.01.05-.01.16-.03.24z"/></svg>
-          <span data-ru="Подключить" data-en="Connect">Подключить</span>
+          <span data-ru="Подключить" data-en="Connect" data-fa="اتصال">Подключить</span>
         </a>
       </div>
     </section>
@@ -260,24 +266,24 @@
               <line x1="15" y1="10" x2="11" y2="14"></line>
             </svg>
           </div>
-          <h3 data-ru="Стабильное соединение" data-en="Stable Connection">Стабильное соединение</h3>
-          <p data-ru="Работает в любых корпоративных сетях. Отдельные серверы с продвинутыми протоколами инкапсуляции трафика — надёжный доступ к вашей удалённой инфраструктуре" data-en="Works in any corporate network. Dedicated servers with advanced traffic encapsulation protocols — reliable access to your remote infrastructure">Работает в любых корпоративных сетях. Отдельные серверы с продвинутыми протоколами инкапсуляции трафика — надёжный доступ к вашей удалённой инфраструктуре</p>
+          <h3 data-ru="Стабильное соединение" data-en="Stable Connection" data-fa="اتصال پایدار">Стабильное соединение</h3>
+          <p data-ru="Работает в любых корпоративных сетях. Отдельные серверы с продвинутыми протоколами инкапсуляции трафика — надёжный доступ к вашей удалённой инфраструктуре" data-en="Works in any corporate network. Dedicated servers with advanced traffic encapsulation protocols — reliable access to your remote infrastructure" data-fa="در هر شبکه‌ای کار می‌کند. سرورهای اختصاصی با پروتکل‌های پیشرفته کپسوله‌سازی ترافیک — دسترسی مطمئن به زیرساخت‌های از راه دور شما">Работает в любых корпоративных сетях. Отдельные серверы с продвинутыми протоколами инкапсуляции трафика — надёжный доступ к вашей удалённой инфраструктуре</p>
         </div>
 
         <div class="card animate-up delay-2">
           <div class="icon-box">
             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
           </div>
-          <h3 data-ru="Доступ к зарубежным ресурсам" data-en="Access Global Resources">Доступ к зарубежным ресурсам</h3>
-          <p data-ru="Надёжная связь с европейскими дата-центрами. Никаких ограничений скорости при работе с удалёнными IT-сервисами" data-en="Reliable connection to European data centers. No speed limits when working with remote IT services">Надёжная связь с европейскими дата-центрами. Никаких ограничений скорости при работе с удалёнными IT-сервисами</p>
+          <h3 data-ru="Доступ к зарубежным ресурсам" data-en="Access Global Resources" data-fa="دسترسی به منابع جهانی">Доступ к зарубежным ресурсам</h3>
+          <p data-ru="Надёжная связь с европейскими дата-центрами. Никаких ограничений скорости при работе с удалёнными IT-сервисами" data-en="Reliable connection to European data centers. No speed limits when working with remote IT services" data-fa="اتصال مطمئن به مراکز داده اروپایی. بدون محدودیت سرعت هنگام کار با سرویس‌های IT از راه دور">Надёжная связь с европейскими дата-центрами. Никаких ограничений скорости при работе с удалёнными IT-сервисами</p>
         </div>
 
         <div class="card animate-up delay-3">
           <div class="icon-box">
             <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
           </div>
-          <h3 data-ru="Самая низкая цена на рынке" data-en="Lowest Price on the Market">Самая низкая цена на рынке</h3>
-          <p data-ru="Мы оптимизировали серверную инфраструктуру, чтобы дать премиальное качество по минимальной цене" data-en="We optimized our server infrastructure to deliver premium quality at the lowest possible price">Мы оптимизировали серверную инфраструктуру, чтобы дать премиальное качество по минимальной цене</p>
+          <h3 data-ru="Самая низкая цена на рынке" data-en="Lowest Price on the Market" data-fa="کمترین قیمت در بازار">Самая низкая цена на рынке</h3>
+          <p data-ru="Мы оптимизировали серверную инфраструктуру, чтобы дать премиальное качество по минимальной цене" data-en="We optimized our server infrastructure to deliver premium quality at the lowest possible price" data-fa="ما زیرساخت سرور خود را بهینه‌سازی کردیم تا کیفیت عالی را با کمترین قیمت ممکن ارائه دهیم">Мы оптимизировали серверную инфраструктуру, чтобы дать премиальное качество по минимальной цене</p>
         </div>
 
         <div class="card animate-up delay-3">
@@ -287,8 +293,8 @@
               <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
             </svg>
           </div>
-          <h3 data-ru="Безопасность" data-en="Security">Безопасность</h3>
-          <p data-ru="Мы дорожим вашим доверием и не храним никакие конфиденциальные данные, а ваш трафик надежно шифруется" data-en="We value your trust and do not store any confidential data. Your traffic is securely encrypted">Мы дорожим вашим доверием и не храним никакие конфиденциальные данные, а ваш трафик надежно шифруется</p>
+          <h3 data-ru="Безопасность" data-en="Security" data-fa="امنیت">Безопасность</h3>
+          <p data-ru="Мы дорожим вашим доверием и не храним никакие конфиденциальные данные, а ваш трафик надежно шифруется" data-en="We value your trust and do not store any confidential data. Your traffic is securely encrypted" data-fa="ما به اعتماد شما اهمیت می‌دهیم و هیچ اطلاعات محرمانه‌ای ذخیره نمی‌کنیم. ترافیک شما به صورت امن رمزنگاری می‌شود">Мы дорожим вашим доверием и не храним никакие конфиденциальные данные, а ваш трафик надежно шифруется</p>
         </div>
 
       </div>
@@ -297,11 +303,11 @@
 
 <footer>
   <div class="container footer-inner">
-    <div class="footer-copy" data-ru="&copy; 2026 BlackRay. Все права защищены." data-en="&copy; 2026 BlackRay. All rights reserved.">&copy; 2026 BlackRay. Все права защищены.</div>
+    <div class="footer-copy" data-ru="&copy; 2026 BlackRay. Все права защищены." data-en="&copy; 2026 BlackRay. All rights reserved." data-fa="&copy; 2026 BlackRay. تمامی حقوق محفوظ است.">&copy; 2026 BlackRay. Все права защищены.</div>
     <div class="footer-links">
-      <a href="/terms" data-ru="Договор-оферта" data-en="Terms">Договор-оферта</a>
-      <a href="/contacts" data-ru="Контакты" data-en="Contacts">Контакты</a>
-      <a href="https://t.me/blackray_support_bot?start=1" target="_blank" rel="noopener noreferrer" data-ru="Поддержка" data-en="Support">Поддержка</a>
+      <a href="/terms" data-ru="Договор-оферта" data-en="Terms" data-fa="شرایط استفاده">Договор-оферта</a>
+      <a href="/contacts" data-ru="Контакты" data-en="Contacts" data-fa="تماس با ما">Контакты</a>
+      <a href="https://t.me/blackray_support_bot?start=1" target="_blank" rel="noopener noreferrer" data-ru="Поддержка" data-en="Support" data-fa="پشتیبانی">Поддержка</a>
     </div>
   </div>
 </footer>
@@ -313,19 +319,35 @@
 
     (function(){
       const btn = document.getElementById('lang-toggle');
-      let lang = localStorage.getItem('br_lang') || 'ru';
+      const langs = ['ru','en','fa'];
+      const labels = {ru:'EN', en:'فا', fa:'RU'};
+
+      function detectLang() {
+        var stored = localStorage.getItem('br_lang');
+        if (stored && langs.indexOf(stored) !== -1) return stored;
+        var nav = (navigator.language || '').toLowerCase();
+        if (nav.startsWith('fa')) return 'fa';
+        if (nav.startsWith('en')) return 'en';
+        return 'ru';
+      }
+      let lang = detectLang();
+
       function apply(l) {
         lang = l;
         localStorage.setItem('br_lang', l);
-        btn.textContent = l === 'ru' ? 'EN' : 'RU';
+        btn.textContent = labels[l];
         document.documentElement.lang = l;
-        document.querySelectorAll('[data-'+l+']').forEach(el => {
-          const v = el.getAttribute('data-'+l);
+        document.documentElement.dir = l === 'fa' ? 'rtl' : 'ltr';
+        document.querySelectorAll('[data-'+l+']').forEach(function(el) {
+          var v = el.getAttribute('data-'+l);
           if (v) el.innerHTML = v;
         });
       }
-      btn.addEventListener('click', () => apply(lang === 'ru' ? 'en' : 'ru'));
-      if (lang !== 'ru') apply(lang);
+      btn.addEventListener('click', function() {
+        var idx = langs.indexOf(lang);
+        apply(langs[(idx + 1) % langs.length]);
+      });
+      apply(lang);
     })();
   </script>
 </body>
