@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Redirecting…</title>
+  <script>
+  (function () {
+    var path = (location.pathname || "").replace(/^\/+|\/+$/g, "");
+    var m = path.match(/^go\/([A-Za-z0-9_-]{1,30})$/);
+    if (!m) {
+      return;
+    }
+    var slug = m[1];
+    location.replace("https://t.me/BlackRayVPN_bot?start=ad_" + encodeURIComponent(slug));
+  })();
+  </script>
+  <meta http-equiv="refresh" content="0;url=https://t.me/BlackRayVPN_bot">
+</head>
+<body>
+  <p>Переход в Telegram…</p>
+</body>
+</html>
