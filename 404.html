@@ -7,6 +7,10 @@
   <script>
   (function () {
     var path = (location.pathname || "").replace(/^\/+|\/+$/g, "");
+    if (path === "help" || path === "help.html") {
+      location.replace("https://blackray.info/");
+      return;
+    }
     var m = path.match(/^go\/([A-Za-z0-9_-]{1,30})$/);
     if (!m) {
       return;
