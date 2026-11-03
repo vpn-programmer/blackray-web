@@ -10,6 +10,7 @@
 .site-header { background: #0a1120; }
 .site-header .brand { color: #f1f5f9; }
 .brand img { width: 40px; height: 40px; }
+.site-header .brand .wordmark { width: 119px; height: 48px; border-radius: 0; object-fit: contain; }
 .header-inner { min-height: 76px; }
 .site-header nav a { color: #b5bfd0; }
 .site-footer { margin-top: 36px; border-top: 1px solid var(--line); }
