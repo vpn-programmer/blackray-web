@@ -1,351 +1,75 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Пользовательское соглашение — BlackRay Cloud</title>
-  <meta name="theme-color" content="#0a0a0c" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
-  
-  <style>
-    :root {
-      --bg-start: #0a0a0c;
-      --bg-end: #000000;
-      --card-bg: rgba(15, 23, 42, 0.6);
-      --border: rgba(56, 189, 248, 0.15);
-      --text-main: #e2e8f0;
-      --text-muted: #94a3b8;
-      --brand: #38bdf8;
-      --gradient: linear-gradient(to right, #60a5fa, #67e8f9);
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    html[dir="rtl"] { direction: rtl; text-align: right; }
-    html[dir="rtl"] .nav-inner { flex-direction: row-reverse; }
-    html[dir="rtl"] .nav-links { flex-direction: row-reverse; }
-    html[dir="rtl"] .footer-inner { flex-direction: row-reverse; }
-
-    .lang-picker { position: relative; }
-    .lang-current {
-      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
-      color: var(--text-muted); padding: 5px 12px; border-radius: 8px; cursor: pointer;
-      font-family: inherit; font-size: 0.85rem; font-weight: 600; transition: all .2s;
-    }
-    .lang-current:hover { border-color: var(--brand); color: #fff; }
-    .lang-current img, .lang-menu img { vertical-align: middle; margin-right: 4px; border-radius: 2px; }
-    .lang-menu {
-      display: none; position: absolute; top: calc(100% + 6px); right: 0;
-      background: #1a1a28; border: 1px solid rgba(255,255,255,0.1); border-radius: 10px;
-      padding: 4px; min-width: 140px; z-index: 200; box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-    }
-    html[dir="rtl"] .lang-menu { right: auto; left: 0; }
-    .lang-menu.open { display: block; }
-    .lang-menu button {
-      display: block; width: 100%; text-align: left; padding: 8px 12px; border: none;
-      background: none; color: var(--text-muted); font-size: 0.85rem; font-weight: 500;
-      cursor: pointer; border-radius: 6px; font-family: inherit; transition: all .15s;
-    }
-    html[dir="rtl"] .lang-menu button { text-align: right; }
-    .lang-menu button:hover { background: rgba(56,189,248,0.1); color: #fff; }
-    .lang-menu button.active { color: var(--brand); font-weight: 700; }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      color: var(--text-main);
-      background: linear-gradient(to bottom, var(--bg-start), var(--bg-end));
-      min-height: 100vh;
-      overflow-x: hidden;
-      line-height: 1.6;
-      background-attachment: fixed;
-    }
-
-    a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-
-    /* Навигация */
-    header.nav-bar {
-      padding: 16px 0;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 100;
-      background: rgba(10, 10, 12, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .nav-inner { display: flex; justify-content: space-between; align-items: center; }
-    
-    .logo-block { 
-      display: flex; align-items: center; gap: 12px; 
-      cursor: pointer; transition: transform 0.2s ease;
-    }
-    .logo-block:hover { transform: scale(1.02); }
-    
-    .logo-img {
-      width: 44px; height: 44px; border-radius: 50%;
-      box-shadow: 0 4px 20px rgba(56, 189, 248, 0.2);
-    }
-
-    .logo-text { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.05em; }
-    .logo-text span:first-child { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .logo-text span:last-child { color: var(--brand); }
-
-    .nav-links { display: flex; gap: 32px; font-size: 1rem; font-weight: 500; align-items: center; }
-    .nav-links a.active { color: var(--brand); font-weight: 700; }
-    .nav-links a:hover:not(.active) { color: #fff; }
-
-    .menu-btn {
-      display: none; background: none; border: none;
-      color: var(--text-main); cursor: pointer; padding: 8px;
-    }
-    .menu-btn svg { width: 28px; height: 28px; stroke: currentColor; stroke-width: 2; }
-
-    /* Стили для текстовой страницы документов */
-    .legal-content {
-      padding: 140px 0 80px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .legal-content h1 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800;
-      margin-bottom: 40px;
-      line-height: 1.2;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .legal-content h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--brand);
-      margin: 48px 0 24px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .legal-content h3 {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #fff;
-      margin: 32px 0 16px;
-    }
-
-    .legal-content p {
-      color: var(--text-muted);
-      margin-bottom: 12px;
-      font-size: 1rem;
-      line-height: 1.7;
-    }
-
-    .legal-content ul {
-      margin-left: 24px;
-      margin-bottom: 16px;
-      color: var(--text-muted);
-      font-size: 1rem;
-      line-height: 1.7;
-    }
-
-    .legal-content li {
-      margin-bottom: 8px;
-    }
-
-    .legal-content strong {
-      color: #e2e8f0;
-      font-weight: 600;
-    }
-
-    .doc-section {
-      background: var(--card-bg);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 24px;
-      padding: 40px;
-      margin-bottom: 40px;
-      backdrop-filter: blur(10px);
-    }
-
-    /* Подвал */
-    footer { border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 40px 0; margin-top: 40px; }
-    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
-    .footer-copy { color: rgba(148, 163, 184, 0.6); font-size: 0.9rem; }
-    .footer-links { display: flex; gap: 24px; font-size: 0.9rem; }
-    .footer-links a:hover { color: #fff; }
-
-    @media (max-width: 768px) {
-      .legal-content { padding: 120px 20px 60px; }
-      .doc-section { padding: 24px; }
-      .footer-inner { flex-direction: column; text-align: center; }
-      .menu-btn { display: block; }
-      .nav-links {
-        display: none; position: absolute; top: 100%; left: 0; width: 100%;
-        background: rgba(10, 10, 12, 0.98); border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        flex-direction: column; padding: 24px; gap: 20px;
-      }
-      .nav-links.active { display: flex; }
-    }
-  </style>
-</head>
-<body>
-
-  <header class="nav-bar">
-    <div class="container nav-inner">
-      <a href="/" class="logo-block">
-        <img src="image_0.png" alt="BlackRay Logo" class="logo-img">
-        <div class="logo-text"><span>Black</span><span>Ray</span></div>
-      </a>
-      
-      <button class="menu-btn" id="mobile-menu-btn" aria-label="Открыть меню">
-        <svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-      </button>
-
-      <nav class="nav-links" id="nav-links">
-        <a href="/" data-ru="Главная" data-en="Home" data-fa="خانه">Главная</a>
-        <div class="lang-picker" id="lang-picker">
-          <button class="lang-current" id="lang-current"><img src="https://flagcdn.com/20x15/ru.png" width="20" height="15" alt=""> RU</button>
-          <div class="lang-menu" id="lang-menu">
-            <button data-lang="ru"><img src="https://flagcdn.com/20x15/ru.png" width="20" height="15" alt=""> Русский</button>
-            <button data-lang="en"><img src="https://flagcdn.com/20x15/us.png" width="20" height="15" alt=""> English</button>
-            <button data-lang="fa"><img src="https://flagcdn.com/20x15/ir.png" width="20" height="15" alt=""> فارسی</button>
-          </div>
-        </div>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container legal-content">
-    <h1 data-ru="Документация и правила сервиса" data-en="Service Documentation and Policies" data-fa="مستندات و قوانین سرویس">Документация и правила сервиса</h1>
-    
-    <div class="doc-section">
-      <h2 data-ru="Пользовательское соглашение (Публичная оферта)" data-en="User Agreement (Public Offer)" data-fa="توافق‌نامه کاربری (پیشنهاد عمومی)">Пользовательское соглашение (Публичная оферта)</h2>
-      <p data-ru="Настоящий документ является публичной офертой (далее — «Соглашение») сервиса BlackRay Cloud (далее — «Провайдер») и содержит все существенные условия предоставления услуг по аренде вычислительных мощностей." data-en="This document constitutes a public offer (hereinafter the &laquo;Agreement&raquo;) of BlackRay Cloud service (hereinafter the &laquo;Provider&raquo;) and contains all material terms and conditions for the provision of computing resource rental services." data-fa="این سند یک پیشنهاد عمومی (از این پس &laquo;توافق‌نامه&raquo;) از سرویس BlackRay Cloud (از این پس &laquo;ارائه‌دهنده&raquo;) بوده و شامل تمامی شرایط اساسی ارائه خدمات اجاره منابع محاسباتی می‌باشد.">Настоящий документ является публичной офертой (далее — «Соглашение») сервиса BlackRay Cloud (далее — «Провайдер») и содержит все существенные условия предоставления услуг по аренде вычислительных мощностей.</p>
-
-      <h3 data-ru="1. Термины и определения" data-en="1. Terms and Definitions" data-fa="۱. اصطلاحات و تعاریف">1. Термины и определения</h3>
-      <p data-ru="1.1. <strong>«Провайдер»</strong> — сервис BlackRay Cloud, предоставляющий услуги по аренде виртуальных вычислительных мощностей (IaaS) и обеспечению удалённого доступа к сетевой инфраструктуре." data-en="1.1. <strong>&laquo;Provider&raquo;</strong> — BlackRay Cloud service providing virtual computing resource (IaaS) rental and remote network infrastructure access." data-fa="۱.۱. <strong>&laquo;ارائه‌دهنده&raquo;</strong> — سرویس BlackRay Cloud که خدمات اجاره منابع محاسباتی مجازی (IaaS) و دسترسی از راه دور به زیرساخت شبکه را ارائه می‌دهد.">1.1. <strong>«Провайдер»</strong> — сервис BlackRay Cloud, предоставляющий услуги по аренде виртуальных вычислительных мощностей (IaaS) и обеспечению удалённого доступа к сетевой инфраструктуре.</p>
-      <p data-ru="1.2. <strong>«Пользователь»</strong> — дееспособное физическое лицо, осуществившее Акцепт настоящей Оферты." data-en="1.2. <strong>&laquo;User&raquo;</strong> — a legally capable individual who has accepted this Offer." data-fa="۱.۲. <strong>&laquo;کاربر&raquo;</strong> — شخص حقیقی دارای اهلیت قانونی که این پیشنهاد را پذیرفته است.">1.2. <strong>«Пользователь»</strong> — дееспособное физическое лицо, осуществившее Акцепт настоящей Оферты.</p>
-      <p data-ru="1.3. <strong>«Удалённый доступ»</strong> — технология предоставления Пользователю выделенного канала связи для управления арендованными серверными ресурсами." data-en="1.3. <strong>&laquo;Remote Access&raquo;</strong> — technology providing the User with a dedicated communication channel for managing rented server resources." data-fa="۱.۳. <strong>&laquo;دسترسی از راه دور&raquo;</strong> — فناوری ارائه کانال ارتباطی اختصاصی به کاربر برای مدیریت منابع سروری اجاره‌ای.">1.3. <strong>«Удалённый доступ»</strong> — технология предоставления Пользователю выделенного канала связи для управления арендованными серверными ресурсами.</p>
-      <p data-ru="1.4. <strong>«Бот»</strong> — автоматизированный аппаратно-программный интерфейс Провайдера в мессенджере Telegram, предназначенный для регистрации, управления биллингом и получения реквизитов доступа." data-en="1.4. <strong>&laquo;Bot&raquo;</strong> — the Provider's automated software interface in Telegram messenger, designed for registration, billing management, and obtaining access credentials." data-fa="۱.۴. <strong>&laquo;ربات&raquo;</strong> — رابط نرم‌افزاری خودکار ارائه‌دهنده در پیام‌رسان Telegram، طراحی شده برای ثبت‌نام، مدیریت صورتحساب و دریافت اطلاعات دسترسی.">1.4. <strong>«Бот»</strong> — автоматизированный аппаратно-программный интерфейс Провайдера в мессенджере Telegram, предназначенный для регистрации, управления биллингом и получения реквизитов доступа.</p>
-      <p data-ru="1.5. <strong>«Реквизиты доступа»</strong> — уникальный набор авторизационных данных и сетевых настроек, генерируемый индивидуально для подключения оборудования Пользователя к инфраструктуре Провайдера." data-en="1.5. <strong>&laquo;Access Credentials&raquo;</strong> — a unique set of authentication data and network settings generated individually for connecting the User's equipment to the Provider's infrastructure." data-fa="۱.۵. <strong>&laquo;اطلاعات دسترسی&raquo;</strong> — مجموعه‌ای منحصربه‌فرد از داده‌های احراز هویت و تنظیمات شبکه که به صورت اختصاصی برای اتصال تجهیزات کاربر به زیرساخت ارائه‌دهنده تولید می‌شود.">1.5. <strong>«Реквизиты доступа»</strong> — уникальный набор авторизационных данных и сетевых настроек, генерируемый индивидуально для подключения оборудования Пользователя к инфраструктуре Провайдера.</p>
-
-      <h3 data-ru="2. Общие положения и порядок Акцепта" data-en="2. General Provisions and Acceptance Procedure" data-fa="۲. مقررات عمومی و روش پذیرش">2. Общие положения и порядок Акцепта</h3>
-      <p data-ru="2.1. Безусловным принятием (Акцептом) условий настоящей Оферты считается запуск Бота, пополнение лицевого счёта или фактическое начало использования Реквизитов доступа для подключения к инфраструктуре Провайдера." data-en="2.1. Unconditional acceptance (Acceptance) of this Offer is deemed to occur upon launching the Bot, topping up the account balance, or commencing actual use of the Access Credentials to connect to the Provider's infrastructure." data-fa="۲.۱. پذیرش بدون قید و شرط (قبول) شرایط این پیشنهاد با راه‌اندازی ربات، شارژ حساب کاربری یا شروع استفاده واقعی از اطلاعات دسترسی برای اتصال به زیرساخت ارائه‌دهنده محقق می‌شود.">2.1. Безусловным принятием (Акцептом) условий настоящей Оферты считается запуск Бота, пополнение лицевого счёта или фактическое начало использования Реквизитов доступа для подключения к инфраструктуре Провайдера.</p>
-      <p data-ru="2.2. Сервис является инструментом для удалённой работы, тестирования IT-продуктов и развёртывания пользовательских приложений. Провайдер предоставляет только сетевую и аппаратную инфраструктуру. Ответственность за цель использования вычислительных мощностей лежит исключительно на Пользователе." data-en="2.2. The service is a tool for remote work, IT product testing, and deployment of user applications. The Provider supplies only network and hardware infrastructure. Responsibility for the purpose of use of computing resources lies exclusively with the User." data-fa="۲.۲. این سرویس ابزاری برای کار از راه دور، آزمایش محصولات فناوری اطلاعات و استقرار برنامه‌های کاربری است. ارائه‌دهنده تنها زیرساخت شبکه و سخت‌افزار را فراهم می‌کند. مسئولیت هدف استفاده از منابع محاسباتی صرفاً بر عهده کاربر است.">2.2. Сервис является инструментом для удалённой работы, тестирования IT-продуктов и развёртывания пользовательских приложений. Провайдер предоставляет только сетевую и аппаратную инфраструктуру. Ответственность за цель использования вычислительных мощностей лежит исключительно на Пользователе.</p>
-
-      <h3 data-ru="3. Права и обязанности сторон" data-en="3. Rights and Obligations of the Parties" data-fa="۳. حقوق و تعهدات طرفین">3. Права и обязанности сторон</h3>
-      <p data-ru="<strong>3.1. Пользователь обязуется:</strong>" data-en="<strong>3.1. The User undertakes to:</strong>" data-fa="<strong>۳.۱. کاربر متعهد می‌شود:</strong>"><strong>3.1. Пользователь обязуется:</strong></p>
-      <p data-ru="3.1.1. Использовать вычислительные мощности в строгом соответствии с применимым законодательством." data-en="3.1.1. Use computing resources in strict compliance with applicable law." data-fa="۳.۱.۱. منابع محاسباتی را در انطباق کامل با قوانین قابل اعمال استفاده کند.">3.1.1. Использовать вычислительные мощности в строгом соответствии с применимым законодательством.</p>
-      <p data-ru="3.1.2. Не создавать избыточную нагрузку на магистральные каналы связи Провайдера, в том числе путём использования протоколов непрерывного массового файлообмена (P2P/BitTorrent) на вычислительных узлах, не предназначенных для хранения больших объёмов данных." data-en="3.1.2. Not create excessive load on the Provider's backbone communication channels, including through the use of continuous mass file-sharing protocols (P2P/BitTorrent) on compute nodes not designed for large-volume data storage." data-fa="۳.۱.۲. بار اضافی بر کانال‌های ارتباطی اصلی ارائه‌دهنده ایجاد نکند، از جمله از طریق استفاده از پروتکل‌های اشتراک‌گذاری انبوه فایل (P2P/BitTorrent) بر روی گره‌های محاسباتی که برای ذخیره‌سازی حجم زیاد داده طراحی نشده‌اند.">3.1.2. Не создавать избыточную нагрузку на магистральные каналы связи Провайдера, в том числе путём использования протоколов непрерывного массового файлообмена (P2P/BitTorrent) на вычислительных узлах, не предназначенных для хранения больших объёмов данных.</p>
-      <p data-ru="3.1.3. Не использовать инфраструктуру Провайдера для осуществления вредоносной деятельности:" data-en="3.1.3. Not use the Provider's infrastructure for malicious activities:" data-fa="۳.۱.۳. از زیرساخت ارائه‌دهنده برای فعالیت‌های مخرب استفاده نکند:">3.1.3. Не использовать инфраструктуру Провайдера для осуществления вредоносной деятельности:</p>
-      <ul>
-        <li data-ru="Организация DDoS-атак, сканирование портов, брутфорс;" data-en="Organizing DDoS attacks, port scanning, brute-force attacks;" data-fa="سازماندهی حملات DDoS، اسکن پورت، حملات brute-force؛">Организация DDoS-атак, сканирование портов, брутфорс;</li>
-        <li data-ru="Распространение вредоносного ПО;" data-en="Distributing malware;" data-fa="انتشار بدافزار؛">Распространение вредоносного ПО;</li>
-        <li data-ru="Осуществление спам-рассылок любого типа;" data-en="Sending spam of any type;" data-fa="ارسال هرزنامه از هر نوع؛">Осуществление спам-рассылок любого типа;</li>
-        <li data-ru="Фишинг, мошенничество и несанкционированный доступ к чужим данным." data-en="Phishing, fraud, and unauthorized access to third-party data." data-fa="فیشینگ، کلاهبرداری و دسترسی غیرمجاز به داده‌های اشخاص ثالث.">Фишинг, мошенничество и несанкционированный доступ к чужим данным.</li>
-      </ul>
-      <p data-ru="3.1.4. Не передавать свои Реквизиты доступа третьим лицам. Услуга предоставляется для индивидуального использования. При фиксации одновременных подключений с использованием одних авторизационных данных Провайдер оставляет за собой право аннулировать скомпрометированные реквизиты." data-en="3.1.4. Not share Access Credentials with third parties. The service is provided for individual use. If simultaneous connections using the same authentication data are detected, the Provider reserves the right to revoke the compromised credentials." data-fa="۳.۱.۴. اطلاعات دسترسی خود را به اشخاص ثالث منتقل نکند. خدمات برای استفاده شخصی ارائه می‌شود. در صورت شناسایی اتصالات هم‌زمان با استفاده از اطلاعات احراز هویت یکسان، ارائه‌دهنده حق لغو اطلاعات دسترسی آسیب‌دیده را برای خود محفوظ می‌دارد.">3.1.4. Не передавать свои Реквизиты доступа третьим лицам. Услуга предоставляется для индивидуального использования. При фиксации одновременных подключений с использованием одних авторизационных данных Провайдер оставляет за собой право аннулировать скомпрометированные реквизиты.</p>
-
-      <p data-ru="<strong>3.2. Провайдер обязуется и имеет право:</strong>" data-en="<strong>3.2. The Provider undertakes and has the right to:</strong>" data-fa="<strong>۳.۲. ارائه‌دهنده متعهد می‌شود و حق دارد:</strong>"><strong>3.2. Провайдер обязуется и имеет право:</strong></p>
-      <p data-ru="3.2.1. Обеспечивать бесперебойную работу аппаратной части серверов и сетевой доступности." data-en="3.2.1. Ensure uninterrupted operation of server hardware and network availability." data-fa="۳.۲.۱. عملکرد بدون وقفه سخت‌افزار سرور و دسترسی شبکه را تضمین کند.">3.2.1. Обеспечивать бесперебойную работу аппаратной части серверов и сетевой доступности.</p>
-      <p data-ru="3.2.2. Приостановить или прекратить оказание услуг (заблокировать аккаунт) без возмещения средств в случае нарушения Пользователем пунктов 3.1.2 — 3.1.4." data-en="3.2.2. Suspend or terminate services (block the account) without refund in case of violation by the User of clauses 3.1.2–3.1.4." data-fa="۳.۲.۲. در صورت نقض بندهای ۳.۱.۲ تا ۳.۱.۴ توسط کاربر، خدمات را تعلیق یا خاتمه دهد (مسدود کردن حساب) بدون بازپرداخت.">3.2.2. Приостановить или прекратить оказание услуг (заблокировать аккаунт) без возмещения средств в случае нарушения Пользователем пунктов 3.1.2 — 3.1.4.</p>
-
-      <h3 data-ru="4. Стоимость услуг и порядок расчётов" data-en="4. Service Fees and Payment Terms" data-fa="۴. هزینه خدمات و شرایط پرداخت">4. Стоимость услуг и порядок расчётов</h3>
-      <p data-ru="4.1. Доступ к услугам Провайдера предоставляется по авансовой системе расчётов." data-en="4.1. Access to the Provider's services is provided on a prepaid basis." data-fa="۴.۱. دسترسی به خدمات ارائه‌دهنده بر اساس سیستم پیش‌پرداخت ارائه می‌شود.">4.1. Доступ к услугам Провайдера предоставляется по авансовой системе расчётов.</p>
-      <p data-ru="4.2. Списание средств с лицевого счёта Пользователя происходит ежедневно (посуточно) за каждую активную выделенную ноду (устройство), добавленную в интерфейсе Бота." data-en="4.2. Funds are deducted from the User's account on a daily basis for each active dedicated node (device) added via the Bot interface." data-fa="۴.۲. کسر وجه از حساب کاربر به صورت روزانه برای هر نود (دستگاه) اختصاصی فعال که از طریق رابط ربات اضافه شده، انجام می‌شود.">4.2. Списание средств с лицевого счёта Пользователя происходит ежедневно (посуточно) за каждую активную выделенную ноду (устройство), добавленную в интерфейсе Бота.</p>
-      <p data-ru="4.3. Базовая стоимость аренды вычислительных мощностей для 1 (одного) подключения составляет 149 рублей за 30 (тридцать) календарных дней." data-en="4.3. The base cost of computing resource rental for 1 (one) connection is 149 rubles per 30 (thirty) calendar days." data-fa="۴.۳. هزینه پایه اجاره منابع محاسباتی برای ۱ (یک) اتصال، ۱۴۹ روبل به ازای هر ۳۰ (سی) روز تقویمی است.">4.3. Базовая стоимость аренды вычислительных мощностей для 1 (одного) подключения составляет 149 рублей за 30 (тридцать) календарных дней.</p>
-      <p data-ru="4.4. При отрицательном или нулевом балансе Провайдер автоматически приостанавливает обслуживание инфраструктуры Пользователя до момента пополнения счёта." data-en="4.4. If the balance is zero or negative, the Provider automatically suspends the User's infrastructure services until the account is topped up." data-fa="۴.۴. در صورت صفر یا منفی بودن موجودی، ارائه‌دهنده به صورت خودکار خدمات زیرساخت کاربر را تا زمان شارژ مجدد حساب تعلیق می‌کند.">4.4. При отрицательном или нулевом балансе Провайдер автоматически приостанавливает обслуживание инфраструктуры Пользователя до момента пополнения счёта.</p>
-      <p data-ru="4.5. Для остановки тарификации Пользователь обязан самостоятельно удалить неиспользуемую ноду в интерфейсе Бота." data-en="4.5. To stop billing, the User must independently remove the unused node via the Bot interface." data-fa="۴.۵. برای توقف محاسبه هزینه، کاربر باید نود استفاده‌نشده را از طریق رابط ربات حذف کند.">4.5. Для остановки тарификации Пользователь обязан самостоятельно удалить неиспользуемую ноду в интерфейсе Бота.</p>
-
-      <h3 data-ru="5. Ограничение ответственности и возврат средств" data-en="5. Limitation of Liability and Refunds" data-fa="۵. محدودیت مسئولیت و بازپرداخت">5. Ограничение ответственности и возврат средств</h3>
-      <p data-ru="5.1. Услуги Провайдера предоставляются на условиях «КАК ЕСТЬ» (AS IS). Провайдер не несёт ответственности за любой прямой или косвенный ущерб, возникший в результате использования сервиса." data-en="5.1. The Provider's services are provided on an &laquo;AS IS&raquo; basis. The Provider shall not be liable for any direct or indirect damages arising from the use of the service." data-fa="۵.۱. خدمات ارائه‌دهنده به صورت &laquo;همان‌گونه که هست&raquo; (AS IS) ارائه می‌شود. ارائه‌دهنده هیچ مسئولیتی در قبال خسارات مستقیم یا غیرمستقیم ناشی از استفاده از سرویس ندارد.">5.1. Услуги Провайдера предоставляются на условиях «КАК ЕСТЬ» (AS IS). Провайдер не несёт ответственности за любой прямой или косвенный ущерб, возникший в результате использования сервиса.</p>
-      <p data-ru="5.2. Возврат неизрасходованных средств производится в случае технической аварии на аппаратной стороне Провайдера, продолжающейся более 72 часов подряд." data-en="5.2. Refund of unused funds is made in the event of a technical failure on the Provider's hardware side lasting more than 72 consecutive hours." data-fa="۵.۲. بازپرداخت وجوه مصرف‌نشده در صورت بروز خرابی فنی در سمت سخت‌افزار ارائه‌دهنده که بیش از ۷۲ ساعت متوالی ادامه داشته باشد، انجام می‌شود.">5.2. Возврат неизрасходованных средств производится в случае технической аварии на аппаратной стороне Провайдера, продолжающейся более 72 часов подряд.</p>
-      <p data-ru="5.3. Возврат не осуществляется при блокировке за нарушение правил сервиса (п. 3.1), а также при индивидуальных сетевых ограничениях на стороне локального интернет-провайдера Пользователя." data-en="5.3. No refund is issued in cases of account suspension for violation of service rules (clause 3.1), as well as for individual network restrictions on the User's local ISP side." data-fa="۵.۳. در صورت مسدود شدن حساب به دلیل نقض قوانین سرویس (بند ۳.۱) و همچنین محدودیت‌های شبکه‌ای در سمت ارائه‌دهنده اینترنت محلی کاربر، بازپرداختی صورت نمی‌گیرد.">5.3. Возврат не осуществляется при блокировке за нарушение правил сервиса (п. 3.1), а также при индивидуальных сетевых ограничениях на стороне локального интернет-провайдера Пользователя.</p>
-    </div>
-
-    <div class="doc-section">
-      <h2 data-ru="Политика обработки данных и конфиденциальность" data-en="Data Processing and Privacy Policy" data-fa="سیاست پردازش داده‌ها و حریم خصوصی">Политика обработки данных и конфиденциальность</h2>
-      
-      <p data-ru="6.1. Провайдер запрашивает исключительно минимальный набор технических данных, необходимых для оказания услуг: Telegram ID (для авторизации в биллинговой системе) и агрегированную статистику объёма переданных данных (для учёта тарификации)." data-en="6.1. The Provider requests only the minimum set of technical data required to deliver services: Telegram ID (for billing system authentication) and aggregated data transfer volume statistics (for billing purposes)." data-fa="۶.۱. ارائه‌دهنده تنها حداقل مجموعه داده‌های فنی لازم برای ارائه خدمات را درخواست می‌کند: شناسه تلگرام (Telegram ID) برای احراز هویت در سیستم صورتحساب و آمار تجمیعی حجم انتقال داده برای محاسبه هزینه.">6.1. Провайдер запрашивает исключительно минимальный набор технических данных, необходимых для оказания услуг: Telegram ID (для авторизации в биллинговой системе) и агрегированную статистику объёма переданных данных (для учёта тарификации).</p>
-      <p data-ru="6.2. Провайдер не имеет технического доступа к информации, передаваемой или хранимой Пользователем на арендованных вычислительных мощностях. Логирование действий пользователей на уровне операционной системы серверов отключено в целях оптимизации производительности оборудования." data-en="6.2. The Provider does not have technical access to information transmitted or stored by the User on rented computing resources. User activity logging at the server operating system level is disabled to optimize hardware performance." data-fa="۶.۲. ارائه‌دهنده دسترسی فنی به اطلاعات ارسال شده یا ذخیره شده توسط کاربر بر روی منابع محاسباتی اجاره‌ای ندارد. ثبت فعالیت کاربران در سطح سیستم‌عامل سرورها به منظور بهینه‌سازی عملکرد سخت‌افزار غیرفعال شده است.">6.2. Провайдер не имеет технического доступа к информации, передаваемой или хранимой Пользователем на арендованных вычислительных мощностях. Логирование действий пользователей на уровне операционной системы серверов отключено в целях оптимизации производительности оборудования.</p>
-      <p data-ru="6.3. Провайдер не осуществляет передачу технических данных третьим лицам, за исключением случаев получения официального мотивированного запроса от правоохранительных органов в рамках действующего законодательства юрисдикции расположения серверов." data-en="6.3. The Provider does not disclose technical data to third parties, except upon receipt of an official substantiated request from law enforcement authorities under the applicable laws of the jurisdiction where the servers are located." data-fa="۶.۳. ارائه‌دهنده داده‌های فنی را به اشخاص ثالث منتقل نمی‌کند، مگر در صورت دریافت درخواست رسمی مستدل از مراجع قانونی طبق قوانین جاری حوزه قضایی محل استقرار سرورها.">6.3. Провайдер не осуществляет передачу технических данных третьим лицам, за исключением случаев получения официального мотивированного запроса от правоохранительных органов в рамках действующего законодательства юрисдикции расположения серверов.</p>
-
-      <h3 data-ru="Контакты" data-en="Contacts" data-fa="تماس با ما">Контакты</h3>
-      <p data-ru="По всем вопросам, касающимся настоящей Оферты или Политики конфиденциальности:" data-en="For all inquiries regarding this Offer or Privacy Policy:" data-fa="برای تمامی سوالات مربوط به این پیشنهاد یا سیاست حریم خصوصی:">По всем вопросам, касающимся настоящей Оферты или Политики конфиденциальности:</p>
-      <ul>
-        <li data-ru="<strong>Telegram:</strong> <a href=&quot;https://t.me/blackray_support_bot?start=1&quot; style=&quot;color: var(--brand);&quot;>@blackray_support_bot</a>" data-en="<strong>Telegram:</strong> <a href=&quot;https://t.me/blackray_support_bot?start=1&quot; style=&quot;color: var(--brand);&quot;>@blackray_support_bot</a>" data-fa="<strong>تلگرام:</strong> <a href=&quot;https://t.me/blackray_support_bot?start=1&quot; style=&quot;color: var(--brand);&quot;>@blackray_support_bot</a>"><strong>Telegram:</strong> <a href="https://t.me/blackray_support_bot?start=1" style="color: var(--brand);">@blackray_support_bot</a></li>
-      </ul>
-    </div>
-  </main>
-
-<footer>
-  <div class="container footer-inner">
-    <div class="footer-copy" data-ru="&copy; 2026 BlackRay. Все права защищены." data-en="&copy; 2026 BlackRay. All rights reserved." data-fa="&copy; 2026 BlackRay. تمامی حقوق محفوظ است.">&copy; 2026 BlackRay. Все права защищены.</div>
-    <div class="footer-links">
-      <a href="/terms" data-ru="Договор-оферта" data-en="Service Agreement" data-fa="قرارداد خدمات">Договор-оферта</a>
-      <a href="https://t.me/blackray_support_bot?start=1" target="_blank" rel="noopener noreferrer" data-ru="Вопросы и предложения" data-en="Questions and Suggestions" data-fa="سوالات و پیشنهادات">Вопросы и предложения</a>
-    </div>
-  </div>
-</footer>
-
-  <script>
-    const menuBtn = document.getElementById('mobile-menu-btn');
-    const navLinks = document.getElementById('nav-links');
-
-    menuBtn.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
-  </script>
-  <script>
-  (function(){
-    const currentBtn = document.getElementById('lang-current');
-    const menu = document.getElementById('lang-menu');
-    const langs = ['ru','en','fa'];
-    const shortLabels = {ru:'<img src="https://flagcdn.com/20x15/ru.png" width="20" height="15" alt=""> RU', en:'<img src="https://flagcdn.com/20x15/us.png" width="20" height="15" alt=""> EN', fa:'<img src="https://flagcdn.com/20x15/ir.png" width="20" height="15" alt=""> FA'};
-
-    function detectLang() {
-      var stored = localStorage.getItem('br_lang');
-      if (stored && langs.indexOf(stored) !== -1) return stored;
-      var nav = (navigator.language || '').toLowerCase();
-      if (nav.startsWith('fa')) return 'fa';
-      if (nav.startsWith('en')) return 'en';
-      return 'ru';
-    }
-    let lang = detectLang();
-
-    currentBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      menu.classList.toggle('open');
-    });
-    document.addEventListener('click', function() { menu.classList.remove('open'); });
-
-    menu.querySelectorAll('button[data-lang]').forEach(function(b) {
-      b.addEventListener('click', function(e) {
-        e.stopPropagation();
-        apply(b.getAttribute('data-lang'));
-        menu.classList.remove('open');
-      });
-    });
-
-    function apply(l) {
-      lang = l;
-      localStorage.setItem('br_lang', l);
-      currentBtn.innerHTML = shortLabels[l];
-      menu.querySelectorAll('button').forEach(function(b) {
-        b.classList.toggle('active', b.getAttribute('data-lang') === l);
-      });
-      document.documentElement.lang = l;
-      document.documentElement.dir = l === 'fa' ? 'rtl' : 'ltr';
-      document.querySelectorAll('[data-'+l+']').forEach(function(el) {
-        var v = el.getAttribute('data-'+l);
-        if (v) el.innerHTML = v;
-      });
-    }
-    apply(lang);
-  })();
-  </script>
-</body>
-</html>
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Пользовательское соглашение | BlackRay</title><meta name="description" content="Условия подключения, оплаты и использования сервиса BlackRay."><meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#151719"><link rel="icon" href="/image_0.png"><link rel="stylesheet" href="/site.css"><script src="/site.js" defer></script></head>
+<body><a class="skip" href="#main">К содержанию</a><header class="site-header"><div class="wrap header-inner"><a class="brand" href="/"><img src="/image_0.png" width="36" height="36" alt="">BlackRay<span>VPN</span></a><nav aria-label="Основная навигация"><a href="/#pricing">Тарифы</a><a href="/help.html">Помощь</a><a href="/contacts.html">Контакты</a></nav></div></header>
+<main id="main" class="wrap document"><header class="page-heading"><p class="eyebrow">Документы BlackRay</p><h1>Пользовательское соглашение</h1><p>Условия подключения, оплаты и использования сервиса BlackRay.</p><p class="meta">Редакция от 4 ноября 2026 года</p></header><nav class="toc" aria-label="Содержание"><a href="#scope">1. Общие положения</a><a href="#acceptance">2. Ознакомление и акцепт</a><a href="#service">3. Назначение и состав сервиса</a><a href="#devices">4. Учётная запись и устройства</a><a href="#billing">5. Тарифы и расчёты</a><a href="#refunds">6. Прекращение использования и возвраты</a><a href="#rules">7. Допустимое использование</a><a href="#suspension">8. Ограничение доступа</a><a href="#availability">9. Доступность и ответственность</a><a href="#changes">10. Изменение документа</a><a href="#contact">11. Контакты и обращения</a></nav><section id="scope">
+<h2>1. Общие положения</h2>
+<p>1.1. Настоящее соглашение определяет условия использования BlackRay: Telegram-бота, Mini App, конфигураций подключения и связанных функций. Обработка данных описана в отдельной Политике конфиденциальности.</p>
+<p>1.2. Оператор или Исполнитель в настоящем соглашении означает Администрацию сервиса BlackRay. По вопросам исполнения соглашения обращайтесь в официальную поддержку BlackRay, указанную в разделе «Контакты и обращения».</p>
+<p>1.3. Пользователь должен обладать необходимой дееспособностью либо действовать с согласия законного представителя. Пользователь самостоятельно проверяет допустимость применения сервиса в стране своего нахождения.</p>
+</section><section id="acceptance">
+<h2>2. Ознакомление и акцепт</h2>
+<p>2.1. До начала использования Пользователь обязан ознакомиться с настоящим документом. Полным и безоговорочным акцептом считаются конклюдентные действия после предоставления ссылки на документ: создание устройства, получение или импорт подписки, установление соединения, пополнение баланса либо иное фактическое использование функций BlackRay.</p>
+<p>2.2. Простое открытие страницы справки или настоящего документа само по себе не считается акцептом.</p>
+<p>2.3. Если Пользователь не согласен с условиями, он не должен начинать использование либо должен прекратить его и удалить активные устройства.</p>
+<p>2.4. Общий акцепт настоящих условий не заменяет отдельное согласие на обработку персональных данных в тех случаях, когда такое согласие обязательно по применимому закону. Такое согласие запрашивается отдельно и должно быть конкретным, информированным и однозначным.</p>
+</section><section id="service">
+<h2>3. Назначение и состав сервиса</h2>
+<p>3.1. BlackRay предоставляет программно-техническую возможность создать зашифрованное сетевое соединение и маршрутизировать трафик через доступные сетевые ресурсы. Сервис предназначен для защиты соединения, приватности и безопасной работы в публичных и недоверенных сетях.</p>
+<p>3.2. BlackRay не гарантирует доступ к конкретному сайту или приложению, определённую геолокацию, совместимость с каждым сторонним сервисом, постоянную скорость или непрерывную доступность. На результат влияют устройство, сеть Пользователя, операторы связи, внешние платформы и меры третьих лиц.</p>
+<p>3.3. Состав доступных маршрутов, приложений-клиентов и технических способов подключения может меняться для поддержания работоспособности и безопасности.</p>
+</section><section id="devices">
+<h2>4. Учётная запись и устройства</h2>
+<p>4.1. Учётная запись связана с Telegram-аккаунтом Пользователя. Пользователь отвечает за безопасность своего Telegram-аккаунта и не должен передавать ссылки подписки, конфигурации или иные реквизиты доступа третьим лицам.</p>
+<p>4.2. В одной учётной записи можно создать <strong>до 15 устройств</strong>. Для каждого физического устройства создаётся отдельная конфигурация.</p>
+<p>4.3. Новое устройство имеет статус <strong>«Не активировано»</strong>. Его конфигурация подготовлена к подключению, но плата не списывается до первого фактического импорта подписки поддерживаемым приложением.</p>
+<p>4.4. При первом импорте сервис получает технический идентификатор устройства (<strong>HWID</strong>), привязывает конфигурацию к этому устройству и переводит её в активированное состояние. Уведомление об успешной привязке направляется один раз.</p>
+<p>4.5. Использование одной конфигурации на другом физическом устройстве может быть отклонено. Если устройство заменено или доступ скомпрометирован, Пользователь должен удалить старую запись и создать новую либо обратиться в поддержку.</p>
+</section><section id="billing">
+<h2>5. Тарифы и расчёты</h2>
+<p>5.1. Сервис работает по предоплатной модели с внутренним балансом. Базовый тариф составляет <strong>150 ₽ за 30 дней</strong> на одно активированное устройство и списывается частями по <strong>5 ₽ в день</strong>. За каждое дополнительное оплачиваемое устройство предоставляется скидка <strong>5% на все устройства учётной записи</strong>, но не более <strong>35%</strong>. При восьми и более учитываемых устройствах стоимость каждого составляет <strong>97,50 ₽ за 30 дней</strong>. Неактивированные, вручную остановленные, удалённые и заблокированные по другим основаниям устройства не учитываются при расчёте скидки. Устройства, приостановленные из-за недостаточного баланса, продолжают учитываться. Скидка пересчитывается при изменении количества учитываемых устройств и применяется к последующим списаниям.</p>
+<p>5.2. Первое суточное списание производится после успешной первичной привязки HWID. Пока устройство имеет статус «Не активировано», плата за него не начисляется.</p>
+<p>5.3. Трафик дополнительных маршрутов после исчерпания доступного бонуса тарифицируется по <strong>2,90 ₽ за 1 ГиБ</strong>. Такие маршруты отмечены ценой трафика в подписке. Остаток бонуса и расход отображаются в интерфейсе сервиса. Использование этих маршрутов оплачивается отдельно от платы за устройство.</p>
+<p>5.4. Доступные способы оплаты, минимальная сумма пополнения, бонусы и итоговая сумма показываются до подтверждения платежа. Обработку платежа выполняет выбранный платёжный провайдер по собственным условиям; BlackRay не получает полные реквизиты банковской карты.</p>
+<p>5.5. При недостаточном балансе активированное устройство приостанавливается. Конфигурация сохраняется и может быть возобновлена после пополнения, если она не удалена и не заблокирована по другому основанию.</p>
+<p>5.6. Изменение тарифа применяется только к будущим периодам и доводится до Пользователя через интерфейс сервиса или сообщение в боте. Уже списанная стоимость оказанного периода задним числом не меняется.</p>
+</section><section id="refunds">
+<h2>6. Прекращение использования и возвраты</h2>
+<p>6.1. Пользователь может в любое время прекратить будущие списания, удалив устройство в боте или Mini App. Неактивированное устройство удаляется без списаний.</p>
+<p>6.2. Запрос на возврат реального неизрасходованного остатка либо суммы за неоказанную или ненадлежащим образом оказанную услугу направляется в поддержку. Запрос рассматривается с учётом фактически оказанного объёма, документально подтверждённых расходов Исполнителя и обязательных требований применимого законодательства.</p>
+<p>6.3. Рекламные, приветственные, реферальные и иные бонусные начисления не являются денежным вкладом Пользователя, не обмениваются на деньги и аннулируются при закрытии учётной записи, если закон не требует иного.</p>
+<p>6.4. Никакое положение настоящего документа не исключает и не ограничивает неотчуждаемые права потребителя, ответственность Исполнителя или способы защиты, которые не могут быть ограничены соглашением сторон.</p>
+</section><section id="rules">
+<h2>7. Допустимое использование</h2>
+<p>7.1. Пользователь обязан соблюдать применимое законодательство, права третьих лиц и правила сторонних сервисов.</p>
+<p>7.2. Запрещается использовать BlackRay для:</p>
+<ul>
+<li>несанкционированного доступа, сканирования, эксплуатации уязвимостей, DDoS-атак и перебора учётных данных;</li>
+<li>распространения вредоносного ПО, фишинга, мошенничества, спама и иной вредоносной автоматизации;</li>
+<li>распространения или получения материалов, оборот которых запрещён применимым законом;</li>
+<li>нарушения авторских и смежных прав, включая использование P2P и BitTorrent через инфраструктуру сервиса;</li>
+<li>перепродажи доступа, публичного распространения конфигураций и передачи персонального ключа третьим лицам;</li>
+<li>создания нагрузки, явно несоразмерной обычному личному использованию и мешающей другим пользователям.</li>
+</ul>
+<p>7.3. Пользователь несёт ответственность за свои действия, передаваемые материалы и выбор ресурсов. Наличие технической возможности соединения не означает разрешение на запрещённое действие.</p>
+</section><section id="suspension">
+<h2>8. Ограничение доступа</h2>
+<p>8.1. Исполнитель вправе временно ограничить отдельную конфигурацию или учётную запись при недостаточном балансе, признаках компрометации, угрозе безопасности, аномальной нагрузке, обоснованной жалобе, нарушении раздела 7 либо обязательном требовании уполномоченного органа или инфраструктурного провайдера.</p>
+<p>8.2. Если это не создаёт дополнительного риска и не запрещено законом, Пользователю сообщается причина и доступный способ восстановления или обжалования.</p>
+<p>8.3. Меры применяются соразмерно риску. Вопрос об остатке средств решается отдельно по разделу 6 и применимому законодательству, а не автоматически самим фактом блокировки.</p>
+</section><section id="availability">
+<h2>9. Доступность и ответственность</h2>
+<p>9.1. Исполнитель принимает разумные технические и организационные меры для поддержания сервиса, но не обещает абсолютную непрерывность или неуязвимость.</p>
+<p>9.2. Исполнитель не отвечает за сбои устройства или сети Пользователя, действия операторов связи, магазинов приложений, Telegram, платёжных систем и иных независимых третьих лиц, кроме случаев, когда ответственность возложена на Исполнителя обязательной нормой закона.</p>
+<p>9.3. Ограничения ответственности применяются только в пределах, разрешённых законом, и не действуют при умысле, грубой неосторожности либо в иных случаях, когда исключение ответственности недопустимо.</p>
+</section><section id="changes">
+<h2>10. Изменение документа</h2>
+<p>10.1. Новая редакция публикуется по тому же адресу с указанием даты. Существенные изменения условий оплаты или обработки данных дополнительно сообщаются через бот либо интерфейс сервиса до их применения, когда это требуется законом.</p>
+<p>10.2. Продолжение использования после даты вступления новой редакции в силу считается её акцептом в той мере, в которой такой способ акцепта разрешён законом. Изменения не лишают Пользователя прав по уже оплаченным периодам.</p>
+</section><section id="contact">
+<h2>11. Контакты и обращения</h2>
+<p>Вопросы по условиям, платежам, данным, удалению аккаунта и работе сервиса принимаются в Telegram: <a href="https://t.me/blackray_support_bot?start=support" rel="noopener" target="_blank">@blackray_support_bot</a>.</p>
+<p>Технические инструкции находятся в <a href="/help.html">центре помощи BlackRay</a>.</p>
+</section></main>
+<footer class="site-footer"><div class="wrap"><div class="footer-top"><a class="brand" href="/">BlackRay<span>VPN</span></a><a href="https://t.me/blackray_support_bot?start=support">Поддержка в Telegram ↗</a></div><nav aria-label="Документы"><a href="/terms.html">Пользовательское соглашение</a><a href="/policy.html">Политика конфиденциальности</a><a href="/help.html">Помощь</a><a href="/contacts.html">Контакты</a></nav><p>© 2026 BlackRay</p></div></footer></body></html>
